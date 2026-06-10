@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/collectibles/collectible.gd" id="1_collectible"]
+
+[sub_resource type="RectangleShape2D" id="pickup_shape"]
+size = Vector2(48, 48)
+
+[node name="StudyNote" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_collectible")
+collectible_type = "study_note"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("pickup_shape")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+color = Color(0.95, 0.85, 0.35, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -14.0
+offset_top = -12.0
+offset_right = 14.0
+offset_bottom = 12.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1

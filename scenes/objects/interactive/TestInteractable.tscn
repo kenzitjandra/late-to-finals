@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/interactive/interactable.gd" id="1_interactable"]
+
+[sub_resource type="RectangleShape2D" id="interact_shape"]
+size = Vector2(120, 80)
+
+[node name="TestInteractable" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_interactable")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("interact_shape")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-28, -28, 28, -28, 28, 28, -28, 28)
+color = Color(0.6, 0.35, 0.9, 1)
+
+[node name="PromptLabel" type="Label" parent="."]
+visible = false
+offset_left = -64.0
+offset_top = -72.0
+offset_right = 64.0
+offset_bottom = -48.0
+text = "Press E to interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="."]
+visible = false
+offset_left = -64.0
+offset_top = -48.0
+offset_right = 64.0
+offset_bottom = -24.0
+text = "Interaction works"
+horizontal_alignment = 1
+vertical_alignment = 1

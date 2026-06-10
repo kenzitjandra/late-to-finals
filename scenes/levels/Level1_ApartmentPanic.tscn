@@ -1,0 +1,1777 @@
+[gd_scene format=3 uid="uid://cenlmcunihntv"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudyNote.tscn" id="4_study_note"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/Coffee.tscn" id="5_coffee"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudentID.tscn" id="6_student_id"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="7_exposed_wiring"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/WetFloor.tscn" id="8_wet_floor"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/FallZone.tscn" id="9_fall_zone"]
+[ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ceiling_fan"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/Roommate.tscn" id="11_roommate"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/SecurityGuard.tscn" id="12_security_guard"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/IDBarrier.tscn" id="13_id_barrier"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/SwitchButton.tscn" id="14_switch_button"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/LockedDoor.tscn" id="15_locked_door"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/MovingCarHazard.tscn" id="16_moving_car"]
+[ext_resource type="Script" path="res://scripts/levels/bus_stop_trigger.gd" id="17_bus_stop_trigger"]
+
+[sub_resource type="RectangleShape2D" id="wall_left_collision"]
+size = Vector2(64, 2020)
+
+[sub_resource type="RectangleShape2D" id="wall_right_collision"]
+size = Vector2(66, 1996)
+
+[sub_resource type="RectangleShape2D" id="roof_collision"]
+size = Vector2(5600, 48)
+
+[sub_resource type="RectangleShape2D" id="bottom_boundary_collision"]
+size = Vector2(5600, 48)
+
+[sub_resource type="RectangleShape2D" id="floor_collision"]
+size = Vector2(3556, 40)
+
+[sub_resource type="RectangleShape2D" id="bottom_floor_collision"]
+size = Vector2(3740, 48)
+
+[sub_resource type="RectangleShape2D" id="draft_service_floor_collision"]
+size = Vector2(2736, 24)
+
+[sub_resource type="RectangleShape2D" id="draft_ground_floor_collision"]
+size = Vector2(3740, 24)
+
+[sub_resource type="RectangleShape2D" id="draft_outdoor_road_collision"]
+size = Vector2(1400, 24)
+
+[sub_resource type="RectangleShape2D" id="test_ground_collision"]
+size = Vector2(3200, 48)
+
+[sub_resource type="RectangleShape2D" id="test_jump_platform_collision"]
+size = Vector2(240, 28)
+
+[sub_resource type="RectangleShape2D" id="test_fall_platform_collision"]
+size = Vector2(180, 24)
+
+[sub_resource type="RectangleShape2D" id="test_road_collision"]
+size = Vector2(520, 24)
+
+[sub_resource type="RectangleShape2D" id="test_bus_stop_collision"]
+size = Vector2(120, 120)
+
+[node name="Level1" type="Node2D" unique_id=1518310747]
+
+[node name="Player" parent="." unique_id=1937296609 instance=ExtResource("2_player")]
+position = Vector2(5680, 1276)
+
+[node name="Camera2D" parent="Player" index="2"]
+enabled = true
+limit_right = 9000
+limit_bottom = 1900
+
+[node name="HUD" parent="." unique_id=659347025 instance=ExtResource("3_hud")]
+
+[node name="LevelOverviewCamera" type="Camera2D" parent="." unique_id=1097051677]
+position = Vector2(2780, 900)
+enabled = false
+zoom = Vector2(0.24, 0.24)
+limit_left = 0
+limit_top = 0
+limit_right = 5600
+limit_bottom = 1900
+
+[node name="FormalBuilding" type="Node2D" parent="." unique_id=1153878845]
+
+[node name="BuildingFrame" type="Node2D" parent="FormalBuilding" unique_id=1789869298]
+
+[node name="Wall_Left" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=1632812806]
+position = Vector2(160, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/Wall_Left" unique_id=238415657]
+position = Vector2(0, 80)
+shape = SubResource("wall_left_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left" unique_id=1414882916]
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-25, -937, 34, -928, 29, 1091, -35, 1090)
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left/Visual" unique_id=81534875]
+position = Vector2(278, 30)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-31, -920, 7, -918, 7, -612, -33, -612)
+
+[node name="Wall_Right" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=599536249]
+position = Vector2(5500, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/Wall_Right" unique_id=435301325]
+position = Vector2(-1495, 76)
+shape = SubResource("wall_right_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Right" unique_id=455485485]
+position = Vector2(-1493, 28)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-31, -924, 27, -932, 26, 1063, -39, 1061)
+
+[node name="Roof" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=85190395]
+position = Vector2(2860, 30.04)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/Roof" unique_id=2021928311]
+position = Vector2(2, -231.325)
+shape = SubResource("roof_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Roof" unique_id=136834602]
+position = Vector2(-31, -222.04)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-2800, -24, 1175, -31.714996, 1185, 29.285004, -2800, 24)
+
+[node name="BottomBoundary" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=201041207]
+position = Vector2(2860, 1400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/BottomBoundary" unique_id=968792557]
+position = Vector2(17, 376)
+shape = SubResource("bottom_boundary_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/BottomBoundary" unique_id=1487649348]
+position = Vector2(17, 376)
+color = Color(0.18, 0.18, 0.22, 1)
+polygon = PackedVector2Array(-2800, -24, 2800, -24, 2800, 24, -2800, 24)
+
+[node name="Floors" type="Node2D" parent="FormalBuilding" unique_id=1693937203]
+
+[node name="Floor_Top" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=48378362]
+position = Vector2(2100, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_Top" unique_id=1705440195]
+position = Vector2(92, 0)
+shape = SubResource("floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_Top" unique_id=2109759575]
+color = Color(0.55, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-1692, -17, 1870, -20, 1870, 20, -1686, 24, -1689, 9)
+
+[node name="Floor_Second" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=1381085211]
+position = Vector2(2085, 637)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_Second" unique_id=1021581878]
+position = Vector2(-4, 113)
+shape = SubResource("floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_Second" unique_id=2103432533]
+position = Vector2(-4, 113)
+color = Color(0.5, 0.5, 0.55, 1)
+polygon = PackedVector2Array(-1870, -20, 1870, -20, 1870, 20, -1870, 20)
+
+[node name="Floor_Third" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=628590852]
+position = Vector2(2080, 945)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_Third" unique_id=2034256754]
+position = Vector2(13, 242)
+shape = SubResource("floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_Third" unique_id=1732790045]
+position = Vector2(13, 242)
+color = Color(0.44, 0.44, 0.5, 1)
+polygon = PackedVector2Array(-1870, -20, 1870, -20, 1870, 20, -1870, 20)
+
+[node name="Floor_BottomIndoor" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=384028166]
+position = Vector2(2080, 1280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_BottomIndoor" unique_id=58810928]
+shape = SubResource("bottom_floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_BottomIndoor" unique_id=1431373922]
+visible = false
+color = Color(0.36, 0.36, 0.42, 1)
+polygon = PackedVector2Array(-1870, -24, -9.202881, -23.999878, 1870, -24, 1870, 24, -1870, 24)
+
+[node name="Stage1B_RouteMarkers" type="Node2D" parent="." unique_id=266491367]
+visible = false
+
+[node name="Route_Opening_A_TopToSecond" type="Marker2D" parent="Stage1B_RouteMarkers" unique_id=1230896629]
+z_index = 100
+position = Vector2(2920, 300)
+
+[node name="Visual" type="Polygon2D" parent="Stage1B_RouteMarkers/Route_Opening_A_TopToSecond" unique_id=627673399]
+color = Color(1, 0.42, 0.08, 0.85)
+polygon = PackedVector2Array(0, -38, 38, 0, 0, 38, -38, 0)
+
+[node name="Label" type="Label" parent="Stage1B_RouteMarkers/Route_Opening_A_TopToSecond" unique_id=1389224532]
+offset_left = 46.0
+offset_top = -30.0
+offset_right = 286.0
+offset_bottom = 30.0
+text = "Opening A
+Top to Second"
+
+[node name="Route_Landing_A_TopToSecond" type="Marker2D" parent="Stage1B_RouteMarkers" unique_id=1067925260]
+z_index = 100
+position = Vector2(2920, 690)
+
+[node name="Visual" type="Polygon2D" parent="Stage1B_RouteMarkers/Route_Landing_A_TopToSecond" unique_id=596305720]
+color = Color(0.1, 0.75, 1, 0.85)
+polygon = PackedVector2Array(-42, -18, 42, -18, 42, 18, -42, 18)
+
+[node name="Label" type="Label" parent="Stage1B_RouteMarkers/Route_Landing_A_TopToSecond" unique_id=327217621]
+offset_left = 50.0
+offset_top = -26.0
+offset_right = 290.0
+offset_bottom = 34.0
+text = "Landing A
+Second floor"
+
+[node name="Route_Opening_B_SecondToThird" type="Marker2D" parent="Stage1B_RouteMarkers" unique_id=1043970639]
+z_index = 100
+position = Vector2(1150, 750)
+
+[node name="Visual" type="Polygon2D" parent="Stage1B_RouteMarkers/Route_Opening_B_SecondToThird" unique_id=1748274898]
+color = Color(1, 0.42, 0.08, 0.85)
+polygon = PackedVector2Array(0, -38, 38, 0, 0, 38, -38, 0)
+
+[node name="Label" type="Label" parent="Stage1B_RouteMarkers/Route_Opening_B_SecondToThird" unique_id=818246822]
+offset_left = 46.0
+offset_top = -30.0
+offset_right = 286.0
+offset_bottom = 30.0
+text = "Opening B
+Second to Third"
+
+[node name="Route_Landing_B_SecondToThird" type="Marker2D" parent="Stage1B_RouteMarkers" unique_id=1361065011]
+z_index = 100
+position = Vector2(1150, 1127)
+
+[node name="Visual" type="Polygon2D" parent="Stage1B_RouteMarkers/Route_Landing_B_SecondToThird" unique_id=2121399036]
+color = Color(0.1, 0.75, 1, 0.85)
+polygon = PackedVector2Array(-42, -18, 42, -18, 42, 18, -42, 18)
+
+[node name="Label" type="Label" parent="Stage1B_RouteMarkers/Route_Landing_B_SecondToThird" unique_id=1816557966]
+offset_left = 50.0
+offset_top = -26.0
+offset_right = 290.0
+offset_bottom = 34.0
+text = "Landing B
+Third floor"
+
+[node name="Route_Opening_C_ThirdToBottom" type="Marker2D" parent="Stage1B_RouteMarkers" unique_id=275340060]
+z_index = 100
+position = Vector2(2450, 1187)
+
+[node name="Visual" type="Polygon2D" parent="Stage1B_RouteMarkers/Route_Opening_C_ThirdToBottom" unique_id=1889119164]
+color = Color(1, 0.42, 0.08, 0.85)
+polygon = PackedVector2Array(0, -38, 38, 0, 0, 38, -38, 0)
+
+[node name="Label" type="Label" parent="Stage1B_RouteMarkers/Route_Opening_C_ThirdToBottom" unique_id=65764712]
+offset_left = 46.0
+offset_top = -30.0
+offset_right = 286.0
+offset_bottom = 30.0
+text = "Opening C
+Third to Bottom"
+
+[node name="Route_Landing_C_ThirdToBottom" type="Marker2D" parent="Stage1B_RouteMarkers" unique_id=1178244114]
+z_index = 100
+position = Vector2(2450, 1216)
+
+[node name="Visual" type="Polygon2D" parent="Stage1B_RouteMarkers/Route_Landing_C_ThirdToBottom" unique_id=1105106365]
+color = Color(0.1, 0.75, 1, 0.85)
+polygon = PackedVector2Array(-42, -18, 42, -18, 42, 18, -42, 18)
+
+[node name="Label" type="Label" parent="Stage1B_RouteMarkers/Route_Landing_C_ThirdToBottom" unique_id=161446711]
+offset_left = 50.0
+offset_top = -26.0
+offset_right = 290.0
+offset_bottom = 34.0
+text = "Landing C
+Bottom indoor"
+
+[node name="TopFloor_Blockout" type="Node2D" parent="." unique_id=158520869]
+visible = false
+z_index = 80
+
+[node name="Top_SN_Placeholder" type="Node2D" parent="TopFloor_Blockout" unique_id=319480455]
+position = Vector2(3540, 238)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_SN_Placeholder" unique_id=12724995]
+color = Color(0.95, 0.92, 0.72, 0.95)
+polygon = PackedVector2Array(-28, -20, 28, -20, 28, 20, -28, 20)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_SN_Placeholder" unique_id=1035723315]
+offset_left = -44.0
+offset_top = -66.0
+offset_right = 96.0
+offset_bottom = -24.0
+text = "SN"
+
+[node name="Top_Coffee_Placeholder" type="Node2D" parent="TopFloor_Blockout" unique_id=1973998959]
+position = Vector2(3370, 244)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_Coffee_Placeholder" unique_id=1543929519]
+color = Color(0.55, 0.33, 0.18, 0.95)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_Coffee_Placeholder" unique_id=632684112]
+offset_left = -58.0
+offset_top = -70.0
+offset_right = 122.0
+offset_bottom = -28.0
+text = "Coffee"
+
+[node name="Top_AC_Platform_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=1420690334]
+position = Vector2(3410, 165)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_AC_Platform_Visual" unique_id=1657393367]
+color = Color(0.72, 0.78, 0.82, 0.95)
+polygon = PackedVector2Array(-110, -18, 110, -18, 110, 18, -110, 18)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_AC_Platform_Visual" unique_id=119307846]
+offset_left = -78.0
+offset_top = -62.0
+offset_right = 162.0
+offset_bottom = -20.0
+text = "Platform as AC"
+
+[node name="Top_StudentID_Placeholder" type="Node2D" parent="TopFloor_Blockout" unique_id=1486915161]
+position = Vector2(3260, 124)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_StudentID_Placeholder" unique_id=1008229585]
+color = Color(0.95, 0.86, 0.22, 0.95)
+polygon = PackedVector2Array(-30, -18, 30, -18, 30, 18, -30, 18)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_StudentID_Placeholder" unique_id=1363706334]
+offset_left = -70.0
+offset_top = -62.0
+offset_right = 150.0
+offset_bottom = -20.0
+text = "Student ID"
+
+[node name="Top_FridgeObstacle_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=1859478254]
+position = Vector2(3090, 228)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_FridgeObstacle_Visual" unique_id=1828768367]
+color = Color(0.7, 0.82, 0.9, 0.95)
+polygon = PackedVector2Array(-42, -86, 42, -86, 42, 58, -42, 58)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_FridgeObstacle_Visual" unique_id=1743343556]
+offset_left = -64.0
+offset_top = -130.0
+offset_right = 156.0
+offset_bottom = -88.0
+text = "Obstacles
+as Fridge"
+
+[node name="Top_Roommate_Placeholder" type="Node2D" parent="TopFloor_Blockout" unique_id=447054119]
+position = Vector2(2850, 238)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_Roommate_Placeholder" unique_id=1216932231]
+color = Color(0.72, 0.62, 0.92, 0.95)
+polygon = PackedVector2Array(0, -52, 28, -18, 18, 42, -18, 42, -28, -18)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_Roommate_Placeholder" unique_id=86653234]
+offset_left = -70.0
+offset_top = -104.0
+offset_right = 150.0
+offset_bottom = -62.0
+text = "Roommate"
+
+[node name="Top_Opening_MidRight_DoorVisual" type="Node2D" parent="TopFloor_Blockout" unique_id=1106646727]
+position = Vector2(2620, 230)
+
+[node name="DoorOpening" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_MidRight_DoorVisual" unique_id=744298202]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -98, 52, -98, 52, 70, -52, 70)
+
+[node name="LeftWall" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_MidRight_DoorVisual" unique_id=1700490287]
+color = Color(0.3, 0.3, 0.34, 0.95)
+polygon = PackedVector2Array(-86, -122, -52, -122, -52, 70, -86, 70)
+
+[node name="RightWall" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_MidRight_DoorVisual" unique_id=894908657]
+color = Color(0.3, 0.3, 0.34, 0.95)
+polygon = PackedVector2Array(52, -122, 86, -122, 86, 70, 52, 70)
+
+[node name="SolidHeader" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_MidRight_DoorVisual" unique_id=1364161884]
+color = Color(0.36, 0.36, 0.4, 0.95)
+polygon = PackedVector2Array(-86, -152, 86, -152, 86, -122, -86, -122)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_Opening_MidRight_DoorVisual" unique_id=750911117]
+offset_left = -72.0
+offset_top = -202.0
+offset_right = 158.0
+offset_bottom = -160.0
+text = "Opening"
+
+[node name="Top_ApartmentRooms_BK_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=949628710]
+position = Vector2(2250, 220)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_ApartmentRooms_BK_Visual" unique_id=1182651449]
+color = Color(0.18, 0.2, 0.23, 0.95)
+polygon = PackedVector2Array(-180, -106, 180, -106, 180, 70, -180, 70)
+
+[node name="RoomLine" type="Polygon2D" parent="TopFloor_Blockout/Top_ApartmentRooms_BK_Visual" unique_id=628193714]
+color = Color(0.42, 0.42, 0.46, 0.95)
+polygon = PackedVector2Array(-8, -106, 8, -106, 8, 70, -8, 70)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_ApartmentRooms_BK_Visual" unique_id=2010868625]
+offset_left = -120.0
+offset_top = -154.0
+offset_right = 220.0
+offset_bottom = -112.0
+text = "Apartment Rooms (bk)"
+
+[node name="Top_WetFloor_RightOfBKApartment_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=707729896]
+position = Vector2(1690, 286)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_WetFloor_RightOfBKApartment_Visual" unique_id=484355986]
+color = Color(0.05, 0.45, 1, 0.9)
+polygon = PackedVector2Array(-260, -12, 260, -12, 260, 12, -260, 12)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_WetFloor_RightOfBKApartment_Visual" unique_id=1252870298]
+offset_left = -96.0
+offset_top = -58.0
+offset_right = 214.0
+offset_bottom = -16.0
+text = "Wet Floor"
+
+[node name="Top_BoxesObstacle_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=1156798009]
+position = Vector2(1650, 242)
+
+[node name="BoxA" type="Polygon2D" parent="TopFloor_Blockout/Top_BoxesObstacle_Visual" unique_id=729596295]
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-78, -44, -18, -44, -18, 44, -78, 44)
+
+[node name="BoxB" type="Polygon2D" parent="TopFloor_Blockout/Top_BoxesObstacle_Visual" unique_id=1423468407]
+color = Color(0.62, 0.46, 0.28, 0.95)
+polygon = PackedVector2Array(-18, -72, 48, -72, 48, 44, -18, 44)
+
+[node name="BoxC" type="Polygon2D" parent="TopFloor_Blockout/Top_BoxesObstacle_Visual" unique_id=1857156553]
+color = Color(0.5, 0.36, 0.22, 0.95)
+polygon = PackedVector2Array(48, -30, 98, -30, 98, 44, 48, 44)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_BoxesObstacle_Visual" unique_id=124385984]
+offset_left = -80.0
+offset_top = -122.0
+offset_right = 160.0
+offset_bottom = -80.0
+text = "Obstacles
+Boxes"
+
+[node name="Top_BKApartment_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=1630572970]
+position = Vector2(1320, 218)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_BKApartment_Visual" unique_id=1540621328]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-120, -104, 120, -104, 120, 72, -120, 72)
+
+[node name="Window" type="Polygon2D" parent="TopFloor_Blockout/Top_BKApartment_Visual" unique_id=85082288]
+color = Color(0.55, 0.64, 0.72, 0.85)
+polygon = PackedVector2Array(-42, -66, 42, -66, 42, -22, -42, -22)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_BKApartment_Visual" unique_id=2066108285]
+offset_left = -86.0
+offset_top = -152.0
+offset_right = 180.0
+offset_bottom = -110.0
+text = "bk Apartment"
+
+[node name="Top_WetFloor_LeftOfBKApartment_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=14200279]
+position = Vector2(1080, 286)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_WetFloor_LeftOfBKApartment_Visual" unique_id=946357004]
+color = Color(0.05, 0.45, 1, 0.9)
+polygon = PackedVector2Array(-150, -12, 150, -12, 150, 12, -150, 12)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_WetFloor_LeftOfBKApartment_Visual" unique_id=2062759838]
+offset_left = -96.0
+offset_top = -58.0
+offset_right = 214.0
+offset_bottom = -16.0
+text = "Wet Floor"
+
+[node name="Top_BrokenLift_BK_Visual" type="Node2D" parent="TopFloor_Blockout" unique_id=216324817]
+position = Vector2(760, 218)
+
+[node name="Visual" type="Polygon2D" parent="TopFloor_Blockout/Top_BrokenLift_BK_Visual" unique_id=787052700]
+color = Color(0.14, 0.15, 0.17, 0.95)
+polygon = PackedVector2Array(-94, -112, 94, -112, 94, 72, -94, 72)
+
+[node name="DoorLine" type="Polygon2D" parent="TopFloor_Blockout/Top_BrokenLift_BK_Visual" unique_id=443359620]
+color = Color(0.36, 0.36, 0.38, 0.95)
+polygon = PackedVector2Array(-6, -112, 6, -112, 6, 72, -6, 72)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_BrokenLift_BK_Visual" unique_id=775571626]
+offset_left = -88.0
+offset_top = -160.0
+offset_right = 176.0
+offset_bottom = -118.0
+text = "Broken Lift (bk)"
+
+[node name="Top_Opening_FarLeft_DoorVisual" type="Node2D" parent="TopFloor_Blockout" unique_id=303395986]
+position = Vector2(430, 230)
+
+[node name="DoorOpening" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_FarLeft_DoorVisual" unique_id=959124344]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-48, -98, 48, -98, 48, 70, -48, 70)
+
+[node name="LeftWall" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_FarLeft_DoorVisual" unique_id=1552931058]
+color = Color(0.3, 0.3, 0.34, 0.95)
+polygon = PackedVector2Array(-82, -122, -48, -122, -48, 70, -82, 70)
+
+[node name="RightWall" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_FarLeft_DoorVisual" unique_id=961869571]
+color = Color(0.3, 0.3, 0.34, 0.95)
+polygon = PackedVector2Array(48, -122, 82, -122, 82, 70, 48, 70)
+
+[node name="SolidHeader" type="Polygon2D" parent="TopFloor_Blockout/Top_Opening_FarLeft_DoorVisual" unique_id=1530940231]
+color = Color(0.36, 0.36, 0.4, 0.95)
+polygon = PackedVector2Array(-82, -152, 82, -152, 82, -122, -82, -122)
+
+[node name="Label" type="Label" parent="TopFloor_Blockout/Top_Opening_FarLeft_DoorVisual" unique_id=2076040354]
+offset_left = -72.0
+offset_top = -202.0
+offset_right = 158.0
+offset_bottom = -160.0
+text = "Opening"
+
+[node name="Level1_MapDraft" type="Node2D" parent="." unique_id=461976513]
+z_index = 90
+
+[node name="FlowNote" type="Label" parent="Level1_MapDraft" unique_id=407329369]
+offset_left = 90.0
+offset_top = 60.0
+offset_right = 820.0
+offset_bottom = 155.0
+text = "Level 1 route: spawn upper-right -> move left -> descend -> move right -> descend -> move left -> descend -> ground exit -> locked door -> traffic -> bus stop"
+
+[node name="Draft_FloorLines" type="Node2D" parent="Level1_MapDraft" unique_id=1298791430]
+
+[node name="Top_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=1503286019]
+position = Vector2(2100, 298)
+color = Color(0.76, 0.7, 0.58, 0.8)
+polygon = PackedVector2Array(-1685, -13, 1870, -10, 1870, 10, -1689, 10)
+
+[node name="Second_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=123121138]
+position = Vector2(2100, 750)
+color = Color(0.58, 0.58, 0.64, 0.8)
+polygon = PackedVector2Array(-1870, -10, 1870, -10, 1870, 10, -1870, 10)
+
+[node name="Third_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=1024478387]
+position = Vector2(2100, 1187)
+color = Color(0.52, 0.52, 0.58, 0.8)
+polygon = PackedVector2Array(-1870, -10, 1870, -10, 1870, 10, -1870, 10)
+
+[node name="Service_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=132666718]
+position = Vector2(2103, 1454)
+color = Color(0.48, 0.48, 0.54, 0.8)
+polygon = PackedVector2Array(-1870, -10, 1870, -10, 1870, 10, -1870, 10)
+
+[node name="Ground_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=38753653]
+position = Vector2(2100, 1665)
+color = Color(0.46, 0.46, 0.5, 0.8)
+polygon = PackedVector2Array(-1870, -12, 1870, -12, 1870, 12, -1870, 12)
+
+[node name="Outdoor_RoadPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=1907105292]
+position = Vector2(4700, 1665)
+color = Color(0.42, 0.42, 0.46, 0.8)
+polygon = PackedVector2Array(-700, -12, 700, -12, 700, 12, -700, 12)
+
+[node name="Draft_CollisionFloors" type="Node2D" parent="Level1_MapDraft" unique_id=60064954]
+
+[node name="Service_Floor_Collision" type="StaticBody2D" parent="Level1_MapDraft/Draft_CollisionFloors" unique_id=1447306187]
+position = Vector2(2100, 1435)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/Draft_CollisionFloors/Service_Floor_Collision" unique_id=1726889880]
+position = Vector2(-498, 25)
+shape = SubResource("draft_service_floor_collision")
+
+[node name="Ground_Floor_Collision" type="StaticBody2D" parent="Level1_MapDraft/Draft_CollisionFloors" unique_id=406328821]
+position = Vector2(2100, 1665)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/Draft_CollisionFloors/Ground_Floor_Collision" unique_id=2083287289]
+shape = SubResource("draft_ground_floor_collision")
+
+[node name="Outdoor_Road_Collision" type="StaticBody2D" parent="Level1_MapDraft/Draft_CollisionFloors" unique_id=677883954]
+position = Vector2(4700, 1665)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/Draft_CollisionFloors/Outdoor_Road_Collision" unique_id=634256673]
+shape = SubResource("draft_outdoor_road_collision")
+
+[node name="TopFloor" type="Node2D" parent="Level1_MapDraft" unique_id=2005296046]
+
+[node name="Top_PlayerStart_Label" type="Label" parent="Level1_MapDraft/TopFloor" unique_id=1097119347]
+offset_left = 3740.0
+offset_top = 220.0
+offset_right = 3920.0
+offset_bottom = 250.0
+text = "Player Start"
+
+[node name="Top_StudentID" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1387383033]
+position = Vector2(3680, 150)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_StudentID" unique_id=2024809663]
+position = Vector2(175, -143)
+color = Color(0.45, 0.8, 1, 0.95)
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_StudentID" unique_id=1561648402]
+offset_left = 103.0
+offset_top = -157.0
+offset_right = 243.0
+offset_bottom = -133.0
+text = "Student ID"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_AC_Platform" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=276738649]
+position = Vector2(3440, 205)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_AC_Platform" unique_id=1223361884]
+position = Vector2(56, -82)
+color = Color(0.72, 0.78, 0.82, 0.95)
+polygon = PackedVector2Array(-125, -18, 125, -18, 125, 18, -125, 18)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_AC_Platform" unique_id=677602862]
+offset_left = -37.0
+offset_top = -91.0
+offset_right = 153.0
+offset_bottom = -67.0
+text = "Platform as AC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_SN_NearSpawn" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=48765308]
+position = Vector2(3610, 250)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_SN_NearSpawn" unique_id=28199668]
+color = Color(0.95, 0.85, 0.35, 0.95)
+polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_SN_NearSpawn" unique_id=1903594218]
+offset_left = -24.0
+offset_top = -12.0
+offset_right = 24.0
+offset_bottom = 12.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_Coffee" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1996230798]
+position = Vector2(3335, 252)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Coffee" unique_id=234502402]
+color = Color(0.45, 0.25, 0.12, 0.95)
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_Coffee" unique_id=1094164278]
+offset_left = -44.0
+offset_top = -12.0
+offset_right = 44.0
+offset_bottom = 12.0
+text = "Coffee"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_FridgeObstacle" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=378151248]
+position = Vector2(3080, 240)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_FridgeObstacle" unique_id=696615252]
+color = Color(0.72, 0.82, 0.9, 0.95)
+polygon = PackedVector2Array(-58, -92, 58, -92, 58, 58, -58, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_FridgeObstacle" unique_id=1169193654]
+offset_left = -72.0
+offset_top = -28.0
+offset_right = 72.0
+offset_bottom = 28.0
+text = "Obstacles
+Fridge"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_Roommate" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1011802220]
+position = Vector2(2860, 250)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Roommate" unique_id=418940127]
+color = Color(0.72, 0.62, 0.92, 0.95)
+polygon = PackedVector2Array(0, -55, 28, -20, 18, 48, -18, 48, -28, -20)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_Roommate" unique_id=1589037581]
+offset_left = -72.0
+offset_top = 48.0
+offset_right = 72.0
+offset_bottom = 78.0
+text = "Roommate"
+horizontal_alignment = 1
+
+[node name="Top_Opening_MidRight" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1122531248]
+position = Vector2(2620, 235)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Opening_MidRight" unique_id=1501903152]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -102, 52, -102, 52, 64, -52, 64)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_Opening_MidRight" unique_id=893291035]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="Top_ApartmentRooms_Right" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1076759422]
+position = Vector2(2220, 240)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Right" unique_id=1578746660]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-150, -92, 150, -92, 150, 58, -150, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Right" unique_id=700424585]
+offset_left = -90.0
+offset_top = -26.0
+offset_right = 90.0
+offset_bottom = 26.0
+text = "Apartment
+Rooms (bk)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_WetFloor_Right" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1218928599]
+position = Vector2(1762, 729)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-170, -10, -70.15259, -10, 449, -16, 451, 7, -170, 10)
+
+[node name="Top_Boxes" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=173109573]
+position = Vector2(1656, 236)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Boxes" unique_id=2093621811]
+position = Vector2(-126, -1)
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_Boxes" unique_id=1176168364]
+offset_left = -211.0
+offset_top = -20.0
+offset_right = -55.0
+offset_bottom = 29.0
+text = "Obstacles
+Boxes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_ApartmentRooms_Left" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1067582540]
+position = Vector2(1320, 240)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Left" unique_id=217609947]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-110, -86, 110, -86, 110, 58, -110, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Left" unique_id=1365459496]
+offset_left = -82.0
+offset_top = -18.0
+offset_right = 82.0
+offset_bottom = 22.0
+text = "Apartment
+Rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_WetFloor_Left" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1882430870]
+position = Vector2(1295, 288)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="Top_BrokenLift" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=137316382]
+position = Vector2(740, 238)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_BrokenLift" unique_id=117003431]
+color = Color(0.13, 0.14, 0.16, 0.95)
+polygon = PackedVector2Array(-95, -95, 95, -95, 95, 60, -95, 60)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_BrokenLift" unique_id=1841938456]
+offset_left = -78.0
+offset_top = -20.0
+offset_right = 78.0
+offset_bottom = 24.0
+text = "Broken Lift
+(bk)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Top_Opening_FarLeft" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1604633066]
+position = Vector2(420, 235)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Opening_FarLeft" unique_id=119792114]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -102, 52, -102, 52, 64, -52, 64)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_Opening_FarLeft" unique_id=1095071955]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="SecondFloor" type="Node2D" parent="Level1_MapDraft" unique_id=1953428449]
+
+[node name="Second_RoommateKeys" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1180997548]
+position = Vector2(260, 700)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys" unique_id=134154629]
+position = Vector2(435, -234)
+color = Color(0.95, 0.72, 0.25, 0.95)
+polygon = PackedVector2Array(-70, -36, 70, -36, 70, 36, -70, 36)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys" unique_id=1335344259]
+offset_left = 362.0
+offset_top = -257.0
+offset_right = 494.0
+offset_bottom = -208.0
+text = "Roommate
+keys"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_Opening_Left" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=76944292]
+position = Vector2(420, 690)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_Opening_Left" unique_id=1955033178]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_Opening_Left" unique_id=1232739634]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="Second_BrokenLift" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=773523760]
+position = Vector2(740, 692)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_BrokenLift" unique_id=1235466057]
+color = Color(0.13, 0.14, 0.16, 0.95)
+polygon = PackedVector2Array(-95, -95, 95, -95, 95, 58, -95, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_BrokenLift" unique_id=1974551959]
+offset_left = -78.0
+offset_top = -20.0
+offset_right = 78.0
+offset_bottom = 24.0
+text = "Broken Lift
+(bk)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_CeilingFan_Left" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1724969752]
+position = Vector2(1040, 610)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Left" unique_id=1697913224]
+position = Vector2(24, -42)
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Left" unique_id=257478759]
+offset_left = -69.0
+offset_top = -55.0
+offset_right = 95.0
+offset_bottom = -31.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_AptAndBoxes_Left" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=648949117]
+position = Vector2(1440, 704)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Left" unique_id=1855541037]
+color = Color(0.2, 0.18, 0.15, 0.95)
+polygon = PackedVector2Array(-150, -76, 150, -76, 150, 46, -150, 46)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Left" unique_id=130121582]
+offset_left = -112.0
+offset_top = -28.0
+offset_right = 112.0
+offset_bottom = 30.0
+text = "Apartment Rooms
++ Boxes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_AptAndBoxes_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=426408602]
+position = Vector2(2380, 704)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Right" unique_id=2117444916]
+color = Color(0.2, 0.18, 0.15, 0.95)
+polygon = PackedVector2Array(-170, -76, 170, -76, 170, 46, -170, 46)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Right" unique_id=461666602]
+offset_left = -125.0
+offset_top = -28.0
+offset_right = 125.0
+offset_bottom = 30.0
+text = "Apartment Rooms
++ Boxes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_Coffee_Mid" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=677038977]
+position = Vector2(2215, 615)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Mid" unique_id=2009389579]
+position = Vector2(166, -31)
+color = Color(0.45, 0.25, 0.12, 0.95)
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Mid" unique_id=1441695548]
+offset_left = 121.0
+offset_top = -45.0
+offset_right = 209.0
+offset_bottom = -21.0
+text = "Coffee"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_CeilingFan_Mid" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1081679917]
+position = Vector2(1860, 610)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Mid" unique_id=1887118840]
+position = Vector2(-3, -40)
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, 29.28955, 12, -90, 12)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Mid" unique_id=1895204371]
+offset_left = -91.0
+offset_top = -50.0
+offset_right = 73.0
+offset_bottom = -26.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_CeilingFan_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1648941077]
+position = Vector2(2860, 610)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Right" unique_id=1772857220]
+position = Vector2(43, -33)
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Right" unique_id=1357645859]
+offset_left = -41.0
+offset_top = -45.0
+offset_right = 123.0
+offset_bottom = -21.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_Coffee_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=817048026]
+position = Vector2(3350, 690)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Right" unique_id=1895621591]
+color = Color(0.45, 0.25, 0.12, 0.95)
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Right" unique_id=1794017882]
+offset_left = -44.0
+offset_top = -12.0
+offset_right = 44.0
+offset_bottom = 12.0
+text = "Coffee"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Second_Opening_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1948389977]
+position = Vector2(3700, 690)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_Opening_Right" unique_id=1771820945]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_Opening_Right" unique_id=2137027606]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="ThirdFloor" type="Node2D" parent="Level1_MapDraft" unique_id=684838873]
+
+[node name="Third_Opening_Left" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=613466176]
+position = Vector2(420, 1125)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Opening_Left" unique_id=1327418997]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Opening_Left" unique_id=693984796]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="Third_Coffee_Left" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=714485263]
+position = Vector2(620, 1128)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Coffee_Left" unique_id=1424139345]
+color = Color(0.45, 0.25, 0.12, 0.95)
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Coffee_Left" unique_id=456487766]
+offset_left = -44.0
+offset_top = -12.0
+offset_right = 44.0
+offset_bottom = 12.0
+text = "Coffee"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_BrokenLift" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=356424699]
+position = Vector2(740, 1130)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_BrokenLift" unique_id=987005277]
+color = Color(0.13, 0.14, 0.16, 0.95)
+polygon = PackedVector2Array(-95, -95, 95, -95, 95, 58, -95, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_BrokenLift" unique_id=781281643]
+offset_left = -78.0
+offset_top = -20.0
+offset_right = 78.0
+offset_bottom = 24.0
+text = "Broken Lift
+(bk)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_JumpTimingNote" type="Label" parent="Level1_MapDraft/ThirdFloor" unique_id=631624682]
+offset_left = 914.0
+offset_top = 945.0
+offset_right = 1194.0
+offset_bottom = 1020.0
+text = "Need correct
+jump timing
+to pass"
+horizontal_alignment = 1
+
+[node name="Third_ExposedWiring_Left" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1334305747]
+position = Vector2(1210, 1072)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left" unique_id=1102597519]
+position = Vector2(-6, -94)
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left" unique_id=2002499759]
+offset_left = -96.0
+offset_top = -145.0
+offset_right = 68.0
+offset_bottom = -96.0
+text = "Exposed
+Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_Apartment_Left" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1020278459]
+position = Vector2(1400, 1130)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Left" unique_id=2036960273]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-75, -78, -73, -77, 75, -78, 75, 58, -75, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Left" unique_id=334886712]
+offset_left = -70.0
+offset_top = -20.0
+offset_right = 70.0
+offset_bottom = 24.0
+text = "Apartment
+Rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_CeilingFan" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=167529275]
+position = Vector2(1780, 1030)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan" unique_id=461407083]
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan" unique_id=1611943042]
+offset_left = -82.0
+offset_top = -12.0
+offset_right = 82.0
+offset_bottom = 12.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_Apartment_Mid" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=239528867]
+position = Vector2(2230, 1130)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Mid" unique_id=1938950048]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-80, -78, 80, -78, 80, 58, -80, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Mid" unique_id=647499944]
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 24.0
+text = "Apartment
+Rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_ExposedWiring_Mid" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1544403390]
+position = Vector2(2700, 980)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid" unique_id=2030028035]
+position = Vector2(103, -103)
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-105, -70, 105, -70, 105, 70, -105, 70)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid" unique_id=955100444]
+offset_left = 13.0
+offset_top = -116.0
+offset_right = 189.0
+offset_bottom = -80.0
+text = "Exposed Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_Boxes_Right" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1632725204]
+position = Vector2(3020, 1130)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Boxes_Right" unique_id=354722713]
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-100, -76, 100, -76, 100, 58, -100, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Boxes_Right" unique_id=656039150]
+offset_left = -72.0
+offset_top = -12.0
+offset_right = 72.0
+offset_bottom = 14.0
+text = "Boxes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_ExposedWiring_RightWall" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1225698130]
+position = Vector2(3370, 1090)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall" unique_id=659603025]
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall" unique_id=603028997]
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 68.0
+offset_bottom = 25.0
+text = "Exposed
+Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Third_Opening_Right" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=806838340]
+position = Vector2(3700, 1125)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Opening_Right" unique_id=441487976]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Opening_Right" unique_id=1578284784]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="ServiceFloor" type="Node2D" parent="Level1_MapDraft" unique_id=1117721584]
+
+[node name="Service_SecurityBaton" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=748514340]
+position = Vector2(620, 1305)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SecurityBaton" unique_id=1771652339]
+color = Color(0.65, 0.45, 0.28, 0.95)
+polygon = PackedVector2Array(-62, -50, 62, -50, 62, 50, -62, 50)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_SecurityBaton" unique_id=959131490]
+offset_left = -60.0
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = 30.0
+text = "Security
+guard
+Baton"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_SwitchButton" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=2030637364]
+position = Vector2(595, 1390)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SwitchButton" unique_id=1438473497]
+color = Color(0.86, 0.86, 0.45, 0.95)
+polygon = PackedVector2Array(-48, -38, 48, -38, 48, 38, -48, 38)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_SwitchButton" unique_id=2038683150]
+offset_left = -46.0
+offset_top = -22.0
+offset_right = 46.0
+offset_bottom = 22.0
+text = "Switch
+/Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_CeilingFan_Left" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=795297861]
+position = Vector2(1080, 1322)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Left" unique_id=1811786339]
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Left" unique_id=438967243]
+offset_left = -82.0
+offset_top = -12.0
+offset_right = 82.0
+offset_bottom = 12.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_Boxes_Left" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=890648155]
+position = Vector2(1470, 1380)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Left" unique_id=901859581]
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-105, -60, 105, -60, 105, 55, -105, 55)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Left" unique_id=1862432132]
+offset_left = -92.0
+offset_top = -22.0
+offset_right = 92.0
+offset_bottom = 24.0
+text = "Obstacles
+Boxes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_CeilingFan_Mid" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=460749371]
+position = Vector2(1840, 1322)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Mid" unique_id=1336881886]
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Mid" unique_id=992496080]
+offset_left = -82.0
+offset_top = -12.0
+offset_right = 82.0
+offset_bottom = 12.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_Boxes_Mid" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=1437851060]
+position = Vector2(2350, 1380)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Mid" unique_id=1673404985]
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-105, -60, 105, -60, 105, 55, -105, 55)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Mid" unique_id=783522071]
+offset_left = -92.0
+offset_top = -22.0
+offset_right = 92.0
+offset_bottom = 24.0
+text = "Obstacles
+Boxes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_SmallPlatforms" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=1589401649]
+position = Vector2(2460, 1268)
+
+[node name="PlatformA" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=174664677]
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-360, -8, -300, -8, -300, 8, -360, 8)
+
+[node name="PlatformB" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=494123387]
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-180, -8, -120, -8, -120, 8, -180, 8)
+
+[node name="PlatformC" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=401453945]
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(0, -8, 60, -8, 60, 8, 0, 8)
+
+[node name="PlatformD" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=2131905995]
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(180, -8, 240, -8, 240, 8, 180, 8)
+
+[node name="Service_ExposedWiring_Right" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=2093898105]
+position = Vector2(3200, 1315)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right" unique_id=1062488060]
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-300, -28, 300, -28, 300, 28, -300, 28)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right" unique_id=765133662]
+offset_left = -120.0
+offset_top = -12.0
+offset_right = 120.0
+offset_bottom = 12.0
+text = "Exposed Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Service_SN_Right" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=934018229]
+position = Vector2(3800, 1285)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SN_Right" unique_id=640368622]
+color = Color(0.95, 0.85, 0.35, 0.95)
+polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_SN_Right" unique_id=359219872]
+offset_left = -24.0
+offset_top = -12.0
+offset_right = 24.0
+offset_bottom = 12.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GroundFloor" type="Node2D" parent="Level1_MapDraft" unique_id=1783173661]
+
+[node name="Ground_Opening_Left" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=2223007]
+position = Vector2(420, 1605)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Opening_Left" unique_id=603539020]
+color = Color(0.04, 0.04, 0.05, 0.95)
+polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Opening_Left" unique_id=201571182]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = 58.0
+offset_bottom = -105.0
+text = "Opening"
+horizontal_alignment = 1
+
+[node name="Ground_Coffee_Left" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1313661431]
+position = Vector2(585, 1618)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Coffee_Left" unique_id=351235844]
+color = Color(0.45, 0.25, 0.12, 0.95)
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Coffee_Left" unique_id=273260803]
+offset_left = -44.0
+offset_top = -12.0
+offset_right = 44.0
+offset_bottom = 12.0
+text = "Coffee"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_BrokenLift" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=532893459]
+position = Vector2(740, 1610)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BrokenLift" unique_id=1557514659]
+color = Color(0.13, 0.14, 0.16, 0.95)
+polygon = PackedVector2Array(-95, -95, 95, -95, 95, 58, -95, 58)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BrokenLift" unique_id=1193162276]
+offset_left = -78.0
+offset_top = -20.0
+offset_right = 78.0
+offset_bottom = 24.0
+text = "Broken Lift
+(bk)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_SecurityGuard" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1177880781]
+position = Vector2(1040, 1600)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_SecurityGuard" unique_id=1210066408]
+color = Color(0.2, 0.55, 0.35, 0.95)
+polygon = PackedVector2Array(0, -55, 28, -20, 18, 48, -18, 48, -28, -20)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_SecurityGuard" unique_id=636286897]
+offset_left = -90.0
+offset_top = 48.0
+offset_right = 90.0
+offset_bottom = 76.0
+text = "Security Guard"
+horizontal_alignment = 1
+
+[node name="Ground_Apartment_Left" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=105079883]
+position = Vector2(1400, 1615)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Left" unique_id=1495540410]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-80, -78, 80, -78, 80, 50, -80, 50)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Left" unique_id=1596978147]
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 24.0
+text = "Apartment
+Rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_ExposedWiring_Left" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1286445546]
+position = Vector2(1770, 1618)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left" unique_id=1974264238]
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left" unique_id=741986440]
+offset_left = -96.0
+offset_top = -12.0
+offset_right = 96.0
+offset_bottom = 12.0
+text = "Exposed Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_Apartment_Mid" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1021228929]
+position = Vector2(2220, 1615)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Mid" unique_id=1607424521]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-80, -78, 80, -78, 80, 50, -80, 50)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Mid" unique_id=1987343634]
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 24.0
+text = "Apartment
+Rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_ExposedWiring_Mid" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1134475651]
+position = Vector2(2520, 1618)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid" unique_id=1203756163]
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid" unique_id=1586363383]
+offset_left = -96.0
+offset_top = -12.0
+offset_right = 96.0
+offset_bottom = 12.0
+text = "Exposed Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_Apartment_Right" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1220185070]
+position = Vector2(2880, 1615)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Right" unique_id=903549139]
+color = Color(0.16, 0.18, 0.21, 0.95)
+polygon = PackedVector2Array(-80, -78, 80, -78, 80, 50, -80, 50)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Right" unique_id=1712929515]
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 24.0
+text = "Apartment
+Rooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_ReceptionTable" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1965596154]
+position = Vector2(3370, 1625)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ReceptionTable" unique_id=745546274]
+color = Color(0.28, 0.22, 0.18, 0.95)
+polygon = PackedVector2Array(-135, -50, 135, -50, 135, 40, -135, 40)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_ReceptionTable" unique_id=92543916]
+offset_left = -120.0
+offset_top = -16.0
+offset_right = 120.0
+offset_bottom = 18.0
+text = "Reception Table
+(bk)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_LockedDoor" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=607393862]
+position = Vector2(3820, 1585)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_LockedDoor" unique_id=309221654]
+color = Color(0.35, 0.35, 0.85, 0.95)
+polygon = PackedVector2Array(-65, -96, 65, -96, 65, 80, -65, 80)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_LockedDoor" unique_id=1645791570]
+offset_left = -92.0
+offset_top = -42.0
+offset_right = 92.0
+offset_bottom = 34.0
+text = "Locked Door
+switch needed
+to open"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outdoor" type="Node2D" parent="Level1_MapDraft" unique_id=2088867544]
+
+[node name="Outdoor_TrafficArea" type="Node2D" parent="Level1_MapDraft/Outdoor" unique_id=340141820]
+position = Vector2(4550, 1590)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1223508629]
+color = Color(0.12, 0.12, 0.13, 0.95)
+polygon = PackedVector2Array(-360, -150, 360, -150, 360, 75, -360, 75)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1258530324]
+offset_left = -250.0
+offset_top = -58.0
+offset_right = 250.0
+offset_bottom = 34.0
+text = "Traffic: cars pass here.
+If the player is hit,
+lose focus and get pushed back."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outdoor_BusStop" type="Node2D" parent="Level1_MapDraft/Outdoor" unique_id=995248738]
+position = Vector2(5280, 1585)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop" unique_id=953165575]
+color = Color(0.12, 0.2, 0.16, 0.95)
+polygon = PackedVector2Array(-120, -160, 120, -160, 120, 80, -120, 80)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop" unique_id=1941784992]
+offset_left = -98.0
+offset_top = -34.0
+offset_right = 98.0
+offset_bottom = 34.0
+text = "End of Level
+Bus Stop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DarkPitNote" type="Label" parent="Level1_MapDraft" unique_id=1556264272]
+offset_left = 30.0
+offset_top = 1780.0
+offset_right = 720.0
+offset_bottom = 1840.0
+text = "Dark pit area: if the player falls, respawn to previous solid ground and lose focus."
+
+[node name="Top_WetFloor_Left" type="Polygon2D" parent="." unique_id=302493775]
+position = Vector2(1145, 736)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="Top_WetFloor_Right" type="Polygon2D" parent="." unique_id=1701156910]
+position = Vector2(2731, 729)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-170, -10, -70.15259, -10, 449, -16, 451, 7, -170, 10)
+
+[node name="Top_WetFloor_Left2" type="Polygon2D" parent="." unique_id=154195664]
+position = Vector2(974, 1169)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-150, -10, -59.278442, -10, 150, -10, 150, 10, -29.268188, 9.999939, -150, 10)
+
+[node name="Top_WetFloor_Right2" type="Polygon2D" parent="." unique_id=1400628509]
+position = Vector2(1646, 1159)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -73, -21, 500, -19, 502, 8, -170, 10)
+
+[node name="Top_WetFloor_Right3" type="Polygon2D" parent="." unique_id=421191814]
+position = Vector2(2465, 1159)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(255, -10, 152, -11, 449, -16, 451, 7, 252, 13)
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=1657752677]
+position = Vector2(2794, 59)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(918, -33, 1190, -32, 1187, 12, 921, 18)
+
+[node name="Top_WetFloor_Left3" type="Polygon2D" parent="." unique_id=1581884539]
+position = Vector2(1757, 282)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="Visual2" type="Polygon2D" parent="." unique_id=12381851]
+position = Vector2(1726, 128)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(874, 13, 871, -301, 925, -301, 921, 10)
+
+[node name="Visual3" type="Polygon2D" parent="." unique_id=176479628]
+position = Vector2(262, 27)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-31, -920, 25, -920, 20, -613, -33, -612)
+
+[node name="Visual4" type="Polygon2D" parent="." unique_id=753269051]
+position = Vector2(267, 29)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-31, -920, 25, -920, 20, -613, -33, -612)
+
+[node name="Visual5" type="Polygon2D" parent="." unique_id=1432053799]
+position = Vector2(413, 1234)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-25, -937, 37, -936, 36, -648, -27, -645)
+
+[node name="Visual" type="Polygon2D" parent="Visual5" unique_id=927369257]
+position = Vector2(267, 29)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-31, -920, 25, -920, 20, -613, -33, -612)
+
+[node name="RoundMechanics_TestArea" type="Node2D" parent="." unique_id=231559244]
+position = Vector2(5560, 480)
+z_index = 120
+
+[node name="Test_Ground" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+position = Vector2(1600, 860)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_Ground"]
+shape = SubResource("test_ground_collision")
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_Ground"]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(-1600, -24, 1600, -24, 1600, 24, -1600, 24)
+
+[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_Ground"]
+offset_left = -1580.0
+offset_top = -72.0
+offset_right = -1240.0
+offset_bottom = -40.0
+text = "Round Mechanics Test Area"
+
+[node name="Test_PlayerStartMarker" type="Marker2D" parent="RoundMechanics_TestArea"]
+position = Vector2(120, 796)
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_PlayerStartMarker"]
+color = Color(0.3, 1, 0.45, 0.9)
+polygon = PackedVector2Array(0, -44, 30, 0, 0, 44, -30, 0)
+
+[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_PlayerStartMarker"]
+offset_left = -70.0
+offset_top = -98.0
+offset_right = 110.0
+offset_bottom = -66.0
+text = "Player Start"
+horizontal_alignment = 1
+
+[node name="Test_JumpPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+position = Vector2(520, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_JumpPlatform"]
+shape = SubResource("test_jump_platform_collision")
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_JumpPlatform"]
+color = Color(0.55, 0.62, 0.7, 1)
+polygon = PackedVector2Array(-120, -14, 120, -14, 120, 14, -120, 14)
+
+[node name="Test_StudyNote" parent="RoundMechanics_TestArea" instance=ExtResource("4_study_note")]
+position = Vector2(260, 812)
+
+[node name="Test_StudentID" parent="RoundMechanics_TestArea" instance=ExtResource("6_student_id")]
+position = Vector2(380, 812)
+
+[node name="Test_Roommate" parent="RoundMechanics_TestArea" instance=ExtResource("11_roommate")]
+position = Vector2(560, 796)
+
+[node name="Test_CeilingFanPlatform" parent="RoundMechanics_TestArea" instance=ExtResource("10_ceiling_fan")]
+position = Vector2(760, 720)
+
+[node name="Test_WetFloor" parent="RoundMechanics_TestArea" instance=ExtResource("8_wet_floor")]
+position = Vector2(1040, 820)
+
+[node name="Test_ExposedWiring" parent="RoundMechanics_TestArea" instance=ExtResource("7_exposed_wiring")]
+position = Vector2(1220, 816)
+
+[node name="Test_Coffee" parent="RoundMechanics_TestArea" instance=ExtResource("5_coffee")]
+position = Vector2(1400, 812)
+
+[node name="Test_SecurityGuard" parent="RoundMechanics_TestArea" instance=ExtResource("12_security_guard")]
+position = Vector2(1600, 796)
+barrier_path = NodePath("../Test_IDBarrier")
+
+[node name="Test_IDBarrier" parent="RoundMechanics_TestArea" instance=ExtResource("13_id_barrier")]
+position = Vector2(1780, 788)
+
+[node name="Test_SwitchButton" parent="RoundMechanics_TestArea" instance=ExtResource("14_switch_button")]
+position = Vector2(2020, 796)
+locked_door_path = NodePath("../Test_LockedDoor")
+
+[node name="Test_LockedDoor" parent="RoundMechanics_TestArea" instance=ExtResource("15_locked_door")]
+position = Vector2(2200, 788)
+
+[node name="Test_RoadSection" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+position = Vector2(2600, 860)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_RoadSection"]
+shape = SubResource("test_road_collision")
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_RoadSection"]
+color = Color(0.1, 0.1, 0.12, 1)
+polygon = PackedVector2Array(-260, -12, 260, -12, 260, 12, -260, 12)
+
+[node name="Test_MovingCarHazard" parent="RoundMechanics_TestArea" instance=ExtResource("16_moving_car")]
+position = Vector2(2600, 776)
+move_distance = 90.0
+
+[node name="Test_FallGap_LeftPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+position = Vector2(820, 1040)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_FallGap_LeftPlatform"]
+shape = SubResource("test_fall_platform_collision")
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_FallGap_LeftPlatform"]
+color = Color(0.42, 0.44, 0.5, 1)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Test_FallGap_RightPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+position = Vector2(1100, 1040)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_FallGap_RightPlatform"]
+shape = SubResource("test_fall_platform_collision")
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_FallGap_RightPlatform"]
+color = Color(0.42, 0.44, 0.5, 1)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+
+[node name="Test_FallZone" parent="RoundMechanics_TestArea" instance=ExtResource("9_fall_zone")]
+position = Vector2(960, 1120)
+
+[node name="Test_BusStop" type="Area2D" parent="RoundMechanics_TestArea"]
+position = Vector2(3060, 788)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_bus_stop_trigger")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_BusStop"]
+shape = SubResource("test_bus_stop_collision")
+
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_BusStop"]
+color = Color(0.12, 0.2, 0.16, 1)
+polygon = PackedVector2Array(-60, -60, 60, -60, 60, 60, -60, 60)
+
+[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_BusStop"]
+offset_left = -54.0
+offset_top = -28.0
+offset_right = 54.0
+offset_bottom = 28.0
+text = "Bus Stop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelCompleteLabel" type="Label" parent="RoundMechanics_TestArea"]
+visible = false
+offset_left = 2940.0
+offset_top = 650.0
+offset_right = 3180.0
+offset_bottom = 700.0
+text = "Level 1 Complete"
+horizontal_alignment = 1

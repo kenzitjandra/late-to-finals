@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="player_collision"]
+size = Vector2(48, 80)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0)
+shape = SubResource("player_collision")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0, 0)
+polygon = PackedVector2Array(-24, -40, 24, -40, 24, 40, -24, 40)
+color = Color(0.2, 0.4, 0.8, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -20)
+enabled = false
+zoom = Vector2(0.6, 0.6)
+drag_bottom_margin = 0.2
+drag_top_margin = 0.2
+drag_left_margin = 0.4
+drag_right_margin = 0.4
+position_smoothing_enabled = false
+limit_smoothed = true
+limit_left = 0
+limit_right = 4300
+limit_top = 0
+limit_bottom = 1400
