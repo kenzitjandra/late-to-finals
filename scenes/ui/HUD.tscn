@@ -1,56 +1,300 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_panel_blue.png" id="2_panel_blue"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_panel_blue_border.png" id="3_panel_blue_border"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_panel_red.png" id="4_panel_red"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_focus_star.png" id="5_focus_star"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_study_note.png" id="6_study_note"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_coffee.png" id="7_coffee"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_student_id.png" id="8_student_id"]
 
 [node name="HUD" type="CanvasLayer"]
+layer = 20
 script = ExtResource("1_hud")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 240.0
-offset_bottom = 152.0
+[node name="HUDRoot" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture_filter = 1
 
-[node name="TimeLabel" type="Label" parent="VBoxContainer"]
-text = "Time: 180"
+[node name="StatsStack" type="VBoxContainer" parent="HUDRoot"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 244.0
+offset_bottom = 252.0
+theme_override_constants/separation = 5
 
-[node name="FocusLabel" type="Label" parent="VBoxContainer"]
+[node name="TimeCard" type="NinePatchRect" parent="HUDRoot/StatsStack"]
+custom_minimum_size = Vector2(224, 38)
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="TimeMargin" type="MarginContainer" parent="HUDRoot/StatsStack/TimeCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+
+[node name="TimeRow" type="HBoxContainer" parent="HUDRoot/StatsStack/TimeCard/TimeMargin"]
+theme_override_constants/separation = 8
+
+[node name="TimeIcon" type="Label" parent="HUDRoot/StatsStack/TimeCard/TimeMargin/TimeRow"]
+custom_minimum_size = Vector2(42, 0)
+theme_override_colors/font_color = Color(0.94, 0.98, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "TIME"
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="HUDRoot/StatsStack/TimeCard/TimeMargin/TimeRow"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "180"
+vertical_alignment = 1
+
+[node name="FocusCard" type="NinePatchRect" parent="HUDRoot/StatsStack"]
+custom_minimum_size = Vector2(224, 38)
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="FocusMargin" type="MarginContainer" parent="HUDRoot/StatsStack/FocusCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+
+[node name="FocusRow" type="HBoxContainer" parent="HUDRoot/StatsStack/FocusCard/FocusMargin"]
+theme_override_constants/separation = 8
+
+[node name="FocusIcon" type="TextureRect" parent="HUDRoot/StatsStack/FocusCard/FocusMargin/FocusRow"]
+custom_minimum_size = Vector2(24, 24)
+texture = ExtResource("5_focus_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FocusLabel" type="Label" parent="HUDRoot/StatsStack/FocusCard/FocusMargin/FocusRow"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Focus: 100"
+vertical_alignment = 1
 
-[node name="NotesLabel" type="Label" parent="VBoxContainer"]
+[node name="NotesCard" type="NinePatchRect" parent="HUDRoot/StatsStack"]
+custom_minimum_size = Vector2(224, 38)
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="NotesMargin" type="MarginContainer" parent="HUDRoot/StatsStack/NotesCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+
+[node name="NotesRow" type="HBoxContainer" parent="HUDRoot/StatsStack/NotesCard/NotesMargin"]
+theme_override_constants/separation = 8
+
+[node name="NotesIcon" type="TextureRect" parent="HUDRoot/StatsStack/NotesCard/NotesMargin/NotesRow"]
+custom_minimum_size = Vector2(24, 24)
+texture = ExtResource("6_study_note")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NotesLabel" type="Label" parent="HUDRoot/StatsStack/NotesCard/NotesMargin/NotesRow"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Notes: 0"
+vertical_alignment = 1
 
-[node name="CoffeeLabel" type="Label" parent="VBoxContainer"]
+[node name="CoffeeCard" type="NinePatchRect" parent="HUDRoot/StatsStack"]
+custom_minimum_size = Vector2(224, 38)
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="CoffeeMargin" type="MarginContainer" parent="HUDRoot/StatsStack/CoffeeCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+
+[node name="CoffeeRow" type="HBoxContainer" parent="HUDRoot/StatsStack/CoffeeCard/CoffeeMargin"]
+theme_override_constants/separation = 8
+
+[node name="CoffeeIcon" type="TextureRect" parent="HUDRoot/StatsStack/CoffeeCard/CoffeeMargin/CoffeeRow"]
+custom_minimum_size = Vector2(24, 24)
+texture = ExtResource("7_coffee")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoffeeLabel" type="Label" parent="HUDRoot/StatsStack/CoffeeCard/CoffeeMargin/CoffeeRow"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Coffee: 0"
+vertical_alignment = 1
 
-[node name="StudentIDLabel" type="Label" parent="VBoxContainer"]
+[node name="StudentIDCard" type="NinePatchRect" parent="HUDRoot/StatsStack"]
+custom_minimum_size = Vector2(224, 38)
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="StudentIDMargin" type="MarginContainer" parent="HUDRoot/StatsStack/StudentIDCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+
+[node name="StudentIDRow" type="HBoxContainer" parent="HUDRoot/StatsStack/StudentIDCard/StudentIDMargin"]
+theme_override_constants/separation = 8
+
+[node name="StudentIDIcon" type="TextureRect" parent="HUDRoot/StatsStack/StudentIDCard/StudentIDMargin/StudentIDRow"]
+custom_minimum_size = Vector2(24, 24)
+texture = ExtResource("8_student_id")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StudentIDLabel" type="Label" parent="HUDRoot/StatsStack/StudentIDCard/StudentIDMargin/StudentIDRow"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Student ID: No"
+vertical_alignment = 1
 
-[node name="ObjectiveLabel" type="Label" parent="VBoxContainer"]
+[node name="ObjectiveCard" type="NinePatchRect" parent="HUDRoot"]
+offset_left = 10.0
+offset_top = 222.0
+offset_right = 430.0
+offset_bottom = 270.0
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="ObjectiveMargin" type="MarginContainer" parent="HUDRoot/ObjectiveCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = -12.0
+offset_bottom = -6.0
+
+[node name="ObjectiveLabel" type="Label" parent="HUDRoot/ObjectiveCard/ObjectiveMargin"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Objective: Reach the Bus Stop"
+vertical_alignment = 1
 
-[node name="LowFocusLabel" type="Label" parent="VBoxContainer"]
+[node name="LowFocusBanner" type="NinePatchRect" parent="HUDRoot"]
 visible = false
-text = "Focus Low!"
+offset_left = 10.0
+offset_top = 276.0
+offset_right = 244.0
+offset_bottom = 318.0
+texture = ExtResource("4_panel_red")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="FocusFeedbackLabel" type="Label" parent="VBoxContainer"]
+[node name="LowFocusLabel" type="Label" parent="HUDRoot/LowFocusBanner"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.22, 0.02, 0.05, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "FOCUS LOW!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FocusFeedbackLabel" type="Label" parent="HUDRoot"]
 visible = false
+offset_left = 252.0
+offset_top = 57.0
+offset_right = 352.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 0.96, 0.42, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Focus -10"
 
-[node name="ResultPanel" type="PanelContainer" parent="."]
+[node name="ResultPanel" type="NinePatchRect" parent="HUDRoot"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -140.0
-offset_right = 180.0
-offset_bottom = 140.0
+offset_left = -220.0
+offset_top = -170.0
+offset_right = 220.0
+offset_bottom = 170.0
+texture = ExtResource("2_panel_blue")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="ResultLabel" type="Label" parent="ResultPanel"]
+[node name="ResultMargin" type="MarginContainer" parent="HUDRoot/ResultPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+
+[node name="ResultLabel" type="Label" parent="HUDRoot/ResultPanel/ResultMargin"]
 custom_minimum_size = Vector2(360, 280)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.08, 0.12, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 text = "Level 1 Complete"
 horizontal_alignment = 1
 vertical_alignment = 1

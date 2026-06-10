@@ -7,6 +7,13 @@ const LEVEL_STATE_PLAYING := "playing"
 const LEVEL_STATE_COMPLETED := "completed"
 const LEVEL_STATE_FAILED := "failed"
 
+# Level scene paths.
+# Changed Level 2 path to the cleaned Level2_CampusRush scene.
+# If your friend's Main/menu expects the old Lvl2/lvl2.tscn, tell me and we can switch it back.
+const LEVEL_1_PATH := "res://scenes/levels/Level1_ApartmentPanic.tscn"
+const LEVEL_2_PATH := "res://scenes/levels/Level2_CampusRush.tscn"
+const LEVEL_3_PATH := "res://scenes/levels/Level3_FinalHallSprint.tscn"
+
 var focus: int = 100
 var time_remaining: float = 180.0
 var notes_collected: int = 0
@@ -40,6 +47,17 @@ func reset_level_1_state() -> void:
 	coffee_collected = 0
 	has_student_id = false
 	current_objective = "Get your Student ID"
+	level_state = LEVEL_STATE_PLAYING
+
+
+func reset_for_level(level_name: String, objective: String, keep_student_id: bool = true) -> void:
+	current_level_display_name = level_name
+	focus = 100
+	time_remaining = 180.0
+	notes_collected = 0
+	coffee_collected = 0
+	has_student_id = keep_student_id
+	current_objective = objective
 	level_state = LEVEL_STATE_PLAYING
 
 
@@ -79,9 +97,27 @@ func fail_current_level(level_name: String = "") -> void:
 
 
 func restart_current_level() -> void:
-	# For direct scene testing, reloading the current scene is safest.
 	level_state = LEVEL_STATE_PLAYING
 	get_tree().reload_current_scene()
+
+
+# Level transition helpers.
+# These keep your friend's connected level flow.
+func go_to_level_1() -> void:
+	reset_level_1_state()
+	get_tree().change_scene_to_file.call_deferred(LEVEL_1_PATH)
+
+
+func go_to_level_2_from_level_1() -> void:
+	# Level 2 happens after Level 1, so keep Student ID.
+	reset_for_level("Level 2", "Reach the Faculty Building", true)
+	get_tree().change_scene_to_file.call_deferred(LEVEL_2_PATH)
+
+
+func go_to_level_3_from_level_2() -> void:
+	# Level 3 happens after Level 1, so keep Student ID.
+	reset_for_level("Level 3", "Enter the Exam Hall", true)
+	get_tree().change_scene_to_file.call_deferred(LEVEL_3_PATH)
 
 
 # Backward-compatible old functions.

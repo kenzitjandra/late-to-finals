@@ -15,8 +15,14 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ookv4"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/SwitchButton.tscn" id="13_dvh6m"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/LockedDoor.tscn" id="14_kswdf"]
+[ext_resource type="Script" path="res://scripts/levels/level2_exit_trigger.gd" id="15_level2_exit"]
+[ext_resource type="Script" path="res://scripts/levels/level2_manager.gd" id="16_level2_manager"]
+
+[sub_resource type="RectangleShape2D" id="level2_complete_trigger_shape"]
+size = Vector2(160, 140)
 
 [node name="Lvl2" type="Node2D" unique_id=880213973]
+script = ExtResource("16_level2_manager")
 
 [node name="Player" parent="." unique_id=551579220 instance=ExtResource("1_4ijb4")]
 position = Vector2(248, -49)
@@ -145,6 +151,17 @@ offset_top = 780.0
 offset_right = 2502.0
 offset_bottom = 803.0
 text = "Level end: BUS STOP"
+
+[node name="Exits" type="Node2D" parent="World"]
+
+[node name="Level2CompleteTrigger" type="Area2D" parent="World/Exits"]
+position = Vector2(7519, -112)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("15_level2_exit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Exits/Level2CompleteTrigger"]
+shape = SubResource("level2_complete_trigger_shape")
 
 [node name="CeilingFanPlatform3" parent="World" unique_id=1897694005 instance=ExtResource("10_ookv4")]
 position = Vector2(5432, -107.99994)

@@ -1,11 +1,16 @@
 extends Node
 
 # Level 2 Manager - Campus Rush
-# Handles:
-# - Level 2 objective setup
-# - player camera setup
-# - faculty building exit trigger
-# - simple standalone testing support
+# Merged version:
+# - Keeps Level 2 objective setup
+# - Keeps Student ID = Yes for Level 2
+# - Keeps FacultyBuildingExit completion trigger
+# - Keeps friend’s polished Level 2 camera settings
+
+const CAMERA_LIMIT_LEFT := 0
+const CAMERA_LIMIT_TOP := -1250
+const CAMERA_LIMIT_RIGHT := 7800
+const CAMERA_LIMIT_BOTTOM := 400
 
 @onready var player: CharacterBody2D = get_node_or_null("Player")
 @onready var hud: Node = get_node_or_null("HUD")
@@ -26,21 +31,26 @@ func _ready() -> void:
 
 	_setup_game_manager_state()
 	_setup_hud_objective()
-	_setup_player_camera()
 	_setup_exit_trigger()
 
+	_configure_player_camera.call_deferred()
 	call_deferred("_late_setup")
 
 	print("Level 2: Campus Rush - Ready")
 
 
 func _late_setup() -> void:
+	_setup_game_manager_state()
 	_setup_hud_objective()
-	_setup_player_camera()
+	_configure_player_camera()
 
 
 func _setup_game_manager_state() -> void:
-	GameManager.set_level_display_name("Level 2")
+	if GameManager.has_method("set_level_display_name"):
+		GameManager.set_level_display_name("Level 2")
+	elif "current_level_display_name" in GameManager:
+		GameManager.current_level_display_name = "Level 2"
+
 	GameManager.level_state = GameManager.LEVEL_STATE_PLAYING
 
 	# Level 2 happens after Level 1, so Student ID should already be collected.
@@ -49,11 +59,17 @@ func _setup_game_manager_state() -> void:
 	if GameManager.time_remaining <= 0.0:
 		GameManager.time_remaining = 180.0
 
-	GameManager.set_objective("Reach the Faculty Building")
+	if GameManager.has_method("set_objective"):
+		GameManager.set_objective("Reach the Faculty Building")
+	elif "current_objective" in GameManager:
+		GameManager.current_objective = "Reach the Faculty Building"
 
 
 func _setup_hud_objective() -> void:
-	GameManager.set_objective("Reach the Faculty Building")
+	if GameManager.has_method("set_objective"):
+		GameManager.set_objective("Reach the Faculty Building")
+	elif "current_objective" in GameManager:
+		GameManager.current_objective = "Reach the Faculty Building"
 
 	if hud == null:
 		print("WARNING: HUD node not found.")
@@ -64,39 +80,32 @@ func _setup_hud_objective() -> void:
 		objective_label.text = "Objective: Reach the Faculty Building"
 
 
-func _setup_player_camera() -> void:
+func _configure_player_camera() -> void:
 	if player == null:
+		push_warning("Level 2 camera setup skipped: Player node not found.")
 		return
 
 	var overview_camera := get_node_or_null("LevelOverviewCamera")
 	if overview_camera != null and overview_camera is Camera2D:
 		overview_camera.enabled = false
 
-	var player_camera: Camera2D = null
-
-	for child in player.get_children():
-		if child is Camera2D:
-			player_camera = child
-			break
+	var player_camera := player.get_node_or_null("Camera2D") as Camera2D
 
 	if player_camera == null:
 		player_camera = Camera2D.new()
-		player_camera.name = "Level2PlayerCamera"
+		player_camera.name = "Camera2D"
 		player.add_child(player_camera)
 		print("Created new Camera2D under Player.")
 
-	player_camera.position = Vector2(0, -20)
 	player_camera.enabled = true
-	player_camera.make_current()
-
-	# Adjust this if needed.
-	player_camera.zoom = Vector2(0.8, 0.8)
-
-	player_camera.limit_left = 0
-	player_camera.limit_top = -500
-	player_camera.limit_right = 7800
-	player_camera.limit_bottom = 1100
+	player_camera.zoom = Vector2(0.75, 0.75)
+	player_camera.offset = Vector2(0, -120)
+	player_camera.limit_left = CAMERA_LIMIT_LEFT
+	player_camera.limit_top = CAMERA_LIMIT_TOP
+	player_camera.limit_right = CAMERA_LIMIT_RIGHT
+	player_camera.limit_bottom = CAMERA_LIMIT_BOTTOM
 	player_camera.position_smoothing_enabled = false
+	player_camera.make_current()
 
 	print("Level 2 player camera enabled.")
 
@@ -121,8 +130,17 @@ func _on_faculty_building_entered(body: Node2D) -> void:
 	if not _is_player(body):
 		return
 
+	if GameManager.has_method("is_level_active") and not GameManager.is_level_active():
+		return
+
 	print("Level 2 Complete! Reached the Faculty Building.")
-	GameManager.complete_current_level("Level 2")
+
+	if GameManager.has_method("complete_current_level"):
+		GameManager.complete_current_level("Level 2")
+	else:
+		GameManager.level_state = GameManager.LEVEL_STATE_COMPLETED
+		if GameManager.has_signal("level_finished"):
+			GameManager.level_finished.emit(GameManager.level_state)
 
 
 func _is_player(body: Node) -> bool:
