@@ -17,8 +17,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	triggered = true
 
-	GameManager.complete_level_1()
 	_show_completion_label()
+	GameManager.go_to_level_2_from_level_1()
 	print("Level 1 Complete!")
 
 

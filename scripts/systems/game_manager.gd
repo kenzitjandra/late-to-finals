@@ -6,6 +6,7 @@ signal level_finished(state: String)
 const LEVEL_STATE_PLAYING := "playing"
 const LEVEL_STATE_COMPLETED := "completed"
 const LEVEL_STATE_FAILED := "failed"
+const LEVEL_2_PATH := "res://scenes/levels/Lvl2/lvl2.tscn"
 
 var focus: int = 100
 var time_remaining: float = 180.0
@@ -52,6 +53,14 @@ func complete_level_1() -> void:
 
 	level_state = LEVEL_STATE_COMPLETED
 	level_finished.emit(level_state)
+
+
+func go_to_level_2_from_level_1() -> void:
+	if level_state == LEVEL_STATE_PLAYING:
+		complete_level_1()
+
+	level_state = LEVEL_STATE_PLAYING
+	get_tree().change_scene_to_file.call_deferred(LEVEL_2_PATH)
 
 
 func fail_level_1() -> void:
