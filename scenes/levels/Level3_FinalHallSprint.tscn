@@ -1,0 +1,771 @@
+[gd_scene format=3 uid="uid://clgc7w73eaw0u"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="2_hud"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_study_note"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/Coffee.tscn" id="4_coffee"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/WetFloor.tscn" id="5_wet_floor"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="6_exposed_wiring"]
+[ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="7_ceiling_fan"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/Roommate.tscn" id="8_roommate"]
+[ext_resource type="Script" uid="uid://d3dpw7lcd6n6m" path="res://scripts/levels/level3_manager.gd" id="9_level3_manager"]
+
+[sub_resource type="RectangleShape2D" id="wall_left_collision"]
+size = Vector2(64, 1500)
+
+[sub_resource type="RectangleShape2D" id="wall_right_collision"]
+size = Vector2(64, 1500)
+
+[sub_resource type="RectangleShape2D" id="roof_collision"]
+size = Vector2(5800, 48)
+
+[sub_resource type="RectangleShape2D" id="bottom_boundary_collision"]
+size = Vector2(5800, 48)
+
+[sub_resource type="RectangleShape2D" id="bottom_floor_collision"]
+size = Vector2(5600, 48)
+
+[sub_resource type="RectangleShape2D" id="middle_floor_collision"]
+size = Vector2(5199, 40)
+
+[sub_resource type="RectangleShape2D" id="top_floor_collision"]
+size = Vector2(5000, 40)
+
+[sub_resource type="RectangleShape2D" id="mid_platform_collision"]
+size = Vector2(780, 48)
+
+[sub_resource type="RectangleShape2D" id="long_platform_collision"]
+size = Vector2(454, 96)
+
+[sub_resource type="RectangleShape2D" id="box_collision"]
+size = Vector2(90, 120)
+
+[sub_resource type="RectangleShape2D" id="small_box_collision"]
+size = Vector2(70, 90)
+
+[sub_resource type="RectangleShape2D" id="fake_exit_collision"]
+size = Vector2(90, 120)
+
+[sub_resource type="RectangleShape2D" id="exam_hall_trigger_collision"]
+size = Vector2(90, 140)
+
+[node name="Level3_FinalHallSprint" type="Node2D" unique_id=685724170]
+script = ExtResource("9_level3_manager")
+
+[node name="Player" parent="." unique_id=1564377369 instance=ExtResource("1_player")]
+position = Vector2(180, 1256)
+
+[node name="HUD" parent="." unique_id=1896246441 instance=ExtResource("2_hud")]
+
+[node name="LevelOverviewCamera" type="Camera2D" parent="." unique_id=759002508]
+position = Vector2(2800, 760)
+enabled = false
+zoom = Vector2(0.24, 0.24)
+limit_left = 0
+limit_top = 0
+limit_right = 5800
+limit_bottom = 1500
+
+[node name="Building" type="Node2D" parent="." unique_id=1940824475]
+
+[node name="BuildingFrame" type="Node2D" parent="Building" unique_id=1254975765]
+
+[node name="Wall_Left" type="StaticBody2D" parent="Building/BuildingFrame" unique_id=1464005594]
+position = Vector2(32, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/BuildingFrame/Wall_Left" unique_id=1749226683]
+shape = SubResource("wall_left_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/BuildingFrame/Wall_Left" unique_id=1910799921]
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-32, -750, 32, -750, 32, 750, -32, 750)
+
+[node name="Wall_Right" type="StaticBody2D" parent="Building/BuildingFrame" unique_id=1531680599]
+position = Vector2(5768, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/BuildingFrame/Wall_Right" unique_id=124875818]
+shape = SubResource("wall_right_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/BuildingFrame/Wall_Right" unique_id=1199721303]
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-32, -750, 32, -750, 32, 750, -32, 750)
+
+[node name="Roof" type="StaticBody2D" parent="Building/BuildingFrame" unique_id=1553861249]
+position = Vector2(2900, 80)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/BuildingFrame/Roof" unique_id=1766669601]
+shape = SubResource("roof_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/BuildingFrame/Roof" unique_id=421114610]
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-2900, -24, 2900, -24, 2900, 24, -2900, 24)
+
+[node name="BottomBoundary" type="StaticBody2D" parent="Building/BuildingFrame" unique_id=197274896]
+position = Vector2(2900, 1420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/BuildingFrame/BottomBoundary" unique_id=434442739]
+shape = SubResource("bottom_boundary_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/BuildingFrame/BottomBoundary" unique_id=393592287]
+color = Color(0.18, 0.18, 0.22, 1)
+polygon = PackedVector2Array(-2900, -24, 2900, -24, 2900, 24, -2900, 24)
+
+[node name="Floors" type="Node2D" parent="Building" unique_id=1277602911]
+
+[node name="BottomFloor" type="StaticBody2D" parent="Building/Floors" unique_id=916397788]
+position = Vector2(2800, 1320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/Floors/BottomFloor" unique_id=1373808549]
+shape = SubResource("bottom_floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/Floors/BottomFloor" unique_id=850575169]
+position = Vector2(67.99977, 0.582852)
+scale = Vector2(1.0242856, 1.0242856)
+color = Color(0.55, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-2800, -24, 2800, -24, 2800, 24, -2800, 24)
+
+[node name="MiddleFloor" type="StaticBody2D" parent="Building/Floors" unique_id=1521012559]
+position = Vector2(2400, 900)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/Floors/MiddleFloor" unique_id=451625543]
+position = Vector2(199.5, 0)
+shape = SubResource("middle_floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/Floors/MiddleFloor" unique_id=1886921971]
+position = Vector2(293, 0)
+scale = Vector2(1.044375, 1)
+color = Color(0.5, 0.5, 0.55, 1)
+polygon = PackedVector2Array(-2577.6184, -20, 2400, -20, 2399.9998, -8.0000305, 2399.9998, 0, 2400, 20, -2578.576, 20, -2577.6184, 1.1666679)
+
+[node name="TopFloor" type="StaticBody2D" parent="Building/Floors" unique_id=338387901]
+position = Vector2(3100, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/Floors/TopFloor" unique_id=591605269]
+shape = SubResource("top_floor_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/Floors/TopFloor" unique_id=785566070]
+position = Vector2(68, 0.5440006)
+scale = Vector2(1.0272, 1.0272)
+color = Color(0.55, 0.48, 0.38, 1)
+polygon = PackedVector2Array(-2500, -20, 2500, -20, 2500, 20, -2500, 20)
+
+[node name="Platforms" type="Node2D" parent="Building" unique_id=811647593]
+
+[node name="Visual2" type="Polygon2D" parent="Building/Platforms" unique_id=841204286]
+position = Vector2(263, 1236)
+color = Color(0.75, 0.75, 0.75, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="BottomMidPlatform" type="StaticBody2D" parent="Building/Platforms" unique_id=724040768]
+position = Vector2(2050, 1160)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/Platforms/BottomMidPlatform" unique_id=2096310072]
+shape = SubResource("mid_platform_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/Platforms/BottomMidPlatform" unique_id=344013211]
+color = Color(0.65, 0.65, 0.68, 1)
+polygon = PackedVector2Array(-390, -24, 390, -24, 390, 24, -390, 24)
+
+[node name="BottomLatePlatform" type="StaticBody2D" parent="Building/Platforms" unique_id=501707573]
+position = Vector2(4511, 1223)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Building/Platforms/BottomLatePlatform" unique_id=895476430]
+position = Vector2(-163, 24)
+shape = SubResource("long_platform_collision")
+
+[node name="Visual" type="Polygon2D" parent="Building/Platforms/BottomLatePlatform" unique_id=1855188320]
+position = Vector2(-162.5, 25)
+scale = Vector2(0.5833333, 2.0416667)
+color = Color(0.65, 0.65, 0.68, 1)
+polygon = PackedVector2Array(-390, -24, 390, -24, 390, 24, -390, 24, -390, -2)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=1664897627]
+
+[node name="WetFloor" parent="Hazards" unique_id=1449676719 instance=ExtResource("5_wet_floor")]
+position = Vector2(663, 1280)
+scale = Vector2(1.96, 1)
+
+[node name="WetFloor" parent="Hazards/WetFloor" unique_id=55035846 instance=ExtResource("5_wet_floor")]
+position = Vector2(2236.7349, -791)
+scale = Vector2(1.067464, 0.6666667)
+
+[node name="BottomWiring_MidPlatform" parent="Hazards" unique_id=121461296 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(1900, 1116)
+
+[node name="BottomWiring_1" parent="Hazards" unique_id=1237284766 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(2750, 1276)
+scale = Vector2(2.52, 1)
+
+[node name="BottomWiring_1" parent="Hazards/BottomWiring_1" unique_id=1095146516 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(254.76192, -784)
+scale = Vector2(1.6074324, 0.4)
+
+[node name="BottomWiring_2" parent="Hazards" unique_id=1078884445 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(3342, 1276)
+
+[node name="BottomWiring_2" parent="Hazards/BottomWiring_2" unique_id=150471420 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(158, 0)
+
+[node name="BottomWetFloor" parent="Hazards" unique_id=698618803 instance=ExtResource("5_wet_floor")]
+position = Vector2(4008, 1280)
+
+[node name="MiddleWiring_1" parent="Hazards" unique_id=2001918730 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(2050, 800)
+
+[node name="MiddleWiring_2" parent="Hazards" unique_id=1029355159 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(4544, 819)
+scale = Vector2(1.5769231, 1.3094629)
+
+[node name="MiddleWiring_2" parent="Hazards/MiddleWiring_2" unique_id=446614923 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(630.97546, 313.10547)
+scale = Vector2(1.5769231, 1.3094629)
+
+[node name="TopWiring_1" parent="Hazards" unique_id=847740829 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(780, 480)
+
+[node name="TopWiring_2" parent="Hazards" unique_id=460564739 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(970, 480)
+
+[node name="TopWiring_3" parent="Hazards" unique_id=1651576902 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(1160, 480)
+
+[node name="TopWiring_4" parent="Hazards" unique_id=42414443 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(4655, 480)
+
+[node name="MiddleCeilingFan_1" parent="Hazards" unique_id=1530729773 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(1520, 735)
+
+[node name="MiddleCeilingFan_1" parent="Hazards/MiddleCeilingFan_1" unique_id=690802938 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(-143, 378)
+
+[node name="MiddleCeilingFan_2" parent="Hazards/MiddleCeilingFan_1" unique_id=1170010173 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(419, -374)
+
+[node name="MiddleCeilingFan_2" parent="Hazards" unique_id=244159977 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(1810, 735)
+
+[node name="MiddleCeilingFan_3" parent="Hazards" unique_id=618876268 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(3750, 735)
+
+[node name="MiddleCeilingFan_3" parent="Hazards/MiddleCeilingFan_3" unique_id=196628859 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(790, -5)
+
+[node name="MiddleCeilingFan_4" parent="Hazards" unique_id=1867505398 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(3144, 740)
+
+[node name="MiddleCeilingFan_4" parent="Hazards/MiddleCeilingFan_4" unique_id=271508917 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(-2937, -49)
+
+[node name="MiddleCeilingFan_4" parent="Hazards/MiddleCeilingFan_4/MiddleCeilingFan_4" unique_id=549346305 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(204, -109)
+
+[node name="MiddleCeilingFan_4" parent="Hazards/MiddleCeilingFan_4/MiddleCeilingFan_4/MiddleCeilingFan_4" unique_id=1940178492 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(-203, -127)
+
+[node name="MiddleCeilingFan_4" parent="Hazards/MiddleCeilingFan_4/MiddleCeilingFan_4/MiddleCeilingFan_4/MiddleCeilingFan_4" unique_id=434188616 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(201, -111)
+
+[node name="MiddleCeilingFan_5" parent="Hazards/MiddleCeilingFan_4" unique_id=674386408 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(237, -378)
+
+[node name="FarRightCeilingFan" parent="Hazards" unique_id=585537647 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(5541, 1126)
+
+[node name="FarRightCeilingFan2" parent="Hazards" unique_id=570992832 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(5331, 998)
+
+[node name="Obstacles" type="Node2D" parent="." unique_id=1156734905]
+
+[node name="BottomBox_3" type="StaticBody2D" parent="Obstacles" unique_id=1671486637]
+position = Vector2(4946, 1236)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/BottomBox_3" unique_id=941356210]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/BottomBox_3" unique_id=1126193409]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Obstacles/BottomBox_3" unique_id=2055399720]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(box)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_1" type="StaticBody2D" parent="Obstacles" unique_id=167174340]
+position = Vector2(1216, 820)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_1" unique_id=1570333408]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_1" unique_id=1608823693]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Obstacles/MiddleBox_1" unique_id=1831505278]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(boxes)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_1" type="StaticBody2D" parent="Obstacles/MiddleBox_1" unique_id=524892205]
+position = Vector2(-191, 434)
+scale = Vector2(3.4, 0.67999995)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_1/MiddleBox_1" unique_id=1034012868]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_1/MiddleBox_1" unique_id=1801948843]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Obstacles/MiddleBox_1/MiddleBox_1" unique_id=228357211]
+offset_left = -17.647053
+offset_top = -18.0
+offset_right = 74.35295
+offset_bottom = 31.0
+scale = Vector2(0.38823533, 1)
+text = "Obstacle
+(table)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_2" type="StaticBody2D" parent="Obstacles" unique_id=1293293352]
+position = Vector2(2050, 820)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_2" unique_id=1270502099]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_2" unique_id=1148675385]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Obstacles/MiddleBox_2" unique_id=1399208214]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(boxes)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_3" type="StaticBody2D" parent="Obstacles" unique_id=1222825830]
+position = Vector2(3436, 835)
+scale = Vector2(1.96, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_3" unique_id=1756870724]
+shape = SubResource("small_box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_3" unique_id=554185802]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-35, -45, 35, -45, 35, 45, -35, 45)
+
+[node name="Label" type="Label" parent="Obstacles/MiddleBox_3" unique_id=496532374]
+offset_left = -40.0
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 18.0
+text = "Obstacle
+(box)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_3" type="StaticBody2D" parent="Obstacles/MiddleBox_3" unique_id=1659848087]
+position = Vector2(-170.40813, -383)
+scale = Vector2(1.3686244, 1.0555556)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_3/MiddleBox_3" unique_id=1828630994]
+shape = SubResource("small_box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_3/MiddleBox_3" unique_id=1802428744]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-35, -45, 35, -45, 35, 45, -35, 45)
+
+[node name="Label" type="Label" parent="Obstacles/MiddleBox_3/MiddleBox_3" unique_id=788198164]
+offset_left = -40.0
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 18.0
+text = "Obstacle
+(box)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_4" type="StaticBody2D" parent="Obstacles" unique_id=887087044]
+position = Vector2(4878, 836)
+scale = Vector2(2.52, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_4" unique_id=1700655627]
+shape = SubResource("small_box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_4" unique_id=1211135691]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-35, -45, 35, -45, 35, 45, -35, 45)
+
+[node name="Label" type="Label" parent="Obstacles/MiddleBox_4" unique_id=1554366634]
+offset_left = -40.0
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 18.0
+text = "Obstacle
+(box)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TopBox_1" type="StaticBody2D" parent="Obstacles" unique_id=1527874914]
+position = Vector2(1646, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/TopBox_1" unique_id=1634255834]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/TopBox_1" unique_id=520272956]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Obstacles/TopBox_1" unique_id=664810380]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(boxes)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TopBox_2" type="StaticBody2D" parent="Obstacles" unique_id=1102434862]
+position = Vector2(2262, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/TopBox_2" unique_id=139448991]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="Obstacles/TopBox_2" unique_id=235220806]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Obstacles/TopBox_2" unique_id=1045122414]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(boxes)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Collectibles" type="Node2D" parent="." unique_id=963419912]
+
+[node name="StudyNote_Start" parent="Collectibles" unique_id=295751428 instance=ExtResource("3_study_note")]
+position = Vector2(190, 840)
+
+[node name="StudyNote_SeniorReward" parent="Collectibles" unique_id=1418935516 instance=ExtResource("3_study_note")]
+position = Vector2(2550, 840)
+
+[node name="Coffee_BottomPlatform" parent="Collectibles" unique_id=1456086351 instance=ExtResource("4_coffee")]
+position = Vector2(2200, 1100)
+
+[node name="Coffee_BottomPlatform" parent="Collectibles/Coffee_BottomPlatform" unique_id=1708142166 instance=ExtResource("4_coffee")]
+position = Vector2(1406, -658)
+
+[node name="Coffee_Top" parent="Collectibles" unique_id=1656964104 instance=ExtResource("4_coffee")]
+position = Vector2(1646, 342)
+
+[node name="Coffee_MiddleLate" parent="Collectibles" unique_id=632292491 instance=ExtResource("4_coffee")]
+position = Vector2(3748, 680)
+
+[node name="Coffee_MiddleLate" parent="Collectibles/Coffee_MiddleLate" unique_id=995383947 instance=ExtResource("4_coffee")]
+position = Vector2(1797, -2)
+
+[node name="NPCs" type="Node2D" parent="." unique_id=21921388]
+
+[node name="Senior" parent="NPCs" unique_id=846896433 instance=ExtResource("8_roommate")]
+position = Vector2(2500, 830)
+interaction_message = "Senior: Here is a study note. The correct exam hall is upstairs."
+
+[node name="NameLabel" type="Label" parent="NPCs/Senior" unique_id=1850602154]
+offset_left = -42.0
+offset_top = 38.0
+offset_right = 42.0
+offset_bottom = 62.0
+text = "Senior"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Signs" type="Node2D" parent="." unique_id=49722913]
+
+[node name="LevelBrief" type="Label" parent="Signs" unique_id=80272244]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+text = "Level 3 map:
+- Find the correct exam hall
+- Keep enough focus for the exam
+
+Interact with senior get SN, skip the senior get nothing
+
+If player enter fake exit -> back to start of the level"
+
+[node name="ExamHallLabel" type="Label" parent="Signs" unique_id=1778388981]
+offset_left = 5320.0
+offset_top = 360.0
+offset_right = 5320.0
+offset_bottom = 360.0
+text = "Exam Hall"
+horizontal_alignment = 1
+
+[node name="Exits" type="Node2D" parent="." unique_id=1619136054]
+
+[node name="FakeExit" type="Area2D" parent="Exits" unique_id=1938372188]
+position = Vector2(2953, 820)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/FakeExit" unique_id=1630649722]
+shape = SubResource("fake_exit_collision")
+
+[node name="Visual" type="Polygon2D" parent="Exits/FakeExit" unique_id=1216557173]
+color = Color(0.75, 0.75, 0.75, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Exits/FakeExit" unique_id=2045075281]
+offset_left = -57.0
+offset_top = -21.0
+offset_right = 60.0
+offset_bottom = 28.0
+text = "Reset
+(Door to Stairs)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="FakeExit" type="Area2D" parent="Exits/FakeExit" unique_id=382825051]
+position = Vector2(1451, -380)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/FakeExit/FakeExit" unique_id=3136193]
+shape = SubResource("fake_exit_collision")
+
+[node name="Visual" type="Polygon2D" parent="Exits/FakeExit/FakeExit" unique_id=2093437613]
+color = Color(0.75, 0.75, 0.75, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="Exits/FakeExit/FakeExit" unique_id=1509078933]
+offset_left = -57.0
+offset_top = -21.0
+offset_right = 60.0
+offset_bottom = 28.0
+text = "Reset
+(Door to Stairs)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExamHallExit" type="Area2D" parent="Exits" unique_id=1670734885]
+position = Vector2(5480, 430)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ExamHallExit" unique_id=752243126]
+shape = SubResource("exam_hall_trigger_collision")
+
+[node name="ExitVisual" type="Polygon2D" parent="Exits/ExamHallExit" unique_id=218451213]
+color = Color(0.2, 0.8, 0.2, 1)
+polygon = PackedVector2Array(-45, -70, 45, -70, 45, 70, -45, 70)
+
+[node name="Label" type="Label" parent="Exits/ExamHallExit" unique_id=1902535496]
+offset_left = -44.0
+offset_top = -14.0
+offset_right = 44.0
+offset_bottom = 14.0
+text = "Exam hall"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ground_ExposedWiring_Mid" type="Node2D" parent="." unique_id=5155803]
+position = Vector2(2520, 1618)
+
+[node name="BottomWiring_MidPlatform" parent="." unique_id=1007514919 instance=ExtResource("6_exposed_wiring")]
+position = Vector2(1395, 1284.0001)
+scale = Vector2(3.56, 0.5999999)
+
+[node name="StudyNote" parent="." unique_id=1544853809 instance=ExtResource("3_study_note")]
+position = Vector2(2083, 1248)
+
+[node name="MiddleBox_1" type="StaticBody2D" parent="." unique_id=837457833]
+position = Vector2(3222, 1255)
+scale = Vector2(0.8400004, 0.67999995)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_1" unique_id=1865590036]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="MiddleBox_1" unique_id=1512818301]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="MiddleBox_1" unique_id=2127109978]
+offset_left = -17.647053
+offset_top = -18.0
+offset_right = 74.35295
+offset_bottom = 31.0
+scale = Vector2(0.38823533, 1)
+text = "Obstacle
+(table)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StudyNote2" parent="." unique_id=1662945676 instance=ExtResource("3_study_note")]
+position = Vector2(3420, 1270)
+
+[node name="MiddleCeilingFan_3" parent="." unique_id=201341805 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(3426, 1112)
+
+[node name="BottomWetFloor" parent="." unique_id=289777954 instance=ExtResource("5_wet_floor")]
+position = Vector2(3704, 1279)
+
+[node name="BottomWetFloor" parent="BottomWetFloor" unique_id=1963129304 instance=ExtResource("5_wet_floor")]
+position = Vector2(432, -416)
+
+[node name="BottomWetFloor" parent="BottomWetFloor/BottomWetFloor" unique_id=227978275 instance=ExtResource("5_wet_floor")]
+position = Vector2(-2320, 8)
+scale = Vector2(3.275862, 0.5)
+
+[node name="BottomWetFloor2" parent="BottomWetFloor" unique_id=458295896 instance=ExtResource("5_wet_floor")]
+position = Vector2(-803, -796)
+
+[node name="FarRightCeilingFan2" parent="." unique_id=1055785849 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(5548, 892)
+
+[node name="BottomBox_3" type="StaticBody2D" parent="." unique_id=1846060506]
+position = Vector2(5290, 1237)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox_3" unique_id=1390830648]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="BottomBox_3" unique_id=83998186]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="BottomBox_3" unique_id=1567149998]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(box)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomWetFloor2" parent="." unique_id=2131379868 instance=ExtResource("5_wet_floor")]
+position = Vector2(5120, 1283)
+
+[node name="MiddleBox_2" type="StaticBody2D" parent="." unique_id=1528318493]
+position = Vector2(482, 840)
+scale = Vector2(3.4, 0.67999995)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_2" unique_id=223571329]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="MiddleBox_2" unique_id=1901182297]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="MiddleBox_2" unique_id=1750668355]
+offset_left = -17.647053
+offset_top = -18.0
+offset_right = 74.35295
+offset_bottom = 31.0
+scale = Vector2(0.38823533, 1)
+text = "Obstacle
+(table)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleBox_2" type="StaticBody2D" parent="MiddleBox_2" unique_id=229545291]
+position = Vector2(-191, 434)
+scale = Vector2(3.4, 0.67999995)
+
+[node name="StudyNote3" parent="." unique_id=1972940906 instance=ExtResource("3_study_note")]
+position = Vector2(409, 279)
+
+[node name="Service_ExposedWiring_Right" type="Node2D" parent="." unique_id=2077775414]
+position = Vector2(2049, 600)
+scale = Vector2(0.11670238, 2.106859)
+
+[node name="Visual" type="Polygon2D" parent="Service_ExposedWiring_Right" unique_id=920336795]
+color = Color(0.9, 0.35, 0.25, 0.95)
+polygon = PackedVector2Array(-300, -28, 300, -28, 300, 28, -300, 28)
+
+[node name="Label" type="Label" parent="Service_ExposedWiring_Right" unique_id=1391462157]
+offset_left = -343.77335
+offset_top = -3.064516
+offset_right = -103.773346
+offset_bottom = 20.935484
+scale = Vector2(2.8188472, 0.22819428)
+text = "Exposed Wiring"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomWetFloor3" parent="." unique_id=1825364042 instance=ExtResource("5_wet_floor")]
+position = Vector2(1950, 492)
+scale = Vector2(3.275862, 0.5)
+
+[node name="BottomBox_4" type="StaticBody2D" parent="." unique_id=1827340336]
+position = Vector2(4022, 442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox_4" unique_id=1891949040]
+shape = SubResource("box_collision")
+
+[node name="Visual" type="Polygon2D" parent="BottomBox_4" unique_id=851901138]
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
+
+[node name="Label" type="Label" parent="BottomBox_4" unique_id=922089991]
+offset_left = -46.0
+offset_top = -18.0
+offset_right = 46.0
+offset_bottom = 18.0
+text = "Obstacle
+(box)"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MiddleCeilingFan_5" parent="." unique_id=1802937029 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(4237, 359)
+
+[node name="MiddleCeilingFan_4" parent="MiddleCeilingFan_5" unique_id=901658808 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(-2937, -49)
+
+[node name="StudyNote4" parent="." unique_id=326112127 instance=ExtResource("3_study_note")]
+position = Vector2(4219, 445)
+
+[node name="WetFloor" parent="." unique_id=1517094559 instance=ExtResource("5_wet_floor")]
+position = Vector2(957, 864)
+scale = Vector2(1.96, 1)
+
+[node name="WetFloor" parent="WetFloor" unique_id=2022511343 instance=ExtResource("5_wet_floor")]
+position = Vector2(2236.7349, -791)
+scale = Vector2(1.067464, 0.6666667)
