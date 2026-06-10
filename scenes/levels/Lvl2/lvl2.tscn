@@ -1,0 +1,351 @@
+[gd_scene format=3 uid="uid://bg8qf0abn7vkx"]
+
+[ext_resource type="PackedScene" uid="uid://cc26slhbeq7cu" path="res://scenes/player/Player.tscn" id="1_4ijb4"]
+[ext_resource type="PackedScene" uid="uid://cdr1qo4kfu53h" path="res://scenes/levels/Lvl2/platform.tscn" id="2_8e7yb"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_p1u73"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/WetFloor.tscn" id="4_bw0md"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/Coffee.tscn" id="5_hr6ds"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/MovingCarHazard.tscn" id="6_hr6ds"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/FallZone.tscn" id="7_rf53q"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudentID.tscn" id="7_ufkxa"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="8_jh7ar"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/SecurityGuard.tscn" id="8_ookv4"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/Roommate.tscn" id="9_pxecf"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/IDBarrier.tscn" id="9_rf53q"]
+[ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ookv4"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/SwitchButton.tscn" id="13_dvh6m"]
+[ext_resource type="PackedScene" path="res://scenes/objects/interactive/LockedDoor.tscn" id="14_kswdf"]
+
+[node name="Lvl2" type="Node2D" unique_id=880213973]
+
+[node name="Player" parent="." unique_id=551579220 instance=ExtResource("1_4ijb4")]
+position = Vector2(248, -49)
+
+[node name="World" type="StaticBody2D" parent="." unique_id=1188501321]
+
+[node name="StaticBody2D2" parent="World" unique_id=1931035566 instance=ExtResource("2_8e7yb")]
+position = Vector2(752, -32)
+scale = Vector2(0.27999997, 0.06494087)
+
+[node name="StaticBody2D3" parent="World" unique_id=236934579 instance=ExtResource("2_8e7yb")]
+position = Vector2(1072, -36)
+scale = Vector2(0.27999997, 0.06494087)
+
+[node name="StaticBody2D4" parent="World" unique_id=984579906 instance=ExtResource("2_8e7yb")]
+position = Vector2(1536, -28)
+scale = Vector2(0.27999997, 0.14494133)
+
+[node name="StaticBody2D5" parent="World" unique_id=1146183940 instance=ExtResource("2_8e7yb")]
+position = Vector2(1648, -28)
+scale = Vector2(0.27999997, 0.59715825)
+
+[node name="StaticBody2D18" parent="World" unique_id=1904847811 instance=ExtResource("2_8e7yb")]
+position = Vector2(4312, -28)
+scale = Vector2(0.27999997, 0.14494133)
+
+[node name="StaticBody2D19" parent="World" unique_id=2010817379 instance=ExtResource("2_8e7yb")]
+position = Vector2(4424, -42)
+scale = Vector2(0.26831004, 0.3571581)
+
+[node name="StaticBody2D20" parent="World" unique_id=1058044971 instance=ExtResource("2_8e7yb")]
+position = Vector2(6288, -21)
+scale = Vector2(-0.16451582, 0.14494133)
+
+[node name="StaticBody2D21" parent="World" unique_id=405831412 instance=ExtResource("2_8e7yb")]
+position = Vector2(6352.0005, -45)
+scale = Vector2(-0.15764731, 0.3571581)
+
+[node name="StaticBody2D12" parent="World" unique_id=2068825784 instance=ExtResource("2_8e7yb")]
+position = Vector2(1888, -232)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D22" parent="World" unique_id=1183118683 instance=ExtResource("2_8e7yb")]
+position = Vector2(6487.9995, -220)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D23" parent="World" unique_id=1515045925 instance=ExtResource("2_8e7yb")]
+position = Vector2(6295.9995, -328)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D24" parent="World" unique_id=126461814 instance=ExtResource("2_8e7yb")]
+position = Vector2(4552, -692)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D17" parent="World" unique_id=992155715 instance=ExtResource("2_8e7yb")]
+position = Vector2(1991.9999, -113)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D13" parent="World" unique_id=170908305 instance=ExtResource("2_8e7yb")]
+position = Vector2(1992, -336)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D14" parent="World" unique_id=1335536098 instance=ExtResource("2_8e7yb")]
+position = Vector2(1880, -464)
+scale = Vector2(0.22435148, -0.018153606)
+
+[node name="StaticBody2D9" parent="World" unique_id=1227677770 instance=ExtResource("2_8e7yb")]
+position = Vector2(2520, -8)
+scale = Vector2(0.24950735, 0.37931383)
+
+[node name="StaticBody2D8" parent="World" unique_id=1768581791 instance=ExtResource("2_8e7yb")]
+position = Vector2(2528, -372)
+scale = Vector2(2.4495075, -0.060687095)
+
+[node name="StaticBody2D15" parent="World" unique_id=471363090 instance=ExtResource("2_8e7yb")]
+position = Vector2(5432, -339.9999)
+scale = Vector2(4.238378, -0.080751665)
+
+[node name="StaticBody2D16" parent="World" unique_id=1959916054 instance=ExtResource("2_8e7yb")]
+position = Vector2(5552, -704.00006)
+scale = Vector2(4.838398, -0.080751665)
+
+[node name="StudyNote" parent="World" unique_id=383996285 instance=ExtResource("3_p1u73")]
+position = Vector2(360, -60)
+
+[node name="StaticBody2D" parent="World" unique_id=1679222532 instance=ExtResource("2_8e7yb")]
+position = Vector2(3000.0002, 16)
+scale = Vector2(8.650634, -0.0770402)
+
+[node name="StaticBody2D7" parent="World" unique_id=1730745597 instance=ExtResource("2_8e7yb")]
+position = Vector2(6912.0005, 16)
+scale = Vector2(3.549623, -0.0770402)
+
+[node name="StaticBody2D11" parent="World" unique_id=601201802 instance=ExtResource("2_8e7yb")]
+position = Vector2(4912, 16.000002)
+scale = Vector2(4.469623, -0.0770402)
+
+[node name="StaticBody2D6" parent="World" unique_id=1399535083 instance=ExtResource("2_8e7yb")]
+position = Vector2(304, 16)
+scale = Vector2(1.2401037, 0.08012628)
+
+[node name="Coffee" parent="World" unique_id=375993904 instance=ExtResource("5_hr6ds")]
+position = Vector2(1364, -48)
+
+[node name="StudyNote2" parent="World" unique_id=166594611 instance=ExtResource("3_p1u73")]
+position = Vector2(1888, -508)
+
+[node name="Coffee2" parent="World" unique_id=1865771273 instance=ExtResource("5_hr6ds")]
+position = Vector2(2520, -131)
+
+[node name="CeilingFanPlatform" parent="World" unique_id=337572558 instance=ExtResource("10_ookv4")]
+position = Vector2(4920, -107.99994)
+
+[node name="CeilingFanPlatform2" parent="World" unique_id=931920758 instance=ExtResource("10_ookv4")]
+position = Vector2(5176, -107.99994)
+
+[node name="CeilingFanPlatform4" parent="World" unique_id=528044209 instance=ExtResource("10_ookv4")]
+position = Vector2(5360, -459)
+
+[node name="CeilingFanPlatform5" parent="World" unique_id=1063899254 instance=ExtResource("10_ookv4")]
+position = Vector2(5096, -904)
+
+[node name="Label2" type="Label" parent="World/CeilingFanPlatform5" unique_id=293925066]
+offset_left = 2344.0
+offset_top = 780.0
+offset_right = 2502.0
+offset_bottom = 803.0
+text = "Level end: BUS STOP"
+
+[node name="CeilingFanPlatform3" parent="World" unique_id=1897694005 instance=ExtResource("10_ookv4")]
+position = Vector2(5432, -107.99994)
+
+[node name="FallZone" parent="World" unique_id=491835585 instance=ExtResource("7_rf53q")]
+position = Vector2(912, 144)
+scale = Vector2(4.2542667, 3.3199997)
+
+[node name="WetFloor" parent="World" unique_id=1118739426 instance=ExtResource("4_bw0md")]
+position = Vector2(5176, -15.999939)
+scale = Vector2(7.3432446, 1.6537117)
+
+[node name="ExposedWiring" parent="World" unique_id=1234610746 instance=ExtResource("8_jh7ar")]
+position = Vector2(5896.0005, -407.9999)
+scale = Vector2(0.87806976, 2.541827)
+
+[node name="ExposedWiring2" parent="World" unique_id=1461260720 instance=ExtResource("8_jh7ar")]
+position = Vector2(5896, -631.99994)
+scale = Vector2(0.8780699, 2.9818268)
+
+[node name="FallZone2" parent="World" unique_id=1814806416 instance=ExtResource("7_rf53q")]
+position = Vector2(6000.0005, 68.00006)
+scale = Vector2(2.3476768, 1.4138836)
+
+[node name="StudyNote3" parent="World" unique_id=1267261569 instance=ExtResource("3_p1u73")]
+position = Vector2(3240, -57)
+
+[node name="StaticBody2D10" parent="World" unique_id=330495323 instance=ExtResource("2_8e7yb")]
+position = Vector2(6536, -488)
+scale = Vector2(0.07443959, 1.8401409)
+
+[node name="WetFloor2" parent="World" unique_id=1037829834 instance=ExtResource("4_bw0md")]
+position = Vector2(5264.0005, -368)
+scale = Vector2(5.1311135, 0.98422694)
+
+[node name="Coffee3" parent="World" unique_id=505600079 instance=ExtResource("5_hr6ds")]
+position = Vector2(4464, -624)
+
+[node name="WetFloor3" parent="World" unique_id=417406782 instance=ExtResource("4_bw0md")]
+position = Vector2(6064, -728)
+scale = Vector2(2.3200195, 1)
+
+[node name="Label" type="Label" parent="." unique_id=73302349]
+offset_left = 3528.0
+offset_top = -176.0
+offset_right = 3707.0
+offset_bottom = -101.0
+text = "Old Grandma:
+Yes: time- 100
+       Door open"
+
+[node name="StaticBody2D" parent="." unique_id=262018150 instance=ExtResource("2_8e7yb")]
+position = Vector2(1840, -256)
+scale = Vector2(0.041177537, 0.6240075)
+
+[node name="StaticBody2D2" parent="." unique_id=1149649127 instance=ExtResource("2_8e7yb")]
+position = Vector2(2032, -239.99998)
+scale = Vector2(0.041177537, 0.6640063)
+
+[node name="StaticBody2D3" parent="." unique_id=1240075307 instance=ExtResource("2_8e7yb")]
+position = Vector2(3008, -256)
+scale = Vector2(0.041177545, 0.6240075)
+
+[node name="StaticBody2D4" parent="." unique_id=1075794370 instance=ExtResource("2_8e7yb")]
+position = Vector2(3128, -256)
+scale = Vector2(0.041177545, 0.6240075)
+
+[node name="StaticBody2D5" parent="." unique_id=381169304 instance=ExtResource("2_8e7yb")]
+position = Vector2(1840.0001, -552.00006)
+scale = Vector2(0.041177537, 0.8640063)
+
+[node name="StaticBody2D6" parent="." unique_id=1438011838 instance=ExtResource("2_8e7yb")]
+position = Vector2(3128, -552)
+scale = Vector2(0.041177545, 0.86400634)
+
+[node name="MovingCarHazard" parent="." unique_id=573060422 instance=ExtResource("6_hr6ds")]
+position = Vector2(2160.0002, -76)
+scale = Vector2(2.3879943, 1)
+
+[node name="MovingCarHazard2" parent="." unique_id=1152871355 instance=ExtResource("6_hr6ds")]
+position = Vector2(2360, -76)
+scale = Vector2(2.3879943, 1)
+
+[node name="MovingCarHazard3" parent="." unique_id=982689160 instance=ExtResource("6_hr6ds")]
+position = Vector2(2674, -76)
+scale = Vector2(2.387994, 1)
+
+[node name="MovingCarHazard4" parent="." unique_id=137509037 instance=ExtResource("6_hr6ds")]
+position = Vector2(2873.9998, -76)
+scale = Vector2(2.387994, 1)
+
+[node name="MovingCarHazard5" parent="." unique_id=1219938888 instance=ExtResource("6_hr6ds")]
+position = Vector2(3816, -76)
+scale = Vector2(2.387994, 1)
+
+[node name="MovingCarHazard6" parent="." unique_id=2095380978 instance=ExtResource("6_hr6ds")]
+position = Vector2(4048, -76)
+scale = Vector2(2.387994, 1)
+
+[node name="Overpass key" parent="." unique_id=1178387539 instance=ExtResource("7_ufkxa")]
+position = Vector2(120, -40)
+
+[node name="Button" parent="." unique_id=1590313016 instance=ExtResource("8_ookv4")]
+position = Vector2(1848, -57)
+barrier_path = NodePath("../Test_IDBarrier")
+
+[node name="Test_IDBarrier" parent="." unique_id=1352086472 instance=ExtResource("9_rf53q")]
+position = Vector2(1936.0001, -144)
+scale = Vector2(3.9483256, 0.27267802)
+
+[node name="CeilingFanPlatform" parent="." unique_id=518887467 instance=ExtResource("10_ookv4")]
+position = Vector2(2448, -508)
+
+[node name="Coffee" parent="." unique_id=1474271161 instance=ExtResource("5_hr6ds")]
+position = Vector2(2808, -440)
+
+[node name="StudyNote" parent="." unique_id=488345286 instance=ExtResource("3_p1u73")]
+position = Vector2(1648, -192)
+scale = Vector2(1.0050337, 1)
+
+[node name="StudyNote2" parent="." unique_id=531828446 instance=ExtResource("3_p1u73")]
+position = Vector2(6000, -135.99994)
+scale = Vector2(1.0050337, 1)
+
+[node name="StaticBody2D7" parent="." unique_id=818178465 instance=ExtResource("2_8e7yb")]
+position = Vector2(2240, -416)
+scale = Vector2(0.15999025, 0.19999999)
+
+[node name="StaticBody2D8" parent="." unique_id=775965464 instance=ExtResource("2_8e7yb")]
+position = Vector2(4704, -31.999931)
+scale = Vector2(0.15999025, 0.19999999)
+
+[node name="StaticBody2D9" parent="." unique_id=995016714 instance=ExtResource("2_8e7yb")]
+position = Vector2(5648, -31.999931)
+scale = Vector2(0.15999025, 0.19999999)
+
+[node name="StaticBody2D10" parent="." unique_id=1016768503 instance=ExtResource("2_8e7yb")]
+position = Vector2(2640, -416)
+scale = Vector2(0.15999025, 0.19999999)
+
+[node name="WetFloor" parent="." unique_id=1716872794 instance=ExtResource("4_bw0md")]
+position = Vector2(2440, -392)
+scale = Vector2(2.88, 1)
+
+[node name="Label2" type="Label" parent="." unique_id=1994631473]
+offset_left = 80.0
+offset_top = -92.0
+offset_right = 177.0
+offset_bottom = -69.0
+text = "Ovepass key"
+
+[node name="Label3" type="Label" parent="." unique_id=141838326]
+offset_left = 2176.0
+offset_top = -216.0
+offset_right = 2353.0
+offset_bottom = -193.0
+text = "longer, and alternating between the other car"
+
+[node name="Coffee2" parent="." unique_id=1067795178 instance=ExtResource("5_hr6ds")]
+position = Vector2(5176, -179.99994)
+
+[node name="Test_SwitchButton" parent="." unique_id=180462077 instance=ExtResource("13_dvh6m")]
+position = Vector2(3600, -56)
+locked_door_path = NodePath("../Test_LockedDoor")
+
+[node name="Test_LockedDoor" parent="." unique_id=1364092540 instance=ExtResource("14_kswdf")]
+position = Vector2(6536, -60)
+scale = Vector2(1.4073193, 1.2945524)
+
+[node name="Roommate" parent="." unique_id=1988319855 instance=ExtResource("9_pxecf")]
+position = Vector2(3480, -56)
+interaction_message = "Help me cross the road"
+
+[node name="Label4" type="Label" parent="." unique_id=2035278940]
+offset_left = 3720.0
+offset_top = -204.0
+offset_right = 3760.0
+offset_bottom = -181.0
+text = "When grandma cross, car stop while grandma cross
+if not cross, alternating between the other car"
+
+[node name="StaticBody2D11" parent="." unique_id=1810643993 instance=ExtResource("2_8e7yb")]
+position = Vector2(6472.0005, -760)
+scale = Vector2(0.24146946, 0.19698752)
+
+[node name="StaticBody2D12" parent="." unique_id=1116252217 instance=ExtResource("2_8e7yb")]
+position = Vector2(4856.0005, -455.99997)
+scale = Vector2(1.3614597, 0.5569888)
+
+[node name="StaticBody2D13" parent="." unique_id=187596776 instance=ExtResource("2_8e7yb")]
+position = Vector2(4496, -536)
+scale = Vector2(0.44144994, 0.15698871)
+
+[node name="StaticBody2D15" parent="." unique_id=1538188205 instance=ExtResource("2_8e7yb")]
+position = Vector2(4808, -752)
+scale = Vector2(0.44380912, 0.27698871)
+
+[node name="StaticBody2D16" parent="." unique_id=1980154238 instance=ExtResource("2_8e7yb")]
+position = Vector2(5480, -856)
+scale = Vector2(0.9063596, 0.8281236)
+
+[node name="StaticBody2D14" parent="." unique_id=614359359 instance=ExtResource("2_8e7yb")]
+position = Vector2(4392.0005, -752)
+scale = Vector2(0.09076866, 1.2493576)
