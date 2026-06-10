@@ -15,8 +15,12 @@ var focus_feedback_time_remaining := 0.0
 
 
 func _ready() -> void:
-	GameManager.focus_changed.connect(_on_focus_changed)
-	GameManager.level_finished.connect(_on_level_finished)
+	if not GameManager.focus_changed.is_connected(_on_focus_changed):
+		GameManager.focus_changed.connect(_on_focus_changed)
+
+	if not GameManager.level_finished.is_connected(_on_level_finished):
+		GameManager.level_finished.connect(_on_level_finished)
+
 	result_panel.visible = false
 
 
@@ -50,11 +54,27 @@ func _on_level_finished(state: String) -> void:
 
 func show_result_panel(state: String) -> void:
 	var student_id_text := "Yes" if GameManager.has_student_id else "No"
-	var rank := GameManager.get_level_1_rank()
+	var rank := GameManager.get_current_level_rank()
+	var level_name := GameManager.current_level_display_name
 
 	if state == GameManager.LEVEL_STATE_FAILED:
-		result_label.text = "Time's Up!\nMissed Exam\n\nTime Remaining: 0\nFocus: %d\nNotes Collected: %d\nCoffee Collected: %d\nStudent ID: %s\nRank: %s\n\nPress R to Restart" % [GameManager.focus, GameManager.notes_collected, GameManager.coffee_collected, student_id_text, rank]
+		result_label.text = "%s Failed\nTime's Up!\nMissed Exam\n\nTime Remaining: 0\nFocus: %d\nNotes Collected: %d\nCoffee Collected: %d\nStudent ID: %s\nRank: %s\n\nPress R to Restart" % [
+			level_name,
+			GameManager.focus,
+			GameManager.notes_collected,
+			GameManager.coffee_collected,
+			student_id_text,
+			rank
+		]
 	else:
-		result_label.text = "Level 1 Complete\n\nTime Remaining: %d\nFocus: %d\nNotes Collected: %d\nCoffee Collected: %d\nStudent ID: %s\nRank: %s\n\nPress R to Restart" % [ceili(GameManager.time_remaining), GameManager.focus, GameManager.notes_collected, GameManager.coffee_collected, student_id_text, rank]
+		result_label.text = "%s Complete\n\nTime Remaining: %d\nFocus: %d\nNotes Collected: %d\nCoffee Collected: %d\nStudent ID: %s\nRank: %s\n\nPress R to Restart" % [
+			level_name,
+			ceili(GameManager.time_remaining),
+			GameManager.focus,
+			GameManager.notes_collected,
+			GameManager.coffee_collected,
+			student_id_text,
+			rank
+		]
 
 	result_panel.visible = true

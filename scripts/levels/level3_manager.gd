@@ -2,11 +2,12 @@ extends Node
 
 # Level 3 Manager - Final Hall Sprint
 # Handles:
-# - HUD objective
+# - Level 3 objective setup
+# - Student ID default
 # - player camera setup
 # - fake exit respawn
 # - real exam hall exit
-# - simple final ending print
+# - result panel through GameManager
 
 @onready var player: CharacterBody2D = get_node_or_null("Player")
 @onready var hud: Node = get_node_or_null("HUD")
@@ -38,33 +39,44 @@ func _ready() -> void:
 
 
 func _late_setup() -> void:
+	_setup_game_manager_state()
 	_setup_hud_objective()
 	_setup_player_camera()
 
 
 func _setup_game_manager_state() -> void:
-	if Engine.has_singleton("GameManager"):
-		return
+	# Level 3 happens after Level 1, and Level 1 cannot be completed without the Student ID.
+	GameManager.has_student_id = true
 
-	# GameManager is likely an autoload, so direct access is expected in this project.
-	if "level_state" in GameManager:
-		GameManager.level_state = GameManager.LEVEL_STATE_PLAYING
+	# Make HUD result panel say "Level 3 Complete" instead of "Level 1 Complete".
+	if GameManager.has_method("set_level_display_name"):
+		GameManager.set_level_display_name("Level 3")
+	elif "current_level_display_name" in GameManager:
+		GameManager.current_level_display_name = "Level 3"
 
-	if "current_objective" in GameManager:
+	GameManager.level_state = GameManager.LEVEL_STATE_PLAYING
+
+	if GameManager.has_method("set_objective"):
+		GameManager.set_objective("Enter the Exam Hall")
+	elif "current_objective" in GameManager:
 		GameManager.current_objective = "Enter the Exam Hall"
+
+	# If testing Level 3 directly after timer already reached 0 in another scene,
+	# give it time again so the demo does not instantly fail.
+	if "time_remaining" in GameManager and GameManager.time_remaining <= 0.0:
+		GameManager.time_remaining = 180.0
 
 
 func _setup_hud_objective() -> void:
+	if GameManager.has_method("set_objective"):
+		GameManager.set_objective("Enter the Exam Hall")
+	elif "current_objective" in GameManager:
+		GameManager.current_objective = "Enter the Exam Hall"
+
 	if hud == null:
 		print("WARNING: HUD node not found.")
 		return
 
-	# Preferred: update through HUD method if it exists.
-	if hud.has_method("set_objective"):
-		hud.set_objective("Enter the Exam Hall")
-		return
-
-	# Fallback: update common label path directly.
 	var objective_label := hud.get_node_or_null("VBoxContainer/ObjectiveLabel")
 	if objective_label != null:
 		objective_label.text = "Objective: Enter the Exam Hall"
@@ -101,7 +113,8 @@ func _setup_player_camera() -> void:
 	player_camera.enabled = true
 	player_camera.make_current()
 
-	# These limits match the blockout map size.
+	# These limits match the Level 3 blockout map size.
+	# Increase limit_right if you extend the level more.
 	player_camera.limit_left = 0
 	player_camera.limit_top = 0
 	player_camera.limit_right = 5800
@@ -111,7 +124,7 @@ func _setup_player_camera() -> void:
 	player_camera.position_smoothing_enabled = false
 	player_camera.zoom = Vector2(1, 1)
 
-	print("Player camera enabled and set current.")
+	print("Level 3 player camera enabled and set current.")
 
 
 func _setup_exit_triggers() -> void:
@@ -146,7 +159,7 @@ func _on_fake_exit_entered(body: Node2D) -> void:
 
 	print("Wrong room! Returning to start.")
 
-	if "change_focus" in GameManager:
+	if GameManager.has_method("change_focus"):
 		GameManager.change_focus(-5)
 
 	body.global_position = start_position
@@ -167,6 +180,9 @@ func _on_exam_hall_entered(body: Node2D) -> void:
 	if not _is_player(body):
 		return
 
+	if GameManager.has_method("is_level_active") and not GameManager.is_level_active():
+		return
+
 	print("Level 3 Complete! Reached the Exam Hall.")
 	print("---")
 	print("Final Stats:")
@@ -174,9 +190,22 @@ func _on_exam_hall_entered(body: Node2D) -> void:
 	print("  Focus: ", GameManager.focus)
 	print("  Notes collected: ", GameManager.notes_collected)
 	print("  Coffee: ", GameManager.coffee_collected)
+	print("  Student ID: ", GameManager.has_student_id)
 	print("---")
 
 	calculate_ending()
+
+	# This is the important part:
+	# Use generic level completion instead of complete_level_1().
+	if GameManager.has_method("complete_current_level"):
+		GameManager.complete_current_level("Level 3")
+	else:
+		# Fallback for older GameManager version.
+		GameManager.level_state = GameManager.LEVEL_STATE_COMPLETED
+		if "current_level_display_name" in GameManager:
+			GameManager.current_level_display_name = "Level 3"
+		if GameManager.has_signal("level_finished"):
+			GameManager.level_finished.emit(GameManager.level_state)
 
 
 func _is_player(body: Node) -> bool:

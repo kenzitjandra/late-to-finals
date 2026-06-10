@@ -688,6 +688,7 @@ offset_bottom = 12.0
 text = "Coffee"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="PickupArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_Coffee" unique_id=123216940]
 collision_layer = 0
@@ -795,6 +796,7 @@ text = "Apartment
 Rooms (bk)"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Second_WetFloor2" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1218928599]
 position = Vector2(1762, 729)
@@ -1281,7 +1283,7 @@ script = ExtResource("18_wet_floor_script")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Second_WetFloor3/MechanicArea" unique_id=1450124152]
 position = Vector2(65.25073, 8.378573)
 scale = Vector2(1.1805, 0.54464287)
-polygon = PackedVector2Array(-174, -17, -73, -18, 449, -16, 451, 7, -170, 10)
+polygon = PackedVector2Array(-174, -17, -134.90918, -17.387054, -73, -18, 449, -16, 451, 7, -170, 10)
 
 [node name="Platform9" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=2026194275]
 position = Vector2(4527, 819)
@@ -1937,7 +1939,6 @@ position = Vector2(52, 18)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("20_collectible_script")
-collectible_type = "study_note"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Bottom_Studynote/PickupArea" unique_id=1527898385]
 polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
