@@ -1,15 +1,16 @@
 extends CanvasLayer
 
-@onready var time_label: Label = $VBoxContainer/TimeLabel
-@onready var focus_label: Label = $VBoxContainer/FocusLabel
-@onready var notes_label: Label = $VBoxContainer/NotesLabel
-@onready var coffee_label: Label = $VBoxContainer/CoffeeLabel
-@onready var student_id_label: Label = $VBoxContainer/StudentIDLabel
-@onready var objective_label: Label = $VBoxContainer/ObjectiveLabel
-@onready var low_focus_label: Label = $VBoxContainer/LowFocusLabel
-@onready var focus_feedback_label: Label = $VBoxContainer/FocusFeedbackLabel
-@onready var result_panel: PanelContainer = $ResultPanel
-@onready var result_label: Label = $ResultPanel/ResultLabel
+@onready var time_label: Label = $HUDRoot/StatsStack/TimeCard/TimeMargin/TimeRow/TimeLabel
+@onready var focus_label: Label = $HUDRoot/StatsStack/FocusCard/FocusMargin/FocusRow/FocusLabel
+@onready var notes_label: Label = $HUDRoot/StatsStack/NotesCard/NotesMargin/NotesRow/NotesLabel
+@onready var coffee_label: Label = $HUDRoot/StatsStack/CoffeeCard/CoffeeMargin/CoffeeRow/CoffeeLabel
+@onready var student_id_label: Label = $HUDRoot/StatsStack/StudentIDCard/StudentIDMargin/StudentIDRow/StudentIDLabel
+@onready var objective_label: Label = $HUDRoot/ObjectiveCard/ObjectiveMargin/ObjectiveLabel
+@onready var low_focus_label: Label = $HUDRoot/LowFocusBanner/LowFocusLabel
+@onready var low_focus_banner: Control = $HUDRoot/LowFocusBanner
+@onready var focus_feedback_label: Label = $HUDRoot/FocusFeedbackLabel
+@onready var result_panel: Control = $HUDRoot/ResultPanel
+@onready var result_label: Label = $HUDRoot/ResultPanel/ResultMargin/ResultLabel
 
 var focus_feedback_time_remaining := 0.0
 
@@ -21,17 +22,22 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	time_label.text = "Time: %d" % ceili(GameManager.time_remaining)
+	time_label.text = "%d sec" % ceili(GameManager.time_remaining)
 	focus_label.text = "Focus: %d" % GameManager.focus
 	notes_label.text = "Notes: %d" % GameManager.notes_collected
 	coffee_label.text = "Coffee: %d" % GameManager.coffee_collected
 	student_id_label.text = "Student ID: %s" % ("Yes" if GameManager.has_student_id else "No")
 	objective_label.text = "Objective: %s" % GameManager.current_objective
-	low_focus_label.visible = GameManager.focus <= 40
+	low_focus_banner.visible = GameManager.focus <= 40
 
 	if focus_feedback_time_remaining > 0.0:
 		focus_feedback_time_remaining = maxf(focus_feedback_time_remaining - delta, 0.0)
 		focus_feedback_label.visible = focus_feedback_time_remaining > 0.0
+
+
+func set_objective(text: String) -> void:
+	GameManager.set_objective(text)
+	objective_label.text = "Objective: %s" % text
 
 
 func _on_focus_changed(amount: int, _new_focus: int) -> void:

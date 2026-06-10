@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bo22howfrv3lq" path="res://scripts/objects/collectibles/collectible.gd" id="20_collectible_script"]
 [ext_resource type="Script" uid="uid://2vajcsndtp6n" path="res://scripts/levels/level1_manager.gd" id="21_level1_manager"]
 [ext_resource type="Script" uid="uid://4lipiehm1txa" path="res://scripts/objects/interactive/interactable.gd" id="22_interactable_script"]
+[ext_resource type="Script" uid="uid://dmnmwfj11ltab" path="res://scripts/levels/level1_visual_skin.gd" id="23_level1_skin"]
 
 [sub_resource type="RectangleShape2D" id="wall_left_collision"]
 size = Vector2(64, 2020)
@@ -59,6 +60,7 @@ size = Vector2(180, 24)
 size = Vector2(120, 120)
 
 [node name="Level1" type="Node2D" unique_id=1518310747]
+script = ExtResource("23_level1_skin")
 
 [node name="Player" parent="." unique_id=1937296609 instance=ExtResource("2_player")]
 position = Vector2(3800, 245)
@@ -1937,7 +1939,6 @@ position = Vector2(52, 18)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("20_collectible_script")
-collectible_type = "study_note"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Bottom_Studynote/PickupArea" unique_id=1527898385]
 polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)

@@ -7,6 +7,7 @@ const LEVEL_STATE_PLAYING := "playing"
 const LEVEL_STATE_COMPLETED := "completed"
 const LEVEL_STATE_FAILED := "failed"
 const LEVEL_2_PATH := "res://scenes/levels/Lvl2/lvl2.tscn"
+const LEVEL_3_PATH := "res://scenes/levels/Level3_FinalHallSprint.tscn"
 
 var focus: int = 100
 var time_remaining: float = 180.0
@@ -61,6 +62,11 @@ func go_to_level_2_from_level_1() -> void:
 
 	level_state = LEVEL_STATE_PLAYING
 	get_tree().change_scene_to_file.call_deferred(LEVEL_2_PATH)
+
+
+func go_to_level_3_from_level_2() -> void:
+	level_state = LEVEL_STATE_PLAYING
+	get_tree().change_scene_to_file.call_deferred(LEVEL_3_PATH)
 
 
 func fail_level_1() -> void:
