@@ -15,34 +15,33 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/SwitchButton.tscn" id="14_switch_button"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/LockedDoor.tscn" id="15_locked_door"]
 [ext_resource type="PackedScene" path="res://scenes/objects/hazards/MovingCarHazard.tscn" id="16_moving_car"]
-[ext_resource type="Script" path="res://scripts/levels/bus_stop_trigger.gd" id="17_bus_stop_trigger"]
+[ext_resource type="Script" uid="uid://cky3so6eam1ip" path="res://scripts/levels/bus_stop_trigger.gd" id="17_bus_stop_trigger"]
+[ext_resource type="Script" uid="uid://uionc3qv6p4b" path="res://scripts/objects/hazards/wet_floor.gd" id="18_wet_floor_script"]
+[ext_resource type="Script" uid="uid://b2sncsh8r5jxe" path="res://scripts/objects/hazards/hazard.gd" id="19_hazard_script"]
+[ext_resource type="Script" uid="uid://bo22howfrv3lq" path="res://scripts/objects/collectibles/collectible.gd" id="20_collectible_script"]
+[ext_resource type="Script" uid="uid://2vajcsndtp6n" path="res://scripts/levels/level1_manager.gd" id="21_level1_manager"]
+[ext_resource type="Script" uid="uid://4lipiehm1txa" path="res://scripts/objects/interactive/interactable.gd" id="22_interactable_script"]
 
 [sub_resource type="RectangleShape2D" id="wall_left_collision"]
 size = Vector2(64, 2020)
 
 [sub_resource type="RectangleShape2D" id="wall_right_collision"]
-size = Vector2(66, 1996)
+size = Vector2(66, 1900)
 
 [sub_resource type="RectangleShape2D" id="roof_collision"]
-size = Vector2(5600, 48)
+size = Vector2(3974, 48)
 
 [sub_resource type="RectangleShape2D" id="bottom_boundary_collision"]
-size = Vector2(5600, 48)
+size = Vector2(5327, 48)
 
 [sub_resource type="RectangleShape2D" id="floor_collision"]
-size = Vector2(3556, 40)
-
-[sub_resource type="RectangleShape2D" id="bottom_floor_collision"]
-size = Vector2(3740, 48)
+size = Vector2(3549, 20.5)
 
 [sub_resource type="RectangleShape2D" id="draft_service_floor_collision"]
-size = Vector2(2736, 24)
+size = Vector2(2641.5, 20)
 
-[sub_resource type="RectangleShape2D" id="draft_ground_floor_collision"]
-size = Vector2(3740, 24)
-
-[sub_resource type="RectangleShape2D" id="draft_outdoor_road_collision"]
-size = Vector2(1400, 24)
+[sub_resource type="RectangleShape2D" id="roommate_interact_shape"]
+size = Vector2(120, 100)
 
 [sub_resource type="RectangleShape2D" id="test_ground_collision"]
 size = Vector2(3200, 48)
@@ -50,11 +49,11 @@ size = Vector2(3200, 48)
 [sub_resource type="RectangleShape2D" id="test_jump_platform_collision"]
 size = Vector2(240, 28)
 
-[sub_resource type="RectangleShape2D" id="test_fall_platform_collision"]
-size = Vector2(180, 24)
-
 [sub_resource type="RectangleShape2D" id="test_road_collision"]
 size = Vector2(520, 24)
+
+[sub_resource type="RectangleShape2D" id="test_fall_platform_collision"]
+size = Vector2(180, 24)
 
 [sub_resource type="RectangleShape2D" id="test_bus_stop_collision"]
 size = Vector2(120, 120)
@@ -62,12 +61,7 @@ size = Vector2(120, 120)
 [node name="Level1" type="Node2D" unique_id=1518310747]
 
 [node name="Player" parent="." unique_id=1937296609 instance=ExtResource("2_player")]
-position = Vector2(5680, 1276)
-
-[node name="Camera2D" parent="Player" index="2"]
-enabled = true
-limit_right = 9000
-limit_bottom = 1900
+position = Vector2(3800, 245)
 
 [node name="HUD" parent="." unique_id=659347025 instance=ExtResource("3_hud")]
 
@@ -88,35 +82,36 @@ limit_bottom = 1900
 position = Vector2(160, 720)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/Wall_Left" unique_id=238415657]
-position = Vector2(0, 80)
+position = Vector2(-137, 83)
 shape = SubResource("wall_left_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left" unique_id=1414882916]
+position = Vector2(-137, 26)
 color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-25, -937, 34, -928, 29, 1091, -35, 1090)
+polygon = PackedVector2Array(-25, -937, 34, -928, 35, 1208, -33, 1211)
 
-[node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left/Visual" unique_id=81534875]
-position = Vector2(278, 30)
+[node name="Wall2" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left/Visual" unique_id=81534875]
+position = Vector2(409, 0)
 color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-31, -920, 7, -918, 7, -612, -33, -612)
+polygon = PackedVector2Array(-37, -919, 12, -924, 9, -614, -35, -614)
 
 [node name="Wall_Right" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=599536249]
 position = Vector2(5500, 720)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/Wall_Right" unique_id=435301325]
-position = Vector2(-1495, 76)
+position = Vector2(-1493, 55)
 shape = SubResource("wall_right_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Right" unique_id=455485485]
 position = Vector2(-1493, 28)
 color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-31, -924, 27, -932, 26, 1063, -39, 1061)
+polygon = PackedVector2Array(-31, -924, 27, -932, 33, 975, -28, 974)
 
 [node name="Roof" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=85190395]
 position = Vector2(2860, 30.04)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/Roof" unique_id=2021928311]
-position = Vector2(2, -231.325)
+position = Vector2(-811, -231.32501)
 shape = SubResource("roof_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Roof" unique_id=136834602]
@@ -124,17 +119,22 @@ position = Vector2(-31, -222.04)
 color = Color(0.24, 0.24, 0.28, 1)
 polygon = PackedVector2Array(-2800, -24, 1175, -31.714996, 1185, 29.285004, -2800, 24)
 
+[node name="Platform5" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Roof/Visual" unique_id=1253012222]
+position = Vector2(-3612, 583)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(1033, -28, 1175, -31.714996, 1177, 6, 1033, 4)
+
 [node name="BottomBoundary" type="StaticBody2D" parent="FormalBuilding/BuildingFrame" unique_id=201041207]
 position = Vector2(2860, 1400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/BuildingFrame/BottomBoundary" unique_id=968792557]
-position = Vector2(17, 376)
+position = Vector2(170.5, 520)
 shape = SubResource("bottom_boundary_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/BottomBoundary" unique_id=1487649348]
-position = Vector2(17, 376)
+position = Vector2(36, 513)
 color = Color(0.18, 0.18, 0.22, 1)
-polygon = PackedVector2Array(-2800, -24, 2800, -24, 2800, 24, -2800, 24)
+polygon = PackedVector2Array(-2521, -22, 2800, -24, 2800, 24, -2521, 23)
 
 [node name="Floors" type="Node2D" parent="FormalBuilding" unique_id=1693937203]
 
@@ -142,7 +142,7 @@ polygon = PackedVector2Array(-2800, -24, 2800, -24, 2800, 24, -2800, 24)
 position = Vector2(2100, 300)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_Top" unique_id=1705440195]
-position = Vector2(92, 0)
+position = Vector2(152.25, 0)
 shape = SubResource("floor_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_Top" unique_id=2109759575]
@@ -150,34 +150,28 @@ color = Color(0.55, 0.48, 0.38, 1)
 polygon = PackedVector2Array(-1692, -17, 1870, -20, 1870, 20, -1686, 24, -1689, 9)
 
 [node name="Floor_Second" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=1381085211]
-position = Vector2(2085, 637)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_Second" unique_id=1021581878]
-position = Vector2(-4, 113)
-shape = SubResource("floor_collision")
+position = Vector2(2028, 655)
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_Second" unique_id=2103432533]
 position = Vector2(-4, 113)
 color = Color(0.5, 0.5, 0.55, 1)
-polygon = PackedVector2Array(-1870, -20, 1870, -20, 1870, 20, -1870, 20)
+polygon = PackedVector2Array(-1772, 47, 1398, -6, 1870, -20, 1870, 20, -1826, 38)
 
 [node name="Floor_Third" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=628590852]
 position = Vector2(2080, 945)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_Third" unique_id=2034256754]
-position = Vector2(13, 242)
+position = Vector2(122.5, 237.75)
 shape = SubResource("floor_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_Third" unique_id=1732790045]
-position = Vector2(13, 242)
+position = Vector2(19.169434, 242)
+scale = Vector2(1.0036527, 1)
 color = Color(0.44, 0.44, 0.5, 1)
-polygon = PackedVector2Array(-1870, -20, 1870, -20, 1870, 20, -1870, 20)
+polygon = PackedVector2Array(-1689, -13, 1870, -20, 1870, 20, -1679, 15)
 
 [node name="Floor_BottomIndoor" type="StaticBody2D" parent="FormalBuilding/Floors" unique_id=384028166]
 position = Vector2(2080, 1280)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FormalBuilding/Floors/Floor_BottomIndoor" unique_id=58810928]
-shape = SubResource("bottom_floor_collision")
 
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/Floors/Floor_BottomIndoor" unique_id=1431373922]
 visible = false
@@ -546,30 +540,40 @@ position = Vector2(2100, 298)
 color = Color(0.76, 0.7, 0.58, 0.8)
 polygon = PackedVector2Array(-1685, -13, 1870, -10, 1870, 10, -1689, 10)
 
-[node name="Second_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=123121138]
-position = Vector2(2100, 750)
-color = Color(0.58, 0.58, 0.64, 0.8)
-polygon = PackedVector2Array(-1870, -10, 1870, -10, 1870, 10, -1870, 10)
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/Draft_FloorLines/Top_MainPath" unique_id=2085331801]
 
-[node name="Third_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=1024478387]
-position = Vector2(2100, 1187)
-color = Color(0.52, 0.52, 0.58, 0.8)
-polygon = PackedVector2Array(-1870, -10, 1870, -10, 1870, 10, -1870, 10)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Draft_FloorLines/Top_MainPath/SolidCollision" unique_id=536996630]
+polygon = PackedVector2Array(-1685, -13, 1870, -10, 1870, 10, -1689, 10)
+
+[node name="Second_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=123121138]
+position = Vector2(2100, 746)
+color = Color(0.58, 0.58, 0.64, 0.8)
+polygon = PackedVector2Array(-2045, -17, -1990.8147, -16.903137, -1839.0935, -16.631866, 1418, -24, 1424, 7, -2043, 6)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/Draft_FloorLines/Second_MainPath" unique_id=2023572377]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Draft_FloorLines/Second_MainPath/SolidCollision" unique_id=1777222231]
+polygon = PackedVector2Array(-2043, -17, -1839.0935, -16.631866, 1418, -24, 1424, 7, -2040, 6)
 
 [node name="Service_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=132666718]
-position = Vector2(2103, 1454)
+position = Vector2(2092, 1628)
 color = Color(0.48, 0.48, 0.54, 0.8)
-polygon = PackedVector2Array(-1870, -10, 1870, -10, 1870, 10, -1870, 10)
+polygon = PackedVector2Array(-1659, -6, 998, -10, 994, 20, -1657, 16)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/Draft_FloorLines/Service_MainPath" unique_id=605113781]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Draft_FloorLines/Service_MainPath/SolidCollision" unique_id=1206963700]
+polygon = PackedVector2Array(-1659, -6, 998, -10, 994, 20, -1657, 16)
 
 [node name="Ground_MainPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=38753653]
-position = Vector2(2100, 1665)
+position = Vector2(2100, 2189)
 color = Color(0.46, 0.46, 0.5, 0.8)
-polygon = PackedVector2Array(-1870, -12, 1870, -12, 1870, 12, -1870, 12)
+polygon = PackedVector2Array(-1726, -7, 1870, -12, 1870, 12, -1720, 12)
 
-[node name="Outdoor_RoadPath" type="Polygon2D" parent="Level1_MapDraft/Draft_FloorLines" unique_id=1907105292]
-position = Vector2(4700, 1665)
-color = Color(0.42, 0.42, 0.46, 0.8)
-polygon = PackedVector2Array(-700, -12, 700, -12, 700, 12, -700, 12)
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/Draft_FloorLines/Ground_MainPath" unique_id=911182552]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Draft_FloorLines/Ground_MainPath/SolidCollision" unique_id=1810267768]
+polygon = PackedVector2Array(-1726, -7, 1870, -12, 1870, 12, -1720, 12)
 
 [node name="Draft_CollisionFloors" type="Node2D" parent="Level1_MapDraft" unique_id=60064954]
 
@@ -577,20 +581,14 @@ polygon = PackedVector2Array(-700, -12, 700, -12, 700, 12, -700, 12)
 position = Vector2(2100, 1435)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/Draft_CollisionFloors/Service_Floor_Collision" unique_id=1726889880]
-position = Vector2(-498, 25)
+position = Vector2(-345.75, 197)
 shape = SubResource("draft_service_floor_collision")
 
 [node name="Ground_Floor_Collision" type="StaticBody2D" parent="Level1_MapDraft/Draft_CollisionFloors" unique_id=406328821]
 position = Vector2(2100, 1665)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/Draft_CollisionFloors/Ground_Floor_Collision" unique_id=2083287289]
-shape = SubResource("draft_ground_floor_collision")
-
 [node name="Outdoor_Road_Collision" type="StaticBody2D" parent="Level1_MapDraft/Draft_CollisionFloors" unique_id=677883954]
 position = Vector2(4700, 1665)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/Draft_CollisionFloors/Outdoor_Road_Collision" unique_id=634256673]
-shape = SubResource("draft_outdoor_road_collision")
 
 [node name="TopFloor" type="Node2D" parent="Level1_MapDraft" unique_id=2005296046]
 
@@ -601,15 +599,15 @@ offset_right = 3920.0
 offset_bottom = 250.0
 text = "Player Start"
 
-[node name="Top_StudentID" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1387383033]
+[node name="Top_StudentID1" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1387383033]
 position = Vector2(3680, 150)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_StudentID" unique_id=2024809663]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_StudentID1" unique_id=2024809663]
 position = Vector2(175, -143)
 color = Color(0.45, 0.8, 1, 0.95)
 polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_StudentID" unique_id=1561648402]
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_StudentID1" unique_id=1561648402]
 offset_left = 103.0
 offset_top = -157.0
 offset_right = 243.0
@@ -618,22 +616,38 @@ text = "Student ID"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_StudentID1" unique_id=1548600863]
+position = Vector2(175, -143)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "student_id"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_StudentID1/PickupArea" unique_id=736437548]
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
+
 [node name="Top_AC_Platform" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=276738649]
 position = Vector2(3440, 205)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_AC_Platform" unique_id=1223361884]
-position = Vector2(56, -82)
+position = Vector2(52, -67)
 color = Color(0.72, 0.78, 0.82, 0.95)
-polygon = PackedVector2Array(-125, -18, 125, -18, 125, 18, -125, 18)
+polygon = PackedVector2Array(-116, -9, 125, -10, 125, 18, -115, 17)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_AC_Platform" unique_id=677602862]
-offset_left = -37.0
-offset_top = -91.0
-offset_right = 153.0
-offset_bottom = -67.0
+offset_left = -46.0
+offset_top = -81.0
+offset_right = 144.0
+offset_bottom = -57.0
 text = "Platform as AC"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Top_AC_Platform" unique_id=540808675]
+position = Vector2(52, -67)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_AC_Platform/SolidCollision" unique_id=480024112]
+polygon = PackedVector2Array(-116, -9, 125, -10, 125, 18, -115, 17)
 
 [node name="Top_SN_NearSpawn" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=48765308]
 position = Vector2(3610, 250)
@@ -651,6 +665,14 @@ text = "SN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_SN_NearSpawn" unique_id=628972759]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_SN_NearSpawn/PickupArea" unique_id=2016080088]
+polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
+
 [node name="Top_Coffee" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1996230798]
 position = Vector2(3335, 252)
 
@@ -666,6 +688,15 @@ offset_bottom = 12.0
 text = "Coffee"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_Coffee" unique_id=123216940]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "coffee"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_Coffee/PickupArea" unique_id=152120888]
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
 
 [node name="Top_FridgeObstacle" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=378151248]
 position = Vector2(3080, 240)
@@ -684,6 +715,11 @@ Fridge"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Top_FridgeObstacle" unique_id=73316567]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_FridgeObstacle/SolidCollision" unique_id=728338584]
+polygon = PackedVector2Array(-58, -92, 58, -92, 58, 58, -58, 58)
+
 [node name="Top_Roommate" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1011802220]
 position = Vector2(2860, 250)
 
@@ -698,6 +734,35 @@ offset_right = 72.0
 offset_bottom = 78.0
 text = "Roommate"
 horizontal_alignment = 1
+
+[node name="Functional_Roommate" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_Roommate" unique_id=1311867428]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("22_interactable_script")
+interaction_message = "Wake up! Your final exam starts soon! Don’t forget your Student ID!"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/TopFloor/Top_Roommate/Functional_Roommate" unique_id=1705007309]
+shape = SubResource("roommate_interact_shape")
+
+[node name="PromptLabel" type="Label" parent="Level1_MapDraft/TopFloor/Top_Roommate/Functional_Roommate" unique_id=1035706229]
+visible = false
+offset_left = -64.0
+offset_top = -92.0
+offset_right = 64.0
+offset_bottom = -68.0
+text = "Press E to interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="Level1_MapDraft/TopFloor/Top_Roommate/Functional_Roommate" unique_id=2111642271]
+visible = false
+offset_left = -180.0
+offset_top = -68.0
+offset_right = 180.0
+offset_bottom = -24.0
+text = "Wake up! Your final exam starts soon! Don’t forget your Student ID!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Top_Opening_MidRight" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1122531248]
 position = Vector2(2620, 235)
@@ -714,14 +779,14 @@ offset_bottom = -105.0
 text = "Opening"
 horizontal_alignment = 1
 
-[node name="Top_ApartmentRooms_Right" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1076759422]
+[node name="Top_BK1" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1076759422]
 position = Vector2(2220, 240)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Right" unique_id=1578746660]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_BK1" unique_id=1578746660]
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-150, -92, 150, -92, 150, 58, -150, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Right" unique_id=700424585]
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_BK1" unique_id=700424585]
 offset_left = -90.0
 offset_top = -26.0
 offset_right = 90.0
@@ -731,17 +796,38 @@ Rooms (bk)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Top_WetFloor_Right" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1218928599]
+[node name="Second_WetFloor2" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1218928599]
 position = Vector2(1762, 729)
 color = Color(0.08, 0.48, 1, 0.95)
 polygon = PackedVector2Array(-170, -10, -70.15259, -10, 449, -16, 451, 7, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Second_WetFloor2" unique_id=323888530]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Second_WetFloor2/MechanicArea" unique_id=1879375489]
+position = Vector2(-51.119965, -1.9073486e-06)
+scale = Vector2(1.0802134, 1)
+polygon = PackedVector2Array(-175.78015, -9, -70.15259, -10, 449, -16, 451, 7, -176.70581, 10)
 
 [node name="Top_Boxes" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=173109573]
 position = Vector2(1656, 236)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Boxes" unique_id=2093621811]
-position = Vector2(-126, -1)
+position = Vector2(-122, -6)
 color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
+
+[node name="Box1" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_Boxes/Visual" unique_id=263778614]
+position = Vector2(-83, 449)
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Top_Boxes/Visual" unique_id=2101664478]
+position = Vector2(-83, 449)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_Boxes/Visual/SolidCollision" unique_id=504603681]
 polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_Boxes" unique_id=1176168364]
@@ -754,14 +840,20 @@ Boxes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Top_ApartmentRooms_Left" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1067582540]
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Top_Boxes" unique_id=439134162]
+position = Vector2(-122, -6)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_Boxes/SolidCollision" unique_id=732393626]
+polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
+
+[node name="Top_BK2" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=1067582540]
 position = Vector2(1320, 240)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Left" unique_id=217609947]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_BK2" unique_id=217609947]
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-110, -86, 110, -86, 110, 58, -110, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_ApartmentRooms_Left" unique_id=1365459496]
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_BK2" unique_id=1365459496]
 offset_left = -82.0
 offset_top = -18.0
 offset_right = 82.0
@@ -771,19 +863,27 @@ Rooms"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Top_WetFloor_Left" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1882430870]
+[node name="Top_WetFloor2" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1882430870]
 position = Vector2(1295, 288)
 color = Color(0.08, 0.48, 1, 0.95)
 polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
 
-[node name="Top_BrokenLift" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=137316382]
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_WetFloor2" unique_id=528461673]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_WetFloor2/MechanicArea" unique_id=1808855859]
+polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="Top_BK3" type="Node2D" parent="Level1_MapDraft/TopFloor" unique_id=137316382]
 position = Vector2(740, 238)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_BrokenLift" unique_id=117003431]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/TopFloor/Top_BK3" unique_id=117003431]
 color = Color(0.13, 0.14, 0.16, 0.95)
 polygon = PackedVector2Array(-95, -95, 95, -95, 95, 60, -95, 60)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_BrokenLift" unique_id=1841938456]
+[node name="Label" type="Label" parent="Level1_MapDraft/TopFloor/Top_BK3" unique_id=1841938456]
 offset_left = -78.0
 offset_top = -20.0
 offset_right = 78.0
@@ -807,6 +907,96 @@ offset_right = 58.0
 offset_bottom = -105.0
 text = "Opening"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Platform1" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1657752677]
+position = Vector2(2794, 59)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(934, -19, 1175, -20, 1177, 7, 934, 5)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Platform1" unique_id=1645069920]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Platform1/SolidCollision" unique_id=148146582]
+polygon = PackedVector2Array(934, -19, 1175, -20, 1177, 7, 934, 5)
+
+[node name="Top_WetFloor1" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1581884539]
+position = Vector2(1757, 282)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_WetFloor1" unique_id=1727629501]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_WetFloor1/MechanicArea" unique_id=716577068]
+polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="Wall1" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=12381851]
+position = Vector2(1726, 128)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(874, 13, 871, -301, 925, -301, 921, 10)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Wall1" unique_id=17455086]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Wall1/SolidCollision" unique_id=2091990133]
+polygon = PackedVector2Array(874, 13, 871, -301, 925, -301, 921, 10)
+
+[node name="Platform4" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=196988595]
+position = Vector2(1040, 212)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Platform4" unique_id=1868771065]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Platform4/SolidCollision" unique_id=815436817]
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="Platform3" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=174712746]
+position = Vector2(1145.7827, 76)
+scale = Vector2(0.89440995, 1)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Platform3" unique_id=256096053]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Platform3/SolidCollision" unique_id=2113402814]
+position = Vector2(-0.67484283, 0)
+scale = Vector2(0.9991322, 1)
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="Platform2" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1627900934]
+position = Vector2(1034, -40)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Platform2" unique_id=1413674721]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Platform2/SolidCollision" unique_id=814742564]
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="Platform6" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=465625483]
+position = Vector2(1041, 550)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/TopFloor/Platform6" unique_id=201627507]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Platform6/SolidCollision" unique_id=1317326464]
+polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
+
+[node name="Top_Studynote2" type="Polygon2D" parent="Level1_MapDraft/TopFloor" unique_id=1437715817]
+position = Vector2(132, -97)
+color = Color(0.45, 0.8, 1, 0.95)
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
+
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/TopFloor/Top_Studynote2" unique_id=658781992]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/TopFloor/Top_Studynote2/PickupArea" unique_id=1858833178]
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
 
 [node name="SecondFloor" type="Node2D" parent="Level1_MapDraft" unique_id=1953428449]
 
@@ -814,17 +1004,48 @@ horizontal_alignment = 1
 position = Vector2(260, 700)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys" unique_id=134154629]
-position = Vector2(435, -234)
+position = Vector2(-117, -7)
 color = Color(0.95, 0.72, 0.25, 0.95)
 polygon = PackedVector2Array(-70, -36, 70, -36, 70, 36, -70, 36)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys" unique_id=1335344259]
-offset_left = 362.0
-offset_top = -257.0
-offset_right = 494.0
-offset_bottom = -208.0
+offset_left = -186.0
+offset_top = -33.0
+offset_right = -54.0
+offset_bottom = 16.0
 text = "Roommate
 keys"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyInteractArea" type="Area2D" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys" unique_id=1211062504]
+position = Vector2(-117, -7)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("22_interactable_script")
+prompt_text = "Press E to inspect"
+interaction_message = "The keys are here, but you still need your Student ID."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys/KeyInteractArea" unique_id=1560510678]
+shape = SubResource("roommate_interact_shape")
+
+[node name="PromptLabel" type="Label" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys/KeyInteractArea" unique_id=407597275]
+visible = false
+offset_left = -64.0
+offset_top = -92.0
+offset_right = 64.0
+offset_bottom = -68.0
+text = "Press E to inspect"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="Level1_MapDraft/SecondFloor/Second_RoommateKeys/KeyInteractArea" unique_id=726687667]
+visible = false
+offset_left = -180.0
+offset_top = -68.0
+offset_right = 180.0
+offset_bottom = -24.0
+text = "The keys are here, but you still need your Student ID."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -843,14 +1064,14 @@ offset_bottom = -105.0
 text = "Opening"
 horizontal_alignment = 1
 
-[node name="Second_BrokenLift" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=773523760]
+[node name="Second_BK1" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=773523760]
 position = Vector2(740, 692)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_BrokenLift" unique_id=1235466057]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_BK1" unique_id=1235466057]
 color = Color(0.13, 0.14, 0.16, 0.95)
 polygon = PackedVector2Array(-95, -95, 95, -95, 95, 58, -95, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_BrokenLift" unique_id=1974551959]
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_BK1" unique_id=1974551959]
 offset_left = -78.0
 offset_top = -20.0
 offset_right = 78.0
@@ -860,31 +1081,37 @@ text = "Broken Lift
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Second_CeilingFan_Left" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1724969752]
+[node name="Second_CeilingFan1" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1724969752]
 position = Vector2(1040, 610)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Left" unique_id=1697913224]
-position = Vector2(24, -42)
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan1" unique_id=1697913224]
+position = Vector2(36, -42)
 color = Color(0.55, 0.75, 0.9, 0.95)
 polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Left" unique_id=257478759]
-offset_left = -69.0
-offset_top = -55.0
-offset_right = 95.0
-offset_bottom = -31.0
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan1" unique_id=257478759]
+offset_left = -45.0
+offset_top = -54.0
+offset_right = 119.0
+offset_bottom = -30.0
 text = "Ceiling Fan"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Second_AptAndBoxes_Left" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=648949117]
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan1" unique_id=1064709681 instance=ExtResource("10_ceiling_fan")]
+visible = false
+position = Vector2(36, -42)
+scale = Vector2(1.3, 1)
+
+[node name="Second_BK2" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=648949117]
 position = Vector2(1440, 704)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Left" unique_id=1855541037]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_BK2" unique_id=1855541037]
 color = Color(0.2, 0.18, 0.15, 0.95)
 polygon = PackedVector2Array(-150, -76, 150, -76, 150, 46, -150, 46)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Left" unique_id=130121582]
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_BK2" unique_id=130121582]
 offset_left = -112.0
 offset_top = -28.0
 offset_right = 112.0
@@ -893,15 +1120,16 @@ text = "Apartment Rooms
 + Boxes"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Second_AptAndBoxes_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=426408602]
+[node name="Second_BK3" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=426408602]
 position = Vector2(2380, 704)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Right" unique_id=2117444916]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_BK3" unique_id=2117444916]
 color = Color(0.2, 0.18, 0.15, 0.95)
 polygon = PackedVector2Array(-170, -76, 170, -76, 170, 46, -170, 46)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_AptAndBoxes_Right" unique_id=461666602]
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_BK3" unique_id=461666602]
 offset_left = -125.0
 offset_top = -28.0
 offset_right = 125.0
@@ -928,22 +1156,38 @@ text = "Coffee"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Second_CeilingFan_Mid" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1081679917]
-position = Vector2(1860, 610)
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Mid" unique_id=486769118]
+position = Vector2(166, -31)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "coffee"
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Mid" unique_id=1887118840]
-position = Vector2(-3, -40)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Mid/PickupArea" unique_id=2098894878]
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Second_CeilingFan2" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1081679917]
+position = Vector2(1837, 605)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan2" unique_id=1887118840]
+position = Vector2(76.00014, -39)
+scale = Vector2(2.2, 1)
 color = Color(0.55, 0.75, 0.9, 0.95)
-polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, 29.28955, 12, -90, 12)
+polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, 29.28955, 12, -90, 12, -90, 0.75198364)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Mid" unique_id=1895204371]
-offset_left = -91.0
-offset_top = -50.0
-offset_right = 73.0
-offset_bottom = -26.0
+[node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan2" unique_id=1895204371]
+offset_left = -20.0
+offset_top = -54.0
+offset_right = 144.0
+offset_bottom = -30.0
 text = "Ceiling Fan"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan2" unique_id=1678637138 instance=ExtResource("10_ceiling_fan")]
+visible = false
+position = Vector2(76.00014, -39)
+scale = Vector2(2.8, 1)
 
 [node name="Second_CeilingFan_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1648941077]
 position = Vector2(2860, 610)
@@ -962,6 +1206,11 @@ text = "Ceiling Fan"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/SecondFloor/Second_CeilingFan_Right" unique_id=652092936 instance=ExtResource("10_ceiling_fan")]
+visible = false
+position = Vector2(43, -33)
+scale = Vector2(1.3, 1)
+
 [node name="Second_Coffee_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=817048026]
 position = Vector2(3350, 690)
 
@@ -978,20 +1227,135 @@ text = "Coffee"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Right" unique_id=2137071544]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "coffee"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Second_Coffee_Right/PickupArea" unique_id=610138]
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
 [node name="Second_Opening_Right" type="Node2D" parent="Level1_MapDraft/SecondFloor" unique_id=1948389977]
-position = Vector2(3700, 690)
+position = Vector2(3707, 688)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Second_Opening_Right" unique_id=1771820945]
+position = Vector2(-186, -3)
 color = Color(0.04, 0.04, 0.05, 0.95)
 polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/SecondFloor/Second_Opening_Right" unique_id=2137027606]
-offset_left = -58.0
-offset_top = -132.0
-offset_right = 58.0
-offset_bottom = -105.0
+offset_left = -244.0
+offset_top = -141.0
+offset_right = -128.0
+offset_bottom = -114.0
 text = "Opening"
 horizontal_alignment = 1
+
+[node name="Second_WetFloor1" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=302493775]
+position = Vector2(1178, 734)
+scale = Vector2(1.2466667, 1)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-150, -10, 25.741364, -10, 93, -10, 150, -10, 150, 10, 61.473022, 10, -150, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/SecondFloor/Second_WetFloor1" unique_id=3833004]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Second_WetFloor1/MechanicArea" unique_id=954672075]
+position = Vector2(-0.48129272, 0)
+scale = Vector2(0.9979946, 1)
+polygon = PackedVector2Array(-150, -10, 93, -10, 150, -10, 150, 10, -150, 10)
+
+[node name="Second_WetFloor3" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=1701156910]
+position = Vector2(2731, 729)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-174, -17, -73, -18, 449, -16, 451, 7, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/SecondFloor/Second_WetFloor3" unique_id=3455852]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Second_WetFloor3/MechanicArea" unique_id=1450124152]
+position = Vector2(65.25073, 8.378573)
+scale = Vector2(1.1805, 0.54464287)
+polygon = PackedVector2Array(-174, -17, -73, -18, 449, -16, 451, 7, -170, 10)
+
+[node name="Platform9" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=2026194275]
+position = Vector2(4527, 819)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -987, 13)
+
+[node name="Platform19" type="Polygon2D" parent="Level1_MapDraft/SecondFloor/Platform9" unique_id=591685632]
+position = Vector2(-3326, 562)
+scale = Vector2(0.8673684, 1)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(451.94177, -4, 1537.9855, -6, 1537.9855, 17, 450.78882, 16)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/SecondFloor/Platform9/Platform19" unique_id=71727106]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Platform9/Platform19/SolidCollision" unique_id=1565056316]
+polygon = PackedVector2Array(451.94177, -4, 1537.9855, -6, 1537.9855, 17, 450.78882, 16)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/SecondFloor/Platform9" unique_id=2031217620]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Platform9/SolidCollision" unique_id=1578211982]
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -987, 13)
+
+[node name="Platform10" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=1447689287]
+position = Vector2(4740, 1012)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -863.64453, 12.426392, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/SecondFloor/Platform10" unique_id=1579878889]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Platform10/SolidCollision" unique_id=762477868]
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -863.64453, 12.426392, -987, 13)
+
+[node name="Platform8" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=707921956]
+position = Vector2(4743, 640)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/SecondFloor/Platform8" unique_id=1006182392]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Platform8/SolidCollision" unique_id=367088671]
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -987, 13)
+
+[node name="Platform7" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=709326267]
+position = Vector2(4534, 466)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/SecondFloor/Platform7" unique_id=2042176465]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Platform7/SolidCollision" unique_id=1341540042]
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -987, 13)
+
+[node name="Second_Studynote" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=1013070523]
+position = Vector2(3661, 416)
+color = Color(0.45, 0.8, 1, 0.95)
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
+
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/SecondFloor/Second_Studynote" unique_id=476158710]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Second_Studynote/PickupArea" unique_id=1015482909]
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
+
+[node name="Box2" type="Polygon2D" parent="Level1_MapDraft/SecondFloor" unique_id=1002790039]
+position = Vector2(2389, 696)
+color = Color(0.58, 0.42, 0.24, 0.95)
+polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/SecondFloor/Box2" unique_id=679553570]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/SecondFloor/Box2/SolidCollision" unique_id=1116229253]
+polygon = PackedVector2Array(-82, -58, 70, -58, 70, 58, -82, 58)
 
 [node name="ThirdFloor" type="Node2D" parent="Level1_MapDraft" unique_id=684838873]
 
@@ -1026,59 +1390,79 @@ text = "Coffee"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Third_BrokenLift" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=356424699]
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_Coffee_Left" unique_id=1332674301]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "coffee"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Coffee_Left/PickupArea" unique_id=1256230430]
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Third_BK1" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=356424699]
 position = Vector2(740, 1130)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_BrokenLift" unique_id=987005277]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_BK1" unique_id=987005277]
+position = Vector2(6, -11)
 color = Color(0.13, 0.14, 0.16, 0.95)
 polygon = PackedVector2Array(-95, -95, 95, -95, 95, 58, -95, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_BrokenLift" unique_id=781281643]
-offset_left = -78.0
-offset_top = -20.0
-offset_right = 78.0
-offset_bottom = 24.0
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_BK1" unique_id=781281643]
+offset_left = -72.0
+offset_top = -45.0
+offset_right = 84.0
+offset_bottom = 4.0
 text = "Broken Lift
 (bk)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Third_JumpTimingNote" type="Label" parent="Level1_MapDraft/ThirdFloor" unique_id=631624682]
-offset_left = 914.0
-offset_top = 945.0
-offset_right = 1194.0
-offset_bottom = 1020.0
+offset_left = 1068.0
+offset_top = 941.0
+offset_right = 1348.0
+offset_bottom = 1016.0
 text = "Need correct
 jump timing
 to pass"
 horizontal_alignment = 1
 
 [node name="Third_ExposedWiring_Left" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1334305747]
-position = Vector2(1210, 1072)
+position = Vector2(1234, 1072)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left" unique_id=1102597519]
-position = Vector2(-6, -94)
+position = Vector2(162, -80)
 color = Color(0.9, 0.35, 0.25, 0.95)
 polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left" unique_id=2002499759]
-offset_left = -96.0
-offset_top = -145.0
-offset_right = 68.0
-offset_bottom = -96.0
+offset_left = 70.0
+offset_top = -130.0
+offset_right = 234.0
+offset_bottom = -81.0
 text = "Exposed
 Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Third_Apartment_Left" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1020278459]
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left" unique_id=229409215]
+position = Vector2(162, -80)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_hazard_script")
+flashing_enabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left/MechanicArea" unique_id=828787267]
+polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
+
+[node name="Third_BK2" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1020278459]
 position = Vector2(1400, 1130)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Left" unique_id=2036960273]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_BK2" unique_id=2036960273]
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-75, -78, -73, -77, 75, -78, 75, 58, -75, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Left" unique_id=334886712]
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_BK2" unique_id=334886712]
 offset_left = -70.0
 offset_top = -20.0
 offset_right = 70.0
@@ -1088,34 +1472,41 @@ Rooms"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Third_CeilingFan" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=167529275]
+[node name="Third_CeilingFan1" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=167529275]
 position = Vector2(1780, 1030)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan" unique_id=461407083]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan1" unique_id=461407083]
+position = Vector2(-13, -3)
 color = Color(0.55, 0.75, 0.9, 0.95)
-polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+polygon = PackedVector2Array(-148, -12, 60.831177, -12, 90, -12, 90, 12, -147, 13)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan" unique_id=1611943042]
-offset_left = -82.0
-offset_top = -12.0
-offset_right = 82.0
-offset_bottom = 12.0
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan1" unique_id=1611943042]
+offset_left = -128.0
+offset_top = -15.0
+offset_right = 26.0
+offset_bottom = 9.0
 text = "Ceiling Fan"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Third_Apartment_Mid" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=239528867]
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/ThirdFloor/Third_CeilingFan1" unique_id=978698573 instance=ExtResource("10_ceiling_fan")]
+visible = false
+position = Vector2(-13, -3)
+scale = Vector2(1.7, 1)
+
+[node name="Third_BK3" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=239528867]
 position = Vector2(2230, 1130)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Mid" unique_id=1938950048]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_BK3" unique_id=1938950048]
+position = Vector2(-125, -16)
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-80, -78, 80, -78, 80, 58, -80, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Apartment_Mid" unique_id=647499944]
-offset_left = -72.0
-offset_top = -20.0
-offset_right = 72.0
-offset_bottom = 24.0
+[node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_BK3" unique_id=647499944]
+offset_left = -198.0
+offset_top = -41.0
+offset_right = -54.0
+offset_bottom = 8.0
 text = "Apartment
 Rooms"
 horizontal_alignment = 1
@@ -1125,18 +1516,28 @@ vertical_alignment = 1
 position = Vector2(2700, 980)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid" unique_id=2030028035]
-position = Vector2(103, -103)
+position = Vector2(101, -106)
 color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-105, -70, 105, -70, 105, 70, -105, 70)
+polygon = PackedVector2Array(-105, -70, 105, -70, 105, 43, -103, 43)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid" unique_id=955100444]
-offset_left = 13.0
-offset_top = -116.0
-offset_right = 189.0
-offset_bottom = -80.0
+offset_left = 15.0
+offset_top = -130.0
+offset_right = 191.0
+offset_bottom = -94.0
 text = "Exposed Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid" unique_id=1073891038]
+position = Vector2(101, -106)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_hazard_script")
+flashing_enabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid/MechanicArea" unique_id=1737337567]
+polygon = PackedVector2Array(-105, -70, 105, -70, 105, 43, -103, 43)
 
 [node name="Third_Boxes_Right" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1632725204]
 position = Vector2(3020, 1130)
@@ -1154,37 +1555,146 @@ text = "Boxes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ThirdFloor/Third_Boxes_Right" unique_id=1574731147]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Boxes_Right/SolidCollision" unique_id=1164403851]
+polygon = PackedVector2Array(-100, -76, 100, -76, 100, 58, -100, 58)
+
 [node name="Third_ExposedWiring_RightWall" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1225698130]
 position = Vector2(3370, 1090)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall" unique_id=659603025]
+position = Vector2(-72, 13)
 color = Color(0.9, 0.35, 0.25, 0.95)
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall" unique_id=603028997]
-offset_left = -68.0
-offset_top = -24.0
-offset_right = 68.0
-offset_bottom = 25.0
+offset_left = -137.0
+offset_top = -12.0
+offset_right = -1.0
+offset_bottom = 37.0
 text = "Exposed
 Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall" unique_id=1375290854]
+position = Vector2(-72, 13)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_hazard_script")
+flashing_enabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall/MechanicArea" unique_id=1220336202]
+polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
+
 [node name="Third_Opening_Right" type="Node2D" parent="Level1_MapDraft/ThirdFloor" unique_id=806838340]
 position = Vector2(3700, 1125)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Opening_Right" unique_id=441487976]
+position = Vector2(-186, -11)
 color = Color(0.04, 0.04, 0.05, 0.95)
 polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ThirdFloor/Third_Opening_Right" unique_id=1578284784]
-offset_left = -58.0
-offset_top = -132.0
-offset_right = 58.0
-offset_bottom = -105.0
+offset_left = -240.0
+offset_top = -143.0
+offset_right = -124.0
+offset_bottom = -116.0
 text = "Opening"
 horizontal_alignment = 1
+
+[node name="Third_WetFloor1" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=154195664]
+position = Vector2(976, 1168)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-145, -16, -61, -15, 83, -19, 83, 8, -29.268188, 9.999939, -150, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_WetFloor1" unique_id=1503572317]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_WetFloor1/MechanicArea" unique_id=351595798]
+polygon = PackedVector2Array(-145, -16, -61, -15, 83, -19, 83, 8, -29.268188, 9.999939, -150, 10)
+
+[node name="Third_WetFloor2" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1400628509]
+position = Vector2(1646, 1159)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -73, -21, 382, -20, 385, 8, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_WetFloor2" unique_id=1284092745]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_WetFloor2/MechanicArea" unique_id=1995509255]
+polygon = PackedVector2Array(-167, -21, -73, -21, 382, -20, 385, 8, -170, 10)
+
+[node name="Third_WetFloor3" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=421191814]
+position = Vector2(2465, 1159)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(255, -10, 253, -15, 455, -17, 457, 9, 252, 13)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_WetFloor3" unique_id=627327650]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_WetFloor3/MechanicArea" unique_id=817018768]
+polygon = PackedVector2Array(255, -10, 253, -15, 455, -17, 457, 9, 252, 13)
+
+[node name="Wall3" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1432053799]
+position = Vector2(413, 1234)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-25, -937, 37, -936, 36, -648, -27, -645)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ThirdFloor/Wall3" unique_id=1945089256]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Wall3/SolidCollision" unique_id=1697640571]
+polygon = PackedVector2Array(-25, -937, 37, -936, 36, -648, -27, -645)
+
+[node name="Platform13" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=2098501108]
+position = Vector2(1232, 1237)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ThirdFloor/Platform13" unique_id=606488079]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Platform13/SolidCollision" unique_id=1715121265]
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="Platform12" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1147141242]
+position = Vector2(1064, 1060)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ThirdFloor/Platform12" unique_id=1783984756]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Platform12/SolidCollision" unique_id=461302460]
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="Platform11" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=734579821]
+position = Vector2(1214, 911)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ThirdFloor/Platform11" unique_id=1936717182]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Platform11/SolidCollision" unique_id=1035347194]
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="Third_Studynote" type="Polygon2D" parent="Level1_MapDraft/ThirdFloor" unique_id=1227803223]
+position = Vector2(314, 863)
+color = Color(0.45, 0.8, 1, 0.95)
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
+
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/ThirdFloor/Third_Studynote" unique_id=1017539255]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_Studynote/PickupArea" unique_id=281545120]
+polygon = PackedVector2Array(-58, -22, 58, -22, 58, 22, -58, 22)
 
 [node name="ServiceFloor" type="Node2D" parent="Level1_MapDraft" unique_id=1117721584]
 
@@ -1192,14 +1702,15 @@ horizontal_alignment = 1
 position = Vector2(620, 1305)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SecurityBaton" unique_id=1771652339]
+position = Vector2(-65, 67)
 color = Color(0.65, 0.45, 0.28, 0.95)
 polygon = PackedVector2Array(-62, -50, 62, -50, 62, 50, -62, 50)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_SecurityBaton" unique_id=959131490]
-offset_left = -60.0
-offset_top = -30.0
-offset_right = 60.0
-offset_bottom = 30.0
+offset_left = -129.0
+offset_top = 39.0
+offset_right = -9.0
+offset_bottom = 114.0
 text = "Security
 guard
 Baton"
@@ -1210,135 +1721,305 @@ vertical_alignment = 1
 position = Vector2(595, 1390)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SwitchButton" unique_id=1438473497]
+position = Vector2(-108, 174)
 color = Color(0.86, 0.86, 0.45, 0.95)
 polygon = PackedVector2Array(-48, -38, 48, -38, 48, 38, -48, 38)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_SwitchButton" unique_id=2038683150]
-offset_left = -46.0
-offset_top = -22.0
-offset_right = 46.0
-offset_bottom = 22.0
+offset_left = -156.0
+offset_top = 153.0
+offset_right = -64.0
+offset_bottom = 202.0
 text = "Switch
 /Button"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Service_CeilingFan_Left" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=795297861]
-position = Vector2(1080, 1322)
+[node name="Functional_SwitchButton" parent="Level1_MapDraft/ServiceFloor/Service_SwitchButton" unique_id=1093444815 instance=ExtResource("14_switch_button")]
+position = Vector2(-108, 174)
+locked_door_path = NodePath("../../../GroundFloor/Ground_LockedDoor/Functional_LockedDoor")
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Left" unique_id=1811786339]
+[node name="Ground_CeilingFan2" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=795297861]
+position = Vector2(1081, 1322)
+
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Ground_CeilingFan2" unique_id=1811786339]
+position = Vector2(265.5, 109.95)
+scale = Vector2(1.1277778, 1)
 color = Color(0.55, 0.75, 0.9, 0.95)
-polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
+polygon = PackedVector2Array(-90, -12, 62.77722, -12, 90, -12, 90, 12, -30.923035, 12, -90, 12, -89, 2)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Left" unique_id=438967243]
-offset_left = -82.0
-offset_top = -12.0
-offset_right = 82.0
-offset_bottom = 12.0
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Ground_CeilingFan2" unique_id=438967243]
+offset_left = 163.0
+offset_top = 95.0
+offset_right = 357.0
+offset_bottom = 119.0
 text = "Ceiling Fan"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/ServiceFloor/Ground_CeilingFan2" unique_id=1869902432 instance=ExtResource("10_ceiling_fan")]
+visible = false
+position = Vector2(265.5, 109.95)
+scale = Vector2(1.45, 1)
 
 [node name="Service_Boxes_Left" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=890648155]
 position = Vector2(1470, 1380)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Left" unique_id=901859581]
+position = Vector2(107, 186)
 color = Color(0.58, 0.42, 0.24, 0.95)
 polygon = PackedVector2Array(-105, -60, 105, -60, 105, 55, -105, 55)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Left" unique_id=1862432132]
-offset_left = -92.0
-offset_top = -22.0
-offset_right = 92.0
-offset_bottom = 24.0
+offset_left = 15.0
+offset_top = 171.0
+offset_right = 199.0
+offset_bottom = 220.0
 text = "Obstacles
 Boxes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Service_CeilingFan_Mid" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=460749371]
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Left" unique_id=1887174728]
+position = Vector2(107, 186)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Left/SolidCollision" unique_id=1116549475]
+polygon = PackedVector2Array(-105, -60, 105, -60, 105, 55, -105, 55)
+
+[node name="Ground_CeilingFan1" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=460749371]
 position = Vector2(1840, 1322)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Mid" unique_id=1336881886]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Ground_CeilingFan1" unique_id=1336881886]
+position = Vector2(-853, 109)
+scale = Vector2(1.1, 1)
 color = Color(0.55, 0.75, 0.9, 0.95)
 polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_CeilingFan_Mid" unique_id=992496080]
-offset_left = -82.0
-offset_top = -12.0
-offset_right = 82.0
-offset_bottom = 12.0
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Ground_CeilingFan1" unique_id=992496080]
+offset_left = -949.0
+offset_top = 94.0
+offset_right = -785.0
+offset_bottom = 118.0
 text = "Ceiling Fan"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/ServiceFloor/Ground_CeilingFan1" unique_id=1446707769 instance=ExtResource("10_ceiling_fan")]
+visible = false
+position = Vector2(-853, 109)
+scale = Vector2(1.42, 1)
 
 [node name="Service_Boxes_Mid" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=1437851060]
 position = Vector2(2350, 1380)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Mid" unique_id=1673404985]
+position = Vector2(-19, 187)
 color = Color(0.58, 0.42, 0.24, 0.95)
 polygon = PackedVector2Array(-105, -60, 105, -60, 105, 55, -105, 55)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Mid" unique_id=783522071]
-offset_left = -92.0
-offset_top = -22.0
-offset_right = 92.0
-offset_bottom = 24.0
+offset_left = -114.0
+offset_top = 170.0
+offset_right = 70.0
+offset_bottom = 219.0
 text = "Obstacles
 Boxes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Mid" unique_id=187569035]
+position = Vector2(-19, 187)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_Boxes_Mid/SolidCollision" unique_id=1449852222]
+polygon = PackedVector2Array(-105, -60, 105, -60, 105, 55, -105, 55)
+
 [node name="Service_SmallPlatforms" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=1589401649]
 position = Vector2(2460, 1268)
 
-[node name="PlatformA" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=174664677]
+[node name="Bottom_WetFloor6" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=174664677]
+position = Vector2(-222, 99)
 color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-360, -8, -300, -8, -300, 8, -360, 8)
+polygon = PackedVector2Array(-360, -8, -243, -7, -242, 7, -360, 8)
 
-[node name="PlatformB" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=494123387]
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-180, -8, -120, -8, -120, 8, -180, 8)
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor6" unique_id=901503125]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
 
-[node name="PlatformC" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=401453945]
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(0, -8, 60, -8, 60, 8, 0, 8)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor6/MechanicArea" unique_id=675113146]
+polygon = PackedVector2Array(-360, -8, -243, -7, -242, 7, -360, 8)
 
-[node name="PlatformD" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=2131905995]
+[node name="Bottom_WetFloor5" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=494123387]
+position = Vector2(-170, 99)
 color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(180, -8, 240, -8, 240, 8, 180, 8)
+polygon = PackedVector2Array(-180, -8, -85, -10, -82, 9, -180, 8)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor5" unique_id=1129516703]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor5/MechanicArea" unique_id=1684381474]
+polygon = PackedVector2Array(-180, -8, -85, -10, -82, 9, -180, 8)
+
+[node name="Bottom_WetFloor4" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=401453945]
+position = Vector2(-112, 96)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-25, -7, 60, -8, 63, 11, -23, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor4" unique_id=776725589]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor4/MechanicArea" unique_id=581352090]
+polygon = PackedVector2Array(-25, -7, 60, -8, 63, 11, -23, 10)
+
+[node name="Bottom_WetFloor3" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms" unique_id=2131905995]
+position = Vector2(-950, 100)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(180, -8, 209.61877, -8.610687, 277, -10, 279, 8, 180, 8)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor3" unique_id=2094575110]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SmallPlatforms/Bottom_WetFloor3/MechanicArea" unique_id=1167934853]
+polygon = PackedVector2Array(180, -8, 209.61877, -8.610687, 277, -10, 279, 8, 180, 8)
 
 [node name="Service_ExposedWiring_Right" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=2093898105]
 position = Vector2(3200, 1315)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right" unique_id=1062488060]
+position = Vector2(-242, 141)
 color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-300, -28, 300, -28, 300, 28, -300, 28)
+polygon = PackedVector2Array(-300, -28, 300, -28, 300, 4, 300, 28, -300, 28)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right" unique_id=765133662]
-offset_left = -120.0
-offset_top = -12.0
-offset_right = 120.0
-offset_bottom = 12.0
+offset_left = -356.0
+offset_top = 126.0
+offset_right = -116.0
+offset_bottom = 150.0
 text = "Exposed Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Service_SN_Right" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=934018229]
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right" unique_id=1517864566]
+position = Vector2(-242, 141)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_hazard_script")
+flashing_enabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right/MechanicArea" unique_id=1175959294]
+polygon = PackedVector2Array(-300, -28, 300, -28, 300, 4, 300, 28, -300, 28)
+
+[node name="Bottom_Studynote" type="Node2D" parent="Level1_MapDraft/ServiceFloor" unique_id=934018229]
 position = Vector2(3800, 1285)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Service_SN_Right" unique_id=640368622]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor/Bottom_Studynote" unique_id=640368622]
+position = Vector2(52, 18)
 color = Color(0.95, 0.85, 0.35, 0.95)
 polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Service_SN_Right" unique_id=359219872]
-offset_left = -24.0
-offset_top = -12.0
-offset_right = 24.0
-offset_bottom = 12.0
+[node name="Label" type="Label" parent="Level1_MapDraft/ServiceFloor/Bottom_Studynote" unique_id=359219872]
+offset_left = 24.0
+offset_top = 9.0
+offset_right = 72.0
+offset_bottom = 33.0
 text = "SN"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Bottom_Studynote" unique_id=1778314193]
+position = Vector2(52, 18)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "study_note"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Bottom_Studynote/PickupArea" unique_id=1527898385]
+polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
+
+[node name="Wall6" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=250153266]
+position = Vector2(413, 1675)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-25, -937, 26, -933, 26, -653, -30, -652)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ServiceFloor/Wall6" unique_id=172464148]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Wall6/SolidCollision" unique_id=1592557216]
+polygon = PackedVector2Array(-25, -937, 26, -933, 26, -653, -30, -652)
+
+[node name="Platform14" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=713298856]
+position = Vector2(1063, 1448)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ServiceFloor/Platform14" unique_id=409758433]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Platform14/SolidCollision" unique_id=1097381417]
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="Platform15" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=364818869]
+position = Vector2(1228, 1644)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ServiceFloor/Platform15" unique_id=1697661507]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Platform15/SolidCollision" unique_id=203320317]
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="Platform16" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=640390297]
+position = Vector2(1057, 1824)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/ServiceFloor/Platform16" unique_id=970382026]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Platform16/SolidCollision" unique_id=2063032068]
+polygon = PackedVector2Array(-1005, -25, -826, -25, -827, 13, -1005, 14)
+
+[node name="Bottom_WetFloor1" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=1587919623]
+position = Vector2(1846, 1610)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Bottom_WetFloor1" unique_id=442554771]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Bottom_WetFloor1/MechanicArea" unique_id=393431439]
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="Bottom_WetFloor2" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=159151031]
+position = Vector2(2223, 1610)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Bottom_WetFloor2" unique_id=1653327985]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Bottom_WetFloor2/MechanicArea" unique_id=1964909252]
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="Top_WetFloor_Right4" type="Polygon2D" parent="Level1_MapDraft/ServiceFloor" unique_id=2029026129]
+position = Vector2(1846, 1610)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/ServiceFloor/Top_WetFloor_Right4" unique_id=1418411684]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("18_wet_floor_script")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Top_WetFloor_Right4/MechanicArea" unique_id=474095205]
+polygon = PackedVector2Array(-167, -21, -73, -21, 3, -24, 5, 9, -170, 10)
 
 [node name="GroundFloor" type="Node2D" parent="Level1_MapDraft" unique_id=1783173661]
 
@@ -1346,14 +2027,15 @@ vertical_alignment = 1
 position = Vector2(420, 1605)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Opening_Left" unique_id=603539020]
+position = Vector2(-4, 228)
 color = Color(0.04, 0.04, 0.05, 0.95)
 polygon = PackedVector2Array(-52, -104, 52, -104, 52, 60, -52, 60)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Opening_Left" unique_id=201571182]
-offset_left = -58.0
-offset_top = -132.0
-offset_right = 58.0
-offset_bottom = -105.0
+offset_left = -69.0
+offset_top = 88.0
+offset_right = 47.0
+offset_bottom = 115.0
 text = "Opening"
 horizontal_alignment = 1
 
@@ -1361,30 +2043,42 @@ horizontal_alignment = 1
 position = Vector2(585, 1618)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Coffee_Left" unique_id=351235844]
+position = Vector2(6, 226)
 color = Color(0.45, 0.25, 0.12, 0.95)
 polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Coffee_Left" unique_id=273260803]
-offset_left = -44.0
-offset_top = -12.0
-offset_right = 44.0
-offset_bottom = 12.0
+offset_left = -38.0
+offset_top = 216.0
+offset_right = 50.0
+offset_bottom = 240.0
 text = "Coffee"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ground_BrokenLift" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=532893459]
+[node name="PickupArea" type="Area2D" parent="Level1_MapDraft/GroundFloor/Ground_Coffee_Left" unique_id=1570917076]
+position = Vector2(6, 226)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_collectible_script")
+collectible_type = "coffee"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Coffee_Left/PickupArea" unique_id=2060895781]
+polygon = PackedVector2Array(-38, -24, 38, -24, 38, 24, -38, 24)
+
+[node name="Ground_BK1" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=532893459]
 position = Vector2(740, 1610)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BrokenLift" unique_id=1557514659]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BK1" unique_id=1557514659]
+position = Vector2(-6, 227)
 color = Color(0.13, 0.14, 0.16, 0.95)
 polygon = PackedVector2Array(-95, -95, 95, -95, 95, 58, -95, 58)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BrokenLift" unique_id=1193162276]
-offset_left = -78.0
-offset_top = -20.0
-offset_right = 78.0
-offset_bottom = 24.0
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BK1" unique_id=1193162276]
+offset_left = -81.0
+offset_top = 197.0
+offset_right = 75.0
+offset_bottom = 246.0
 text = "Broken Lift
 (bk)"
 horizontal_alignment = 1
@@ -1394,29 +2088,40 @@ vertical_alignment = 1
 position = Vector2(1040, 1600)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_SecurityGuard" unique_id=1210066408]
+position = Vector2(-23, 243)
 color = Color(0.2, 0.55, 0.35, 0.95)
 polygon = PackedVector2Array(0, -55, 28, -20, 18, 48, -18, 48, -28, -20)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_SecurityGuard" unique_id=636286897]
-offset_left = -90.0
-offset_top = 48.0
-offset_right = 90.0
-offset_bottom = 76.0
+offset_left = -109.0
+offset_top = 230.0
+offset_right = 71.0
+offset_bottom = 258.0
 text = "Security Guard"
 horizontal_alignment = 1
 
-[node name="Ground_Apartment_Left" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=105079883]
+[node name="Functional_IDBarrier" parent="Level1_MapDraft/GroundFloor/Ground_SecurityGuard" unique_id=1830231913 instance=ExtResource("13_id_barrier")]
+visible = false
+position = Vector2(-23, 243)
+scale = Vector2(1.2, 1.1)
+
+[node name="Functional_SecurityGuard" parent="Level1_MapDraft/GroundFloor/Ground_SecurityGuard" unique_id=197846609 instance=ExtResource("12_security_guard")]
+position = Vector2(-22, 254)
+barrier_path = NodePath("../Functional_IDBarrier")
+
+[node name="Ground_BK2" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=105079883]
 position = Vector2(1400, 1615)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Left" unique_id=1495540410]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BK2" unique_id=1495540410]
+position = Vector2(-138, 229)
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-80, -78, 80, -78, 80, 50, -80, 50)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Left" unique_id=1596978147]
-offset_left = -72.0
-offset_top = -20.0
-offset_right = 72.0
-offset_bottom = 24.0
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BK2" unique_id=1596978147]
+offset_left = -217.0
+offset_top = 194.0
+offset_right = -73.0
+offset_bottom = 243.0
 text = "Apartment
 Rooms"
 horizontal_alignment = 1
@@ -1426,30 +2131,42 @@ vertical_alignment = 1
 position = Vector2(1770, 1618)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left" unique_id=1974264238]
+position = Vector2(-126, 236)
 color = Color(0.9, 0.35, 0.25, 0.95)
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left" unique_id=741986440]
-offset_left = -96.0
-offset_top = -12.0
-offset_right = 96.0
-offset_bottom = 12.0
+offset_left = -234.0
+offset_top = 231.0
+offset_right = -42.0
+offset_bottom = 255.0
 text = "Exposed Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ground_Apartment_Mid" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1021228929]
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left" unique_id=903542128]
+position = Vector2(-126, 236)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_hazard_script")
+flashing_enabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left/MechanicArea" unique_id=728348957]
+polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+
+[node name="Ground_BK3" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1021228929]
 position = Vector2(2220, 1615)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Mid" unique_id=1607424521]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BK3" unique_id=1607424521]
+position = Vector2(-202, 229)
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-80, -78, 80, -78, 80, 50, -80, 50)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Mid" unique_id=1987343634]
-offset_left = -72.0
-offset_top = -20.0
-offset_right = 72.0
-offset_bottom = 24.0
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BK3" unique_id=1987343634]
+offset_left = -281.0
+offset_top = 209.0
+offset_right = -137.0
+offset_bottom = 258.0
 text = "Apartment
 Rooms"
 horizontal_alignment = 1
@@ -1459,47 +2176,60 @@ vertical_alignment = 1
 position = Vector2(2520, 1618)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid" unique_id=1203756163]
+position = Vector2(-100, 235)
 color = Color(0.9, 0.35, 0.25, 0.95)
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid" unique_id=1586363383]
-offset_left = -96.0
-offset_top = -12.0
-offset_right = 96.0
-offset_bottom = 12.0
+offset_left = -191.0
+offset_top = 227.0
+offset_right = 1.0
+offset_bottom = 251.0
 text = "Exposed Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ground_Apartment_Right" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1220185070]
+[node name="MechanicArea" type="Area2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid" unique_id=2023270267]
+position = Vector2(-100, 235)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("19_hazard_script")
+flashing_enabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid/MechanicArea" unique_id=1099375137]
+polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+
+[node name="Ground_BK4" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1220185070]
 position = Vector2(2880, 1615)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Right" unique_id=903549139]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BK4" unique_id=903549139]
+position = Vector2(-47, 225)
 color = Color(0.16, 0.18, 0.21, 0.95)
 polygon = PackedVector2Array(-80, -78, 80, -78, 80, 50, -80, 50)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_Apartment_Right" unique_id=1712929515]
-offset_left = -72.0
-offset_top = -20.0
-offset_right = 72.0
-offset_bottom = 24.0
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BK4" unique_id=1712929515]
+offset_left = -121.0
+offset_top = 197.0
+offset_right = 23.0
+offset_bottom = 246.0
 text = "Apartment
 Rooms"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ground_ReceptionTable" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1965596154]
+[node name="Ground_BK5" type="Node2D" parent="Level1_MapDraft/GroundFloor" unique_id=1965596154]
 position = Vector2(3370, 1625)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ReceptionTable" unique_id=745546274]
+[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_BK5" unique_id=745546274]
+position = Vector2(-184, 227)
 color = Color(0.28, 0.22, 0.18, 0.95)
-polygon = PackedVector2Array(-135, -50, 135, -50, 135, 40, -135, 40)
+polygon = PackedVector2Array(-128, -79, 70, -75, 70, 40, -132, 40)
 
-[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_ReceptionTable" unique_id=92543916]
-offset_left = -120.0
-offset_top = -16.0
-offset_right = 120.0
-offset_bottom = 18.0
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_BK5" unique_id=92543916]
+offset_left = -337.0
+offset_top = 190.0
+offset_right = -97.0
+offset_bottom = 239.0
 text = "Reception Table
 (bk)"
 horizontal_alignment = 1
@@ -1509,153 +2239,232 @@ vertical_alignment = 1
 position = Vector2(3820, 1585)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/GroundFloor/Ground_LockedDoor" unique_id=309221654]
+position = Vector2(200, 236)
 color = Color(0.35, 0.35, 0.85, 0.95)
 polygon = PackedVector2Array(-65, -96, 65, -96, 65, 80, -65, 80)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_LockedDoor" unique_id=1645791570]
-offset_left = -92.0
-offset_top = -42.0
-offset_right = 92.0
-offset_bottom = 34.0
+offset_left = 110.0
+offset_top = 189.0
+offset_right = 294.0
+offset_bottom = 265.0
 text = "Locked Door
 switch needed
 to open"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Functional_LockedDoor" parent="Level1_MapDraft/GroundFloor/Ground_LockedDoor" unique_id=276214806 instance=ExtResource("15_locked_door")]
+position = Vector2(200, 236)
+scale = Vector2(2.7, 1.85)
+
+[node name="Wall7" type="Polygon2D" parent="Level1_MapDraft/GroundFloor" unique_id=1235616568]
+position = Vector2(429, 2105)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-31, -920, 7, -918, 2, -366, -35, -370)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/GroundFloor/Wall7" unique_id=1837635009]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/GroundFloor/Wall7/SolidCollision" unique_id=946375718]
+polygon = PackedVector2Array(-31, -920, 7, -918, 2, -366, -35, -370)
+
+[node name="Ground_CeilingFan3" type="Polygon2D" parent="Level1_MapDraft/GroundFloor" unique_id=631654632]
+position = Vector2(2790, 1391)
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-148, -12, 60.831177, -12, 90, -12, 90, 12, -147, 13)
+
+[node name="Label" type="Label" parent="Level1_MapDraft/GroundFloor/Ground_CeilingFan3" unique_id=1936077650]
+offset_left = -111.0
+offset_top = -9.0
+offset_right = 53.0
+offset_bottom = 15.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/GroundFloor/Ground_CeilingFan3" unique_id=1127382284 instance=ExtResource("10_ceiling_fan")]
+visible = false
+scale = Vector2(1.7, 1)
+
+[node name="Ground_CeilingFan4" type="Polygon2D" parent="Level1_MapDraft/GroundFloor" unique_id=1628060322]
+position = Vector2(3088, 1391)
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-148, -12, 60.831177, -12, 90, -12, 90, 12, -147, 13)
+
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/GroundFloor/Ground_CeilingFan4" unique_id=1106881626 instance=ExtResource("10_ceiling_fan")]
+visible = false
+scale = Vector2(1.7, 1)
+
+[node name="Ground_CeilingFan5" type="Polygon2D" parent="Level1_MapDraft/GroundFloor" unique_id=1287689147]
+position = Vector2(3422, 1391)
+color = Color(0.55, 0.75, 0.9, 0.95)
+polygon = PackedVector2Array(-148, -12, 60.831177, -12, 90, -12, 90, 12, -147, 13)
+
+[node name="Functional_CeilingFanPlatform" parent="Level1_MapDraft/GroundFloor/Ground_CeilingFan5" unique_id=1963482612 instance=ExtResource("10_ceiling_fan")]
+visible = false
+scale = Vector2(1.7, 1)
+
 [node name="Outdoor" type="Node2D" parent="Level1_MapDraft" unique_id=2088867544]
 
 [node name="Outdoor_TrafficArea" type="Node2D" parent="Level1_MapDraft/Outdoor" unique_id=340141820]
 position = Vector2(4550, 1590)
 
-[node name="Visual" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1223508629]
+[node name="Road1_Area" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1223508629]
+visible = false
+position = Vector2(-235, 225)
 color = Color(0.12, 0.12, 0.13, 0.95)
-polygon = PackedVector2Array(-360, -150, 360, -150, 360, 75, -360, 75)
+polygon = PackedVector2Array(-125, -12, 125, -12, 125, 12, -125, 12)
+
+[node name="Road2_Area" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=150440390]
+visible = false
+position = Vector2(155, 225)
+color = Color(0.12, 0.12, 0.13, 0.95)
+polygon = PackedVector2Array(-125, -12, 125, -12, 125, 12, -125, 12)
+
+[node name="SafeIslandVisual" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=265596036]
+position = Vector2(-39, 225)
+color = Color(0.42, 0.45, 0.42, 0.7)
+polygon = PackedVector2Array(-95, -10, 95, -10, 95, 10, -95, 10)
+
+[node name="SafeIslandLabel" type="Label" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1776117694]
+offset_left = -120.0
+offset_top = 215.0
+offset_right = 40.0
+offset_bottom = 239.0
+text = "Safe Island"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1258530324]
-offset_left = -250.0
-offset_top = -58.0
-offset_right = 250.0
-offset_bottom = 34.0
+offset_left = -300.0
+offset_top = 122.0
+offset_right = 220.0
+offset_bottom = 190.0
 text = "Traffic: cars pass here.
 If the player is hit,
 lose focus and get pushed back."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Road1_CarHazard" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1480774762 instance=ExtResource("16_moving_car")]
+position = Vector2(-235, 225)
+speed = 250.0
+move_distance = 120.0
+
+[node name="Road2_CarHazard" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=551670852 instance=ExtResource("16_moving_car")]
+position = Vector2(155, 225)
+speed = 250.0
+move_distance = 120.0
+start_direction = -1.0
+
 [node name="Outdoor_BusStop" type="Node2D" parent="Level1_MapDraft/Outdoor" unique_id=995248738]
 position = Vector2(5280, 1585)
 
 [node name="Visual" type="Polygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop" unique_id=953165575]
+position = Vector2(9, 227)
 color = Color(0.12, 0.2, 0.16, 0.95)
 polygon = PackedVector2Array(-120, -160, 120, -160, 120, 80, -120, 80)
 
 [node name="Label" type="Label" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop" unique_id=1941784992]
-offset_left = -98.0
-offset_top = -34.0
-offset_right = 98.0
-offset_bottom = 34.0
+offset_left = -89.0
+offset_top = 203.0
+offset_right = 107.0
+offset_bottom = 271.0
 text = "End of Level
 Bus Stop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LevelCompleteTrigger" type="Area2D" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop" unique_id=2067173721]
+position = Vector2(9, 227)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_bus_stop_trigger")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop/LevelCompleteTrigger" unique_id=491125209]
+polygon = PackedVector2Array(-120, -160, 120, -160, 120, 80, -120, 80)
+
+[node name="LevelCompleteLabel" type="Label" parent="Level1_MapDraft/Outdoor/Outdoor_BusStop" unique_id=1010113944]
+visible = false
+offset_left = -160.0
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 130.0
+text = "Level 1 Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Platform17" type="Polygon2D" parent="Level1_MapDraft/Outdoor" unique_id=744035166]
+position = Vector2(4327, 1746)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -863.64453, 12.426392, -930.98047, 12.73951, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/Outdoor/Platform17" unique_id=2134988741]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Outdoor/Platform17/SolidCollision" unique_id=1770367747]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -863.64453, 12.426392, -930.98047, 12.73951, -987, 13)
+
+[node name="Platform20" type="Polygon2D" parent="Level1_MapDraft/Outdoor" unique_id=311128469]
+position = Vector2(5215.791, 1353)
+scale = Vector2(1.6046512, 1)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -863.64453, 12.426392, -930.98047, 12.73951, -987, 13)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Level1_MapDraft/Outdoor/Platform20" unique_id=2053429232]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/Outdoor/Platform20/SolidCollision" unique_id=1190720143]
+polygon = PackedVector2Array(-987, -25, -774, -26, -772, 12, -863.64453, 12.426392, -930.98047, 12.73951, -987, 13)
+
 [node name="DarkPitNote" type="Label" parent="Level1_MapDraft" unique_id=1556264272]
-offset_left = 30.0
-offset_top = 1780.0
-offset_right = 720.0
-offset_bottom = 1840.0
+offset_left = -6.0
+offset_top = 2000.0
+offset_right = 684.0
+offset_bottom = 2060.0
 text = "Dark pit area: if the player falls, respawn to previous solid ground and lose focus."
 
-[node name="Top_WetFloor_Left" type="Polygon2D" parent="." unique_id=302493775]
-position = Vector2(1145, 736)
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
+[node name="Level1Manager" type="Node2D" parent="Level1_MapDraft" unique_id=294991455]
+script = ExtResource("21_level1_manager")
 
-[node name="Top_WetFloor_Right" type="Polygon2D" parent="." unique_id=1701156910]
-position = Vector2(2731, 729)
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-170, -10, -70.15259, -10, 449, -16, 451, 7, -170, 10)
-
-[node name="Top_WetFloor_Left2" type="Polygon2D" parent="." unique_id=154195664]
-position = Vector2(974, 1169)
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-150, -10, -59.278442, -10, 150, -10, 150, 10, -29.268188, 9.999939, -150, 10)
-
-[node name="Top_WetFloor_Right2" type="Polygon2D" parent="." unique_id=1400628509]
-position = Vector2(1646, 1159)
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-167, -21, -73, -21, 500, -19, 502, 8, -170, 10)
-
-[node name="Top_WetFloor_Right3" type="Polygon2D" parent="." unique_id=421191814]
-position = Vector2(2465, 1159)
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(255, -10, 152, -11, 449, -16, 451, 7, 252, 13)
-
-[node name="Visual" type="Polygon2D" parent="." unique_id=1657752677]
-position = Vector2(2794, 59)
-color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(918, -33, 1190, -32, 1187, 12, 921, 18)
-
-[node name="Top_WetFloor_Left3" type="Polygon2D" parent="." unique_id=1581884539]
-position = Vector2(1757, 282)
-color = Color(0.08, 0.48, 1, 0.95)
-polygon = PackedVector2Array(-150, -10, 150, -10, 150, 10, -150, 10)
-
-[node name="Visual2" type="Polygon2D" parent="." unique_id=12381851]
-position = Vector2(1726, 128)
-color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(874, 13, 871, -301, 925, -301, 921, 10)
+[node name="FormalFallZone" parent="Level1_MapDraft" unique_id=240045971 instance=ExtResource("9_fall_zone")]
+visible = false
+position = Vector2(2800, 2145)
+scale = Vector2(31, 3)
 
 [node name="Visual3" type="Polygon2D" parent="." unique_id=176479628]
 position = Vector2(262, 27)
 color = Color(0.24, 0.24, 0.28, 1)
 polygon = PackedVector2Array(-31, -920, 25, -920, 20, -613, -33, -612)
 
-[node name="Visual4" type="Polygon2D" parent="." unique_id=753269051]
-position = Vector2(267, 29)
-color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-31, -920, 25, -920, 20, -613, -33, -612)
-
-[node name="Visual5" type="Polygon2D" parent="." unique_id=1432053799]
-position = Vector2(413, 1234)
-color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-25, -937, 37, -936, 36, -648, -27, -645)
-
-[node name="Visual" type="Polygon2D" parent="Visual5" unique_id=927369257]
-position = Vector2(267, 29)
-color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-31, -920, 25, -920, 20, -613, -33, -612)
-
 [node name="RoundMechanics_TestArea" type="Node2D" parent="." unique_id=231559244]
-position = Vector2(5560, 480)
 z_index = 120
+position = Vector2(5560, 480)
 
-[node name="Test_Ground" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+[node name="Test_Ground" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=1621768352]
 position = Vector2(1600, 860)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_Ground"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_Ground" unique_id=1591439487]
 shape = SubResource("test_ground_collision")
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_Ground"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_Ground" unique_id=1840212415]
 color = Color(0.32, 0.34, 0.38, 1)
 polygon = PackedVector2Array(-1600, -24, 1600, -24, 1600, 24, -1600, 24)
 
-[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_Ground"]
+[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_Ground" unique_id=2032109414]
 offset_left = -1580.0
 offset_top = -72.0
 offset_right = -1240.0
 offset_bottom = -40.0
 text = "Round Mechanics Test Area"
 
-[node name="Test_PlayerStartMarker" type="Marker2D" parent="RoundMechanics_TestArea"]
+[node name="Test_PlayerStartMarker" type="Marker2D" parent="RoundMechanics_TestArea" unique_id=1519816359]
 position = Vector2(120, 796)
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_PlayerStartMarker"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_PlayerStartMarker" unique_id=1053671904]
 color = Color(0.3, 1, 0.45, 0.9)
 polygon = PackedVector2Array(0, -44, 30, 0, 0, 44, -30, 0)
 
-[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_PlayerStartMarker"]
+[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_PlayerStartMarker" unique_id=1948980344]
 offset_left = -70.0
 offset_top = -98.0
 offset_right = 110.0
@@ -1663,102 +2472,102 @@ offset_bottom = -66.0
 text = "Player Start"
 horizontal_alignment = 1
 
-[node name="Test_JumpPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+[node name="Test_JumpPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=1212799287]
 position = Vector2(520, 720)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_JumpPlatform"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_JumpPlatform" unique_id=1512252913]
 shape = SubResource("test_jump_platform_collision")
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_JumpPlatform"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_JumpPlatform" unique_id=1609392520]
 color = Color(0.55, 0.62, 0.7, 1)
 polygon = PackedVector2Array(-120, -14, 120, -14, 120, 14, -120, 14)
 
-[node name="Test_StudyNote" parent="RoundMechanics_TestArea" instance=ExtResource("4_study_note")]
+[node name="Test_StudyNote" parent="RoundMechanics_TestArea" unique_id=792578342 instance=ExtResource("4_study_note")]
 position = Vector2(260, 812)
 
-[node name="Test_StudentID" parent="RoundMechanics_TestArea" instance=ExtResource("6_student_id")]
+[node name="Test_StudentID" parent="RoundMechanics_TestArea" unique_id=955925204 instance=ExtResource("6_student_id")]
 position = Vector2(380, 812)
 
-[node name="Test_Roommate" parent="RoundMechanics_TestArea" instance=ExtResource("11_roommate")]
+[node name="Test_Roommate" parent="RoundMechanics_TestArea" unique_id=1974607590 instance=ExtResource("11_roommate")]
 position = Vector2(560, 796)
 
-[node name="Test_CeilingFanPlatform" parent="RoundMechanics_TestArea" instance=ExtResource("10_ceiling_fan")]
+[node name="Test_CeilingFanPlatform" parent="RoundMechanics_TestArea" unique_id=105354588 instance=ExtResource("10_ceiling_fan")]
 position = Vector2(760, 720)
 
-[node name="Test_WetFloor" parent="RoundMechanics_TestArea" instance=ExtResource("8_wet_floor")]
+[node name="Test_WetFloor" parent="RoundMechanics_TestArea" unique_id=130379845 instance=ExtResource("8_wet_floor")]
 position = Vector2(1040, 820)
 
-[node name="Test_ExposedWiring" parent="RoundMechanics_TestArea" instance=ExtResource("7_exposed_wiring")]
+[node name="Test_ExposedWiring" parent="RoundMechanics_TestArea" unique_id=1193806231 instance=ExtResource("7_exposed_wiring")]
 position = Vector2(1220, 816)
 
-[node name="Test_Coffee" parent="RoundMechanics_TestArea" instance=ExtResource("5_coffee")]
+[node name="Test_Coffee" parent="RoundMechanics_TestArea" unique_id=439671876 instance=ExtResource("5_coffee")]
 position = Vector2(1400, 812)
 
-[node name="Test_SecurityGuard" parent="RoundMechanics_TestArea" instance=ExtResource("12_security_guard")]
+[node name="Test_SecurityGuard" parent="RoundMechanics_TestArea" unique_id=148548486 instance=ExtResource("12_security_guard")]
 position = Vector2(1600, 796)
 barrier_path = NodePath("../Test_IDBarrier")
 
-[node name="Test_IDBarrier" parent="RoundMechanics_TestArea" instance=ExtResource("13_id_barrier")]
+[node name="Test_IDBarrier" parent="RoundMechanics_TestArea" unique_id=1992076936 instance=ExtResource("13_id_barrier")]
 position = Vector2(1780, 788)
 
-[node name="Test_SwitchButton" parent="RoundMechanics_TestArea" instance=ExtResource("14_switch_button")]
+[node name="Test_SwitchButton" parent="RoundMechanics_TestArea" unique_id=1733384504 instance=ExtResource("14_switch_button")]
 position = Vector2(2020, 796)
 locked_door_path = NodePath("../Test_LockedDoor")
 
-[node name="Test_LockedDoor" parent="RoundMechanics_TestArea" instance=ExtResource("15_locked_door")]
+[node name="Test_LockedDoor" parent="RoundMechanics_TestArea" unique_id=1020284921 instance=ExtResource("15_locked_door")]
 position = Vector2(2200, 788)
 
-[node name="Test_RoadSection" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+[node name="Test_RoadSection" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=1952904753]
 position = Vector2(2600, 860)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_RoadSection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_RoadSection" unique_id=968825058]
 shape = SubResource("test_road_collision")
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_RoadSection"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_RoadSection" unique_id=1611618497]
 color = Color(0.1, 0.1, 0.12, 1)
 polygon = PackedVector2Array(-260, -12, 260, -12, 260, 12, -260, 12)
 
-[node name="Test_MovingCarHazard" parent="RoundMechanics_TestArea" instance=ExtResource("16_moving_car")]
+[node name="Test_MovingCarHazard" parent="RoundMechanics_TestArea" unique_id=969965457 instance=ExtResource("16_moving_car")]
 position = Vector2(2600, 776)
 move_distance = 90.0
 
-[node name="Test_FallGap_LeftPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+[node name="Test_FallGap_LeftPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=362306178]
 position = Vector2(820, 1040)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_FallGap_LeftPlatform"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_FallGap_LeftPlatform" unique_id=370606318]
 shape = SubResource("test_fall_platform_collision")
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_FallGap_LeftPlatform"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_FallGap_LeftPlatform" unique_id=143575356]
 color = Color(0.42, 0.44, 0.5, 1)
 polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
 
-[node name="Test_FallGap_RightPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea"]
+[node name="Test_FallGap_RightPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=1283087753]
 position = Vector2(1100, 1040)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_FallGap_RightPlatform"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_FallGap_RightPlatform" unique_id=1342001865]
 shape = SubResource("test_fall_platform_collision")
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_FallGap_RightPlatform"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_FallGap_RightPlatform" unique_id=1977273538]
 color = Color(0.42, 0.44, 0.5, 1)
 polygon = PackedVector2Array(-90, -12, 90, -12, 90, 12, -90, 12)
 
-[node name="Test_FallZone" parent="RoundMechanics_TestArea" instance=ExtResource("9_fall_zone")]
+[node name="Test_FallZone" parent="RoundMechanics_TestArea" unique_id=1072349260 instance=ExtResource("9_fall_zone")]
 position = Vector2(960, 1120)
 
-[node name="Test_BusStop" type="Area2D" parent="RoundMechanics_TestArea"]
+[node name="Test_BusStop" type="Area2D" parent="RoundMechanics_TestArea" unique_id=2103539989]
 position = Vector2(3060, 788)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("17_bus_stop_trigger")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_BusStop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoundMechanics_TestArea/Test_BusStop" unique_id=593225111]
 shape = SubResource("test_bus_stop_collision")
 
-[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_BusStop"]
+[node name="Visual" type="Polygon2D" parent="RoundMechanics_TestArea/Test_BusStop" unique_id=53354627]
 color = Color(0.12, 0.2, 0.16, 1)
 polygon = PackedVector2Array(-60, -60, 60, -60, 60, 60, -60, 60)
 
-[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_BusStop"]
+[node name="Label" type="Label" parent="RoundMechanics_TestArea/Test_BusStop" unique_id=501454414]
 offset_left = -54.0
 offset_top = -28.0
 offset_right = 54.0
@@ -1767,7 +2576,7 @@ text = "Bus Stop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelCompleteLabel" type="Label" parent="RoundMechanics_TestArea"]
+[node name="LevelCompleteLabel" type="Label" parent="RoundMechanics_TestArea" unique_id=312780063]
 visible = false
 offset_left = 2940.0
 offset_top = 650.0
@@ -1775,3 +2584,117 @@ offset_right = 3180.0
 offset_bottom = 700.0
 text = "Level 1 Complete"
 horizontal_alignment = 1
+
+[node name="Wall2_CollisionProxy" type="StaticBody2D" parent="." unique_id=1149426773]
+position = Vector2(432, 746)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall2_CollisionProxy" unique_id=464753084]
+polygon = PackedVector2Array(-37, -919, 12, -924, 9, -614, -35, -614)
+
+[node name="Platform5_CollisionProxy" type="StaticBody2D" parent="." unique_id=424305723]
+position = Vector2(-783, 391.96)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform5_CollisionProxy" unique_id=576469552]
+polygon = PackedVector2Array(1033, -28, 1175, -31.714996, 1177, 6, 1033, 4)
+
+[node name="Wall5" type="Polygon2D" parent="." unique_id=1920290237]
+position = Vector2(3529, 1238)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-32, -921, 21, -920, 17, -652, -35, -656, -32.915955, -757.9534)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Wall5" unique_id=412769197]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall5/SolidCollision" unique_id=1166950761]
+polygon = PackedVector2Array(-32, -921, 21, -920, 17, -652, -35, -656, -32.915955, -757.9534)
+
+[node name="Wall4" type="Polygon2D" parent="." unique_id=123607241]
+position = Vector2(3524, 1668)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-32, -921, 21, -920, 20, -658, -32, -660, -32.915955, -757.9534)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Wall4" unique_id=681880274]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall4/SolidCollision" unique_id=372163001]
+polygon = PackedVector2Array(-32, -921, 21, -920, 20, -658, -32, -660, -32.915955, -757.9534)
+
+[node name="Platform18" type="Polygon2D" parent="." unique_id=865050660]
+position = Vector2(576, 1438)
+scale = Vector2(0.05229737, 1)
+color = Color(0.18, 0.18, 0.22, 1)
+polygon = PackedVector2Array(-2715.2432, -21, 2772.6055, -22, 2734.3623, 10, -2677, 10)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Platform18" unique_id=29270198]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform18/SolidCollision" unique_id=1847578845]
+polygon = PackedVector2Array(-2715.2432, -21, 2772.6055, -22, 2734.3623, 10, -2677, 10)
+
+[node name="Label" type="Label" parent="." unique_id=2007608953]
+offset_left = 2985.0
+offset_top = 1378.0
+offset_right = 3149.0
+offset_bottom = 1401.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1115920008]
+offset_left = 3313.0
+offset_top = 1380.0
+offset_right = 3477.0
+offset_bottom = 1403.0
+text = "Ceiling Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="." unique_id=1148192261]
+offset_left = 116.0
+offset_top = -107.0
+offset_right = 164.0
+offset_bottom = -83.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Label3" unique_id=1069395173]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 966.0
+offset_right = 225.0
+offset_bottom = 990.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="." unique_id=1391453711]
+offset_left = 116.0
+offset_top = -107.0
+offset_right = 164.0
+offset_bottom = -83.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="." unique_id=1825863435]
+offset_left = 3635.0
+offset_top = 405.0
+offset_right = 3683.0
+offset_bottom = 428.0
+text = "SN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wall8" type="Polygon2D" parent="." unique_id=124294879]
+position = Vector2(1017, 1701.2235)
+scale = Vector2(1, 0.07495997)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-6, -750.0469, 7, -736.7051, 7, 1197.6602, 0, 1195.8721, -6, 1197.6602)
+
+[node name="Wall2" type="Polygon2D" parent="Wall8" unique_id=1652438023]
+position = Vector2(409, 0)
+color = Color(0.24, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-37, -919, 12, -924, 9, -614, -35, -614)
+
+[node name="SolidCollision" type="StaticBody2D" parent="Wall8" unique_id=582420907]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall8/SolidCollision" unique_id=1204587519]
+polygon = PackedVector2Array(-6, -750.0469, 7, -736.7051, 7, 1197.6602, 0, 1195.8721, -6, 1197.6602)
