@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-@export var collapse_delay: float = 0.8
+@export var collapse_delay: float = 0.6
 @export var respawn_delay: float = 2.5
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -35,10 +35,14 @@ func _hide_platform() -> void:
 	is_hidden = true
 	collision_shape.set_deferred("disabled", true)
 	visual.visible = false
+	if name == "Functional_CeilingFanPlatform" and get_parent() is CanvasItem:
+		get_parent().hide()
 
 
 func _show_platform() -> void:
 	collision_shape.set_deferred("disabled", false)
 	visual.visible = true
+	if name == "Functional_CeilingFanPlatform" and get_parent() is CanvasItem:
+		get_parent().show()
 	is_hidden = false
 	is_ready = true

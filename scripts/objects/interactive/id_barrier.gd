@@ -1,9 +1,10 @@
 extends StaticBody2D
 
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var visual: Polygon2D = $Visual
-
 var opened := false
+
+
+func _ready() -> void:
+	close()
 
 
 func open() -> void:
@@ -11,5 +12,18 @@ func open() -> void:
 		return
 
 	opened = true
-	collision_shape.disabled = true
-	visual.visible = false
+	_set_gate_enabled(false)
+
+
+func close() -> void:
+	opened = false
+	_set_gate_enabled(true)
+
+
+func _set_gate_enabled(enabled: bool) -> void:
+	var collision_shape := get_node_or_null("CollisionShape2D") as CollisionShape2D
+	var visual := get_node_or_null("Visual") as Polygon2D
+	if collision_shape:
+		collision_shape.disabled = not enabled
+	if visual:
+		visual.visible = enabled

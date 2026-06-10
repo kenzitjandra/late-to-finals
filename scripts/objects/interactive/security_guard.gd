@@ -17,6 +17,9 @@ func _ready() -> void:
 	prompt_label.text = prompt_text
 	prompt_label.visible = false
 	message_label.visible = false
+	var barrier := get_node_or_null(barrier_path)
+	if barrier and barrier.has_method("close"):
+		barrier.close()
 
 
 func _process(_delta: float) -> void:
@@ -36,6 +39,9 @@ func interact() -> void:
 			level1_manager.on_security_guard_passed()
 	else:
 		message_label.text = missing_id_message
+		var barrier := get_node_or_null(barrier_path)
+		if barrier and barrier.has_method("close"):
+			barrier.close()
 
 	message_label.visible = true
 

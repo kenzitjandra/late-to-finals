@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var speed: float = 400.0
 
 ## Upward velocity applied on jump (negative = upward in Godot 2D).
-@export var jump_velocity: float = -500.0
+@export var jump_velocity: float = -620.0
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_slippery := false
@@ -18,6 +18,15 @@ var last_safe_position := Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("player")
+	var player_camera := get_node_or_null("Camera2D") as Camera2D
+	if player_camera:
+		player_camera.enabled = true
+		player_camera.zoom = Vector2(0.75, 0.75)
+		player_camera.offset = Vector2(0, -120)
+		player_camera.limit_top = -300
+		player_camera.limit_right = 6000
+		player_camera.limit_bottom = 2300
+		player_camera.make_current()
 	last_safe_position = global_position
 
 

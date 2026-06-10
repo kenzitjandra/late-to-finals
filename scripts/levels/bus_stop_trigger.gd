@@ -1,8 +1,6 @@
-# BusStopTrigger — attached to the BusStop Area2D in Level 1.
-# Detects when the player reaches the bottom-right bus stop.
-# Filters by player group and collision layer to avoid false triggers.
-
 extends Area2D
+
+@export var completion_label_path: NodePath = NodePath("../LevelCompleteLabel")
 
 var triggered := false
 
@@ -12,22 +10,23 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	# Only the player group can trigger the bus stop.
 	if not body.is_in_group("player"):
 		return
 
-	if not GameManager.is_level_active():
-		return
-
-	# One-shot: fire only the first time the player arrives.
-	if triggered:
+	if triggered or not GameManager.is_level_active():
 		return
 	triggered = true
 
 	GameManager.complete_level_1()
+	_show_completion_label()
 	print("Level 1 Complete!")
 
-	# Show the temporary on-screen label if it exists.
-	var label := get_node_or_null("../LevelCompleteLabel")
+
+func _show_completion_label() -> void:
+	var label := get_node_or_null(completion_label_path) as CanvasItem
+	if label == null and get_parent() != null:
+		label = get_parent().find_child("LevelCompleteLabel", true, false) as CanvasItem
+	if label == null:
+		label = find_child("LevelCompleteLabel", true, false) as CanvasItem
 	if label:
 		label.visible = true
