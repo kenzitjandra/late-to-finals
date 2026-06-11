@@ -6,6 +6,9 @@ const WET_FLOOR_TEXTURE := preload("res://assets/level1_skin/sheet/wet_floor.png
 const CEILING_FAN_TEXTURE := preload("res://assets/level1_skin/sheet/ceiling_fan.png")
 const TRAFFIC_CAR_TEXTURE := preload("res://assets/level1_skin/sheet/traffic_car.png")
 const BUS_STOP_TEXTURE := preload("res://assets/level1_skin/sheet/bus_stop.png")
+const SAFE_ZONE_TEXTURE := preload("res://assets/level1_skin/sheet/safe_zone.png")
+const ACTIVATE_BUTTON_TEXTURE := preload("res://assets/level1_skin/sheet/activate_button.png")
+const SECURITY_BATON_TEXTURE := preload("res://assets/level1_skin/sheet/security_baton.png")
 const BROKEN_LIFT_TEXTURE := preload("res://assets/level1_skin/sheet/broken_lift.png")
 const FRIDGE_TEXTURE := preload("res://assets/level1_skin/sheet/refrigerator.png")
 const OPENING_DOOR_TEXTURE := preload("res://assets/level1_skin/sheet/opening_door.png")
@@ -29,6 +32,7 @@ const BACKGROUND_ALPHA := 1.0
 const MAIN_BACKGROUND_TOP_LEFT := Vector2(0, -320)
 const MAIN_BACKGROUND_SIZE := Vector2(5600, 2220)
 const PLAYER_SKIN_Z_INDEX := 20
+const PLAYER_HEIGHT_FILL_RATIO := 0.8
 const OBJECT_SKIN_Z_INDEX := 8
 const ARCHITECTURE_SKIN_Z_INDEX := 2
 const SKIPPED_SKIN_ROOTS := {
@@ -39,6 +43,7 @@ var _tiled_texture_cache: Dictionary = {}
 
 
 func _ready() -> void:
+	_add_background()
 	_skin_player()
 	_skin_nodes(self)
 
@@ -94,6 +99,14 @@ func _skin_node(node: Node2D) -> void:
 	if _is_functional_area(node_name):
 		return
 
+	if _is_wood_floor_node(node_name, node):
+		var wood_floor_bounds := _get_architecture_bounds(node)
+		if wood_floor_bounds.has_area():
+			_add_tiled_skin(node, FLOOR_WOOD_TEXTURE, wood_floor_bounds, ARCHITECTURE_SKIN_Z_INDEX)
+		_hide_blockout_children(node)
+		_hide_self_polygon(node)
+		return
+
 	if _is_platform_tile_node(node_name, node):
 		var platform_bounds := _get_platform_tile_bounds(node)
 		if platform_bounds.has_area():
@@ -127,6 +140,16 @@ func _skin_node(node: Node2D) -> void:
 		_hide_basic_visual_and_label(node)
 		return
 
+	if _is_safe_island_node(node_name):
+		_skin_safe_island(node)
+		return
+
+	if _is_switch_button_node(node_name):
+		_add_skin_sprite_to_bounds(node, ACTIVATE_BUTTON_TEXTURE, _get_target_bounds(node), 1.0, OBJECT_SKIN_Z_INDEX)
+		_hide_blockout_children(node)
+		_hide_visual_placeholders_recursive(node)
+		return
+
 	if _is_locked_door_node(node_name):
 		_add_skin_sprite_exact(node, GENERIC_DOOR_TEXTURE, _get_target_bounds(node), OBJECT_SKIN_Z_INDEX)
 		_hide_door_blockout_children(node)
@@ -150,6 +173,8 @@ func _skin_node(node: Node2D) -> void:
 	if _is_apartment_backdrop_node(node_name, node):
 		_add_skin_sprite_to_bounds(node, APARTMENT_BACKDROP_TEXTURE, _get_target_bounds(node), 1.0, OBJECT_SKIN_Z_INDEX - 1)
 		_hide_blockout_children(node)
+		# Adjust apartment backdrop visual to sit on floor (prevent floating)
+		_adjust_apartment_backdrop_to_floor(node)
 		return
 
 	if node_name.contains("coffee"):
@@ -178,13 +203,39 @@ func _skin_node(node: Node2D) -> void:
 		_hide_blockout_children(node)
 		return
 
+	if _is_security_baton_node(node_name):
+		_add_skin_sprite_to_bounds(node, SECURITY_BATON_TEXTURE, _get_target_bounds(node), 0.9, OBJECT_SKIN_Z_INDEX)
+		_hide_blockout_children(node)
+		_hide_visual_placeholders_recursive(node)
+		return
+
 	if node_name.contains("securityguard"):
 		_add_skin_sprite_to_bounds(node, SECURITY_TEXTURE, _get_target_bounds(node), 0.9, OBJECT_SKIN_Z_INDEX)
 		_hide_blockout_children(node)
+		_hide_security_guard_placeholders(node)
 		return
 
 	if _is_box_node(node_name):
 		_skin_box_node(node)
+		return
+
+	# Skin every wall with wall_brick texture.
+	if _is_wall_or_ceiling_node(node_name, node):
+		var wall_bounds := _get_wall_bounds(node)
+		if wall_bounds.has_area():
+			_add_tiled_skin(node, WALL_BRICK_TEXTURE, wall_bounds, ARCHITECTURE_SKIN_Z_INDEX)
+		_hide_blockout_children(node)
+		_hide_self_polygon(node)
+		return
+
+	# Skin floor with floor_wood texture
+	if _is_floor_node(node_name, node):
+		var floor_bounds := _get_floor_bounds(node)
+		if floor_bounds.has_area():
+			_add_tiled_skin(node, FLOOR_WOOD_TEXTURE, floor_bounds, ARCHITECTURE_SKIN_Z_INDEX)
+		_hide_blockout_children(node)
+		_hide_self_polygon(node)
+		return
 
 
 func _skin_box_node(node: Node2D) -> void:
@@ -218,6 +269,39 @@ func _skin_ceiling_fan_node(node: Node2D) -> void:
 	var functional_platform := node.get_node_or_null("Functional_CeilingFanPlatform")
 	if functional_platform != null:
 		_hide_basic_visual_and_label(functional_platform)
+
+
+func _skin_safe_island(node: Node2D) -> void:
+	var bounds := _get_target_bounds(node)
+	if not bounds.has_area():
+		return
+
+	_add_skin_sprite_to_width(node, SAFE_ZONE_TEXTURE, bounds, 1.0, OBJECT_SKIN_Z_INDEX)
+	_hide_self_polygon(node)
+	var label := node.get_parent().get_node_or_null("SafeIslandLabel") as Label
+	if label != null:
+		label.visible = false
+
+
+func _add_skin_sprite_to_width(node: Node2D, texture: Texture2D, bounds: Rect2, fill_ratio: float, sprite_z_index: int) -> void:
+	if node.get_node_or_null(SKIN_SPRITE_NAME) != null:
+		return
+
+	var texture_size := texture.get_size()
+	if texture_size.x <= 0.0 or texture_size.y <= 0.0:
+		return
+
+	var sprite := Sprite2D.new()
+	sprite.name = SKIN_SPRITE_NAME
+	sprite.texture = texture
+	sprite.centered = true
+	sprite.position = bounds.get_center()
+	var uniform_scale := maxf(bounds.size.x, 1.0) / texture_size.x * fill_ratio
+	sprite.scale = Vector2(uniform_scale, uniform_scale)
+	sprite.z_as_relative = false
+	sprite.z_index = sprite_z_index
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	node.add_child(sprite)
 
 
 func _add_ceiling_fan_sprite(node: Node2D, texture: Texture2D, bounds: Rect2, sprite_z_index: int) -> void:
@@ -331,7 +415,9 @@ func _add_player_skin_sprite(node: Node2D, texture: Texture2D, bounds: Rect2, sp
 		return
 
 	var safe_size := Vector2(maxf(bounds.size.x, 1.0), maxf(bounds.size.y, 1.0))
-	var uniform_scale := minf(safe_size.x / texture_size.x, safe_size.y / texture_size.y)
+	var target_height := safe_size.y * PLAYER_HEIGHT_FILL_RATIO
+	var target_width := safe_size.x * 1.35
+	var uniform_scale := minf(target_width / texture_size.x, target_height / texture_size.y)
 	uniform_scale = maxf(uniform_scale, 0.05)
 	var sprite_size := texture_size * uniform_scale
 
@@ -374,6 +460,23 @@ func _get_platform_tile_bounds(node: Node2D) -> Rect2:
 		return _get_polygon_local_bounds(node, node as Polygon2D)
 
 	for child in node.get_children():
+		if child is Polygon2D and child.name == "Visual":
+			return _get_polygon_local_bounds(node, child as Polygon2D)
+
+	return Rect2()
+
+
+func _get_architecture_bounds(node: Node2D) -> Rect2:
+	if node is Polygon2D:
+		return _get_polygon_local_bounds(node, node as Polygon2D)
+
+	for child in node.get_children():
+		if child is CollisionShape2D and (child as CollisionShape2D).shape is RectangleShape2D:
+			var rect := (child as CollisionShape2D).shape as RectangleShape2D
+			var half_size := rect.size * 0.5
+			var local_pos := node.to_local(child.to_global(Vector2.ZERO))
+			return Rect2(local_pos - half_size, rect.size)
+
 		if child is Polygon2D and child.name == "Visual":
 			return _get_polygon_local_bounds(node, child as Polygon2D)
 
@@ -500,6 +603,183 @@ func _hide_labels(node: Node) -> void:
 			child.visible = false
 
 
+func _hide_security_guard_placeholders(node: Node) -> void:
+	for child in node.get_children():
+		if child.name == SKIN_SPRITE_NAME:
+			continue
+
+		if child is Polygon2D and child.name == "Visual":
+			child.visible = false
+
+		_hide_security_guard_placeholders(child)
+
+
+func _hide_visual_placeholders_recursive(node: Node) -> void:
+	for child in node.get_children():
+		if child.name == SKIN_SPRITE_NAME:
+			continue
+
+		if child is Polygon2D and child.name == "Visual":
+			child.visible = false
+
+		if child is Label and (child.name == "Label" or child.name.ends_with("Label")):
+			child.visible = false
+
+		_hide_visual_placeholders_recursive(child)
+
+
+func _is_wall_or_ceiling_node(node_name: String, node: Node2D) -> bool:
+	# Safety checks to exclude non-architecture nodes
+	if _should_skip_node(node_name, node):
+		return false
+
+	if not node_name.contains("wall"):
+		return _is_opening_wall_piece(node_name, node)
+
+	return node is StaticBody2D or node is Polygon2D
+
+
+func _is_opening_wall_piece(node_name: String, node: Node2D) -> bool:
+	if not node is Polygon2D:
+		return false
+
+	if node_name != "solidheader":
+		return false
+
+	var parent := node.get_parent()
+	if parent == null:
+		return false
+
+	return String(parent.name).to_lower().contains("opening")
+
+
+func _is_floor_node(node_name: String, node: Node2D) -> bool:
+	# Safety checks
+	if _should_skip_node(node_name, node):
+		return false
+	
+	# Check if it's a StaticBody2D
+	if not node is StaticBody2D:
+		return false
+	
+	# Whitelist floor names (but exclude platform and service)
+	if node_name.contains("platform"):
+		return false
+	
+	return node_name.contains("floor")
+
+
+func _is_wood_floor_node(node_name: String, node: Node2D) -> bool:
+	if _should_skip_node(node_name, node):
+		return false
+
+	if node is Polygon2D and node_name.ends_with("_mainpath"):
+		return true
+
+	if node is StaticBody2D and node_name.begins_with("floor_"):
+		return true
+
+	if (node is StaticBody2D or node is Polygon2D) and node_name.contains("boundary"):
+		return true
+
+	return false
+
+
+func _should_skip_node(node_name: String, node: Node2D) -> bool:
+	# Never skin inside test area
+	var current := node.get_parent()
+	while current != null:
+		if String(current.name).to_lower() == "roundmechanics_testarea":
+			return true
+		current = current.get_parent()
+	
+	# Skip functional areas
+	if node_name.begins_with("functional_"):
+		return true
+	
+	# Skip collectibles, hazards, interactive objects
+	if (node_name.contains("collectible") or node_name.contains("hazard") or 
+		node_name.contains("pickup") or node_name.contains("mechanic") or
+		node_name.contains("roommate") or node_name.contains("securityguard") or
+		node_name.contains("traffic") or node_name.contains("busstop") or
+		node_name.contains("idbarrier")):
+		return true
+	
+	return false
+
+
+func _get_wall_bounds(node: Node2D) -> Rect2:
+	if node is Polygon2D:
+		return _get_polygon_local_bounds(node, node as Polygon2D)
+
+	# Get bounds from collision shape or visual polygon
+	if node is StaticBody2D:
+		for child in node.get_children():
+			if child is CollisionShape2D and (child as CollisionShape2D).shape is RectangleShape2D:
+				var rect := (child as CollisionShape2D).shape as RectangleShape2D
+				var half_size := rect.size * 0.5
+				var local_pos := node.to_local(child.to_global(Vector2.ZERO))
+				return Rect2(local_pos - half_size, rect.size)
+			
+			if child is Polygon2D and child.name == "Visual":
+				return _get_polygon_local_bounds(node, child as Polygon2D)
+
+			if child is CollisionPolygon2D:
+				return _get_collision_polygon_local_bounds(node, child as CollisionPolygon2D)
+	
+	return Rect2()
+
+
+func _get_collision_polygon_local_bounds(target: Node2D, collision_polygon: CollisionPolygon2D) -> Rect2:
+	if collision_polygon.polygon.size() == 0:
+		return Rect2()
+
+	var first_point := target.to_local(collision_polygon.to_global(collision_polygon.polygon[0]))
+	var min_point := first_point
+	var max_point := first_point
+	for polygon_point in collision_polygon.polygon:
+		var point := target.to_local(collision_polygon.to_global(polygon_point))
+		min_point.x = minf(min_point.x, point.x)
+		min_point.y = minf(min_point.y, point.y)
+		max_point.x = maxf(max_point.x, point.x)
+		max_point.y = maxf(max_point.y, point.y)
+
+	return Rect2(min_point, max_point - min_point)
+
+
+func _get_floor_bounds(node: Node2D) -> Rect2:
+	# Get bounds from collision shape or visual polygon
+	if node is StaticBody2D:
+		for child in node.get_children():
+			if child is CollisionShape2D and (child as CollisionShape2D).shape is RectangleShape2D:
+				var rect := (child as CollisionShape2D).shape as RectangleShape2D
+				var half_size := rect.size * 0.5
+				var local_pos := node.to_local(child.to_global(Vector2.ZERO))
+				return Rect2(local_pos - half_size, rect.size)
+			
+			if child is Polygon2D and child.name == "Visual":
+				return _get_polygon_local_bounds(node, child as Polygon2D)
+	
+	return Rect2()
+
+
+func _adjust_apartment_backdrop_to_floor(node: Node2D) -> void:
+	# Find the PixelSkinSprite added by _add_skin_sprite_to_bounds
+	var skin_sprite := node.get_node_or_null(SKIN_SPRITE_NAME) as Sprite2D
+	if skin_sprite == null:
+		return
+	
+	# Get the bounds of the apartment backdrop
+	var backdrop_bounds := _get_target_bounds(node)
+	if not backdrop_bounds.has_area():
+		return
+	
+	# Adjust sprite position to sit on bottom of bounds
+	var sprite_size := skin_sprite.texture.get_size() * skin_sprite.scale
+	var target_y := backdrop_bounds.position.y + backdrop_bounds.size.y - sprite_size.y * 0.5
+	skin_sprite.position.y = target_y
+
+
 func _hide_self_polygon(node: Node2D) -> void:
 	if node is Polygon2D:
 		(node as Polygon2D).color.a = 0.0
@@ -517,10 +797,16 @@ func _is_platform_tile_node(node_name: String, node: Node2D) -> bool:
 	if node_name.contains("functional"):
 		return false
 
-	return node is Polygon2D and (
+	if node is Polygon2D and (
 		node_name.begins_with("platform")
 		or node_name.contains("_platform")
-	)
+	):
+		return true
+
+	if node is Node2D and node.get_node_or_null("Visual") is Polygon2D:
+		return node_name.begins_with("platform") or node_name.contains("_platform")
+
+	return false
 
 
 func _is_car_node(node_name: String) -> bool:
@@ -533,6 +819,18 @@ func _is_ceiling_fan_node(node_name: String) -> bool:
 
 func _is_bus_stop_node(node_name: String) -> bool:
 	return node_name.contains("busstop")
+
+
+func _is_safe_island_node(node_name: String) -> bool:
+	return node_name == "safeislandvisual"
+
+
+func _is_switch_button_node(node_name: String) -> bool:
+	return node_name.contains("switchbutton")
+
+
+func _is_security_baton_node(node_name: String) -> bool:
+	return node_name.contains("securitybaton")
 
 
 func _is_locked_door_node(node_name: String) -> bool:
