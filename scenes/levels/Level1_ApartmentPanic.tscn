@@ -90,7 +90,7 @@ shape = SubResource("wall_left_collision")
 [node name="Visual" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left" unique_id=1414882916]
 position = Vector2(-137, 26)
 color = Color(0.24, 0.24, 0.28, 1)
-polygon = PackedVector2Array(-25, -937, 34, -928, 35, 1208, -33, 1211)
+polygon = PackedVector2Array(-25, -937, 34, -928, 35, 1208, -33, 1211, -25.72255, -742.99524)
 
 [node name="Wall2" type="Polygon2D" parent="FormalBuilding/BuildingFrame/Wall_Left/Visual" unique_id=81534875]
 position = Vector2(409, 0)
@@ -2351,14 +2351,9 @@ vertical_alignment = 1
 
 [node name="Road1_CarHazard" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1480774762 instance=ExtResource("16_moving_car")]
 position = Vector2(-235, 225)
-speed = 250.0
-move_distance = 120.0
 
 [node name="Road2_CarHazard" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=551670852 instance=ExtResource("16_moving_car")]
 position = Vector2(155, 225)
-speed = 250.0
-move_distance = 120.0
-start_direction = -1.0
 
 [node name="Outdoor_BusStop" type="Node2D" parent="Level1_MapDraft/Outdoor" unique_id=995248738]
 position = Vector2(5280, 1585)
@@ -2532,7 +2527,6 @@ polygon = PackedVector2Array(-260, -12, 260, -12, 260, 12, -260, 12)
 
 [node name="Test_MovingCarHazard" parent="RoundMechanics_TestArea" unique_id=969965457 instance=ExtResource("16_moving_car")]
 position = Vector2(2600, 776)
-move_distance = 90.0
 
 [node name="Test_FallGap_LeftPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=362306178]
 position = Vector2(820, 1040)

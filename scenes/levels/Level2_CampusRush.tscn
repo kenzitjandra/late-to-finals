@@ -147,13 +147,6 @@ position = Vector2(5360, -459)
 [node name="CeilingFanPlatform5" parent="World" unique_id=1063899254 instance=ExtResource("10_ookv4")]
 position = Vector2(5096, -904)
 
-[node name="Label2" type="Label" parent="World/CeilingFanPlatform5" unique_id=293925066]
-offset_left = 2344.0
-offset_top = 780.0
-offset_right = 2502.0
-offset_bottom = 803.0
-text = "Level end: FACULTY BUILDING"
-
 [node name="CeilingFanPlatform3" parent="World" unique_id=1897694005 instance=ExtResource("10_ookv4")]
 position = Vector2(5432, -107.99994)
 

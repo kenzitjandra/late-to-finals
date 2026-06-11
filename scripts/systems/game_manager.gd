@@ -7,9 +7,6 @@ const LEVEL_STATE_PLAYING := "playing"
 const LEVEL_STATE_COMPLETED := "completed"
 const LEVEL_STATE_FAILED := "failed"
 
-# Level scene paths.
-# Changed Level 2 path to the cleaned Level2_CampusRush scene.
-# If your friend's Main/menu expects the old Lvl2/lvl2.tscn, tell me and we can switch it back.
 const LEVEL_1_PATH := "res://scenes/levels/Level1_ApartmentPanic.tscn"
 const LEVEL_2_PATH := "res://scenes/levels/Level2_CampusRush.tscn"
 const LEVEL_3_PATH := "res://scenes/levels/Level3_FinalHallSprint.tscn"
@@ -23,8 +20,11 @@ var current_objective: String = "Get your Student ID"
 var level_state: String = LEVEL_STATE_PLAYING
 
 # Used by HUD result screen.
-# Level managers should set this when their level starts.
 var current_level_display_name: String = "Level 1"
+
+# Used mainly for Level 3 final result.
+var final_ending_title: String = ""
+var final_ending_description: String = ""
 
 
 func _process(delta: float) -> void:
@@ -48,6 +48,8 @@ func reset_level_1_state() -> void:
 	has_student_id = false
 	current_objective = "Get your Student ID"
 	level_state = LEVEL_STATE_PLAYING
+	final_ending_title = ""
+	final_ending_description = ""
 
 
 func reset_for_level(level_name: String, objective: String, keep_student_id: bool = true) -> void:
@@ -59,6 +61,8 @@ func reset_for_level(level_name: String, objective: String, keep_student_id: boo
 	has_student_id = keep_student_id
 	current_objective = objective
 	level_state = LEVEL_STATE_PLAYING
+	final_ending_title = ""
+	final_ending_description = ""
 
 
 func set_level_display_name(level_name: String) -> void:
@@ -67,6 +71,11 @@ func set_level_display_name(level_name: String) -> void:
 
 func set_objective(text: String) -> void:
 	current_objective = text
+
+
+func set_final_ending(title: String, description: String) -> void:
+	final_ending_title = title
+	final_ending_description = description
 
 
 func is_level_active() -> bool:
@@ -101,27 +110,22 @@ func restart_current_level() -> void:
 	get_tree().reload_current_scene()
 
 
-# Level transition helpers.
-# These keep your friend's connected level flow.
 func go_to_level_1() -> void:
 	reset_level_1_state()
 	get_tree().change_scene_to_file.call_deferred(LEVEL_1_PATH)
 
 
 func go_to_level_2_from_level_1() -> void:
-	# Level 2 happens after Level 1, so keep Student ID.
 	reset_for_level("Level 2", "Reach the Faculty Building", true)
 	get_tree().change_scene_to_file.call_deferred(LEVEL_2_PATH)
 
 
 func go_to_level_3_from_level_2() -> void:
-	# Level 3 happens after Level 1, so keep Student ID.
 	reset_for_level("Level 3", "Enter the Exam Hall", true)
 	get_tree().change_scene_to_file.call_deferred(LEVEL_3_PATH)
 
 
-# Backward-compatible old functions.
-# These allow old Level 1 code to keep working.
+# Backward-compatible Level 1 functions.
 func complete_level_1() -> void:
 	complete_current_level("Level 1")
 
@@ -139,6 +143,9 @@ func get_current_level_rank() -> String:
 	if level_state == LEVEL_STATE_FAILED:
 		return "Missed Exam"
 
+	if final_ending_title != "":
+		return final_ending_title
+
 	if time_remaining >= 60.0 and focus >= 70 and notes_collected >= 1 and has_student_id:
 		return "Excellent"
 
@@ -151,7 +158,6 @@ func get_current_level_rank() -> String:
 	return "Needs Improvement"
 
 
-# Backward-compatible old rank function.
 func get_level_1_rank() -> String:
 	return get_current_level_rank()
 
@@ -160,6 +166,7 @@ func change_focus(amount: int) -> void:
 	var old_focus := focus
 	focus = clampi(focus + amount, 0, 100)
 	var actual_change := focus - old_focus
+
 	if actual_change != 0:
 		focus_changed.emit(actual_change, focus)
 

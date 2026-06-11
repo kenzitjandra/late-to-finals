@@ -2,14 +2,18 @@
 
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="2_hud"]
-[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_study_note"]
-[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/Coffee.tscn" id="4_coffee"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="6_exposed_wiring"]
-[ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="7_ceiling_fan"]
+[ext_resource type="PackedScene" uid="uid://c20cgw6x52b4k" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_study_note"]
+[ext_resource type="PackedScene" uid="uid://cit4jbfnsuy8x" path="res://scenes/objects/collectibles/Coffee.tscn" id="4_coffee"]
+[ext_resource type="PackedScene" uid="uid://bl0ng2mum4ul2" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="6_exposed_wiring"]
+[ext_resource type="PackedScene" uid="uid://co4osg2q1jnmp" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="7_ceiling_fan"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/Roommate.tscn" id="8_roommate"]
 [ext_resource type="Script" uid="uid://d3dpw7lcd6n6m" path="res://scripts/levels/level3_manager.gd" id="9_level3_manager"]
+[ext_resource type="Texture2D" uid="uid://ct86ce72553uo" path="res://assets/level1_skin/sheet/generic_door.png" id="10_gpngy"]
 [ext_resource type="Script" uid="uid://uionc3qv6p4b" path="res://scripts/objects/hazards/wet_floor.gd" id="10_gvwop"]
+[ext_resource type="Texture2D" uid="uid://dxxlqhjmula2g" path="res://assets/level3_skin/cardboard_box.png" id="11_4wtbl"]
 [ext_resource type="Script" uid="uid://b2sncsh8r5jxe" path="res://scripts/objects/hazards/hazard.gd" id="11_n8ff8"]
+[ext_resource type="Texture2D" uid="uid://du011ks25u0nh" path="res://assets/level3_skin/table.png" id="11_odeo2"]
+[ext_resource type="Texture2D" uid="uid://cmogvg76j5uwn" path="res://assets/level3_skin/exposed_wire.png" id="14_odeo2"]
 
 [sub_resource type="RectangleShape2D" id="wall_left_collision"]
 size = Vector2(64, 1500)
@@ -36,7 +40,7 @@ size = Vector2(5197, 40)
 size = Vector2(780, 48)
 
 [sub_resource type="RectangleShape2D" id="box_collision"]
-size = Vector2(90, 90)
+size = Vector2(90, 104)
 
 [sub_resource type="RectangleShape2D" id="small_box_collision"]
 size = Vector2(70, 90)
@@ -195,20 +199,10 @@ position = Vector2(4550, 1236)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/BottomBox_3" unique_id=941356210]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/BottomBox_3" unique_id=1126193409]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Obstacles/BottomBox_3" unique_id=2055399720]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/BottomBox_3" unique_id=545712227]
+position = Vector2(2.670288e-05, 3.0000143)
+scale = Vector2(5.6250033, 7.000001)
+texture = ExtResource("11_4wtbl")
 
 [node name="MiddleBox_1" type="StaticBody2D" parent="Obstacles" unique_id=167174340]
 position = Vector2(1216, 820)
@@ -216,43 +210,10 @@ position = Vector2(1216, 820)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_1" unique_id=1570333408]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_1" unique_id=1608823693]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Obstacles/MiddleBox_1" unique_id=1831505278]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(boxes)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="MiddleBox_1" type="StaticBody2D" parent="Obstacles/MiddleBox_1" unique_id=524892205]
-position = Vector2(-191, 434)
-scale = Vector2(3.4, 0.67999995)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_1/MiddleBox_1" unique_id=1034012868]
-shape = SubResource("box_collision")
-
-[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_1/MiddleBox_1" unique_id=1801948843]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Obstacles/MiddleBox_1/MiddleBox_1" unique_id=228357211]
-offset_left = -17.647053
-offset_top = -18.0
-offset_right = 74.35295
-offset_bottom = 31.0
-scale = Vector2(0.38823533, 1)
-text = "Obstacle
-(table)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/MiddleBox_1" unique_id=1397115301]
+position = Vector2(-8.869171e-05, 5.1482096)
+scale = Vector2(5.750012, 7.143532)
+texture = ExtResource("11_4wtbl")
 
 [node name="MiddleBox_2" type="StaticBody2D" parent="Obstacles" unique_id=1293293352]
 position = Vector2(2050, 820)
@@ -260,20 +221,10 @@ position = Vector2(2050, 820)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_2" unique_id=1270502099]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_2" unique_id=1148675385]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Obstacles/MiddleBox_2" unique_id=1399208214]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(boxes)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/MiddleBox_2" unique_id=881102230]
+position = Vector2(-8.869171e-05, 5.1482096)
+scale = Vector2(5.750012, 7.143532)
+texture = ExtResource("11_4wtbl")
 
 [node name="MiddleBox_3" type="StaticBody2D" parent="Obstacles" unique_id=1222825830]
 position = Vector2(3436, 835)
@@ -282,20 +233,10 @@ scale = Vector2(1.96, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_3" unique_id=1756870724]
 shape = SubResource("small_box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_3" unique_id=554185802]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-35, -45, 35, -45, 35, 45, -35, 45)
-
-[node name="Label" type="Label" parent="Obstacles/MiddleBox_3" unique_id=496532374]
-offset_left = -40.0
-offset_top = -18.0
-offset_right = 40.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/MiddleBox_3" unique_id=58984866]
+position = Vector2(0.19843864, 1.0000048)
+scale = Vector2(4.389881, 5.8749995)
+texture = ExtResource("11_4wtbl")
 
 [node name="MiddleBox_4" type="StaticBody2D" parent="Obstacles" unique_id=887087044]
 position = Vector2(4878, 836)
@@ -304,41 +245,22 @@ scale = Vector2(2.52, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/MiddleBox_4" unique_id=1700655627]
 shape = SubResource("small_box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/MiddleBox_4" unique_id=1211135691]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-35, -45, 35, -45, 35, 45, -35, 45)
-
-[node name="Label" type="Label" parent="Obstacles/MiddleBox_4" unique_id=1554366634]
-offset_left = -40.0
-offset_top = -18.0
-offset_right = 40.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/MiddleBox_4" unique_id=329676078]
+position = Vector2(0.19843864, 1.0000048)
+scale = Vector2(4.389881, 5.8749995)
+texture = ExtResource("11_4wtbl")
 
 [node name="TopBox_1" type="StaticBody2D" parent="Obstacles" unique_id=1527874914]
 position = Vector2(1646, 440)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/TopBox_1" unique_id=1634255834]
+position = Vector2(0, 7)
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/TopBox_1" unique_id=520272956]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Obstacles/TopBox_1" unique_id=664810380]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(boxes)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/TopBox_1" unique_id=717928517]
+position = Vector2(2.670288e-05, 7.4999933)
+scale = Vector2(5.6250033, 6.562503)
+texture = ExtResource("11_4wtbl")
 
 [node name="TopBox_2" type="StaticBody2D" parent="Obstacles" unique_id=1102434862]
 position = Vector2(2451, 440)
@@ -346,20 +268,10 @@ position = Vector2(2451, 440)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/TopBox_2" unique_id=139448991]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="Obstacles/TopBox_2" unique_id=235220806]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Obstacles/TopBox_2" unique_id=1045122414]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(boxes)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/TopBox_2" unique_id=511433153]
+position = Vector2(2.670288e-05, 4.0000067)
+scale = Vector2(5.6250033, 6.875002)
+texture = ExtResource("11_4wtbl")
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=963419912]
 
@@ -392,27 +304,6 @@ vertical_alignment = 1
 
 [node name="Signs" type="Node2D" parent="." unique_id=49722913]
 
-[node name="LevelBrief" type="Label" parent="Signs" unique_id=80272244]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 20.0
-offset_bottom = 20.0
-text = "Level 3 map:
-- Find the correct exam hall
-- Keep enough focus for the exam
-
-Interact with senior get SN, skip the senior get nothing
-
-If player enter fake exit -> back to start of the level"
-
-[node name="ExamHallLabel" type="Label" parent="Signs" unique_id=1778388981]
-offset_left = 5320.0
-offset_top = 360.0
-offset_right = 5320.0
-offset_bottom = 360.0
-text = "Exam Hall"
-horizontal_alignment = 1
-
 [node name="Exits" type="Node2D" parent="." unique_id=1619136054]
 
 [node name="FakeExit" type="Area2D" parent="Exits" unique_id=1938372188]
@@ -423,20 +314,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/FakeExit" unique_id=1630649722]
 shape = SubResource("fake_exit_collision")
 
-[node name="Visual" type="Polygon2D" parent="Exits/FakeExit" unique_id=1216557173]
-color = Color(0.75, 0.75, 0.75, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="Exits/FakeExit" unique_id=2045075281]
-offset_left = -57.0
-offset_top = -21.0
-offset_right = 60.0
-offset_bottom = 28.0
-text = "Reset
-(Door to Stairs)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Exits/FakeExit/CollisionShape2D" unique_id=1816772482]
+position = Vector2(0.4998653, 1.3472214)
+scale = Vector2(0.82407403, 0.6944445)
+texture = ExtResource("10_gpngy")
 
 [node name="ExamHallExit" type="Area2D" parent="Exits" unique_id=1670734885]
 position = Vector2(5480, 430)
@@ -446,18 +327,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ExamHallExit" unique_id=752243126]
 shape = SubResource("exam_hall_trigger_collision")
 
-[node name="ExitVisual" type="Polygon2D" parent="Exits/ExamHallExit" unique_id=218451213]
-color = Color(0.2, 0.8, 0.2, 1)
-polygon = PackedVector2Array(-45, -70, 45, -70, 45, 70, -45, 70)
-
-[node name="Label" type="Label" parent="Exits/ExamHallExit" unique_id=1902535496]
-offset_left = -44.0
-offset_top = -14.0
-offset_right = 44.0
-offset_bottom = 14.0
-text = "Exam hall"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="Exits/ExamHallExit" unique_id=1457713631]
+position = Vector2(0.4998653, 3.999992)
+scale = Vector2(0.82407403, 0.83798856)
+texture = ExtResource("10_gpngy")
 
 [node name="Ground_ExposedWiring_Mid" type="Node2D" parent="." unique_id=5155803]
 position = Vector2(2520, 1618)
@@ -472,23 +345,10 @@ scale = Vector2(0.8400004, 0.67999995)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_1" unique_id=1865590036]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="MiddleBox_1" unique_id=1512818301]
-position = Vector2(39.40476, 0)
-scale = Vector2(1.8756613, 1)
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="MiddleBox_1" unique_id=2127109978]
-offset_left = -17.647053
-offset_top = -18.0
-offset_right = 74.35295
-offset_bottom = 31.0
-scale = Vector2(0.38823533, 1)
-text = "Obstacle
-(table)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="MiddleBox_1" unique_id=1992409695]
+position = Vector2(2.670288e-05, 3.0000143)
+scale = Vector2(5.6250033, 7.000001)
+texture = ExtResource("11_4wtbl")
 
 [node name="StudyNote2" parent="." unique_id=1662945676 instance=ExtResource("3_study_note")]
 position = Vector2(3894, 1223)
@@ -499,20 +359,10 @@ position = Vector2(4994, 1237)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox_3" unique_id=1390830648]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="BottomBox_3" unique_id=83998186]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="BottomBox_3" unique_id=1567149998]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="BottomBox_3" unique_id=134480306]
+position = Vector2(2.670288e-05, 3.0000143)
+scale = Vector2(5.6250033, 7.000001)
+texture = ExtResource("11_4wtbl")
 
 [node name="MiddleBox_2" type="StaticBody2D" parent="." unique_id=1528318493]
 position = Vector2(754, 840)
@@ -521,25 +371,10 @@ scale = Vector2(3.4, 0.67999995)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_2" unique_id=223571329]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="MiddleBox_2" unique_id=1901182297]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="MiddleBox_2" unique_id=1750668355]
-offset_left = -17.647053
-offset_top = -18.0
-offset_right = 74.35295
-offset_bottom = 31.0
-scale = Vector2(0.38823533, 1)
-text = "Obstacle
-(table)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="MiddleBox_2" type="StaticBody2D" parent="MiddleBox_2" unique_id=229545291]
-position = Vector2(-191, 434)
-scale = Vector2(3.4, 0.67999995)
+[node name="Sprite2D" type="Sprite2D" parent="MiddleBox_2" unique_id=1000372373]
+position = Vector2(0.22058487, -59.558857)
+scale = Vector2(3.0245097, 12.8921585)
+texture = ExtResource("11_odeo2")
 
 [node name="BottomBox_4" type="StaticBody2D" parent="." unique_id=1827340336]
 position = Vector2(3578, 442)
@@ -547,20 +382,10 @@ position = Vector2(3578, 442)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox_4" unique_id=1891949040]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="BottomBox_4" unique_id=851901138]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="BottomBox_4" unique_id=922089991]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="BottomBox_4" unique_id=283005735]
+position = Vector2(2.670288e-05, 4.5000143)
+scale = Vector2(5.6250033, 6.812501)
+texture = ExtResource("11_4wtbl")
 
 [node name="StudyNote4" parent="." unique_id=326112127 instance=ExtResource("3_study_note")]
 position = Vector2(4055, 445)
@@ -568,21 +393,10 @@ position = Vector2(4055, 445)
 [node name="Top_BK1" type="Node2D" parent="." unique_id=109925940]
 position = Vector2(318, 1239)
 
-[node name="Visual" type="Polygon2D" parent="Top_BK1" unique_id=107037554]
-position = Vector2(-3.8146973e-06, 0)
-scale = Vector2(0.38, 1)
-color = Color(0.16, 0.18, 0.21, 0.95)
-polygon = PackedVector2Array(-150, -92, 150, -92, 150, 58, -150, 58)
-
-[node name="Label" type="Label" parent="Top_BK1" unique_id=861289658]
-offset_left = -87.0
-offset_top = -44.0
-offset_right = 93.0
-offset_bottom = 8.0
-text = "Stair Door"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="Top_BK1" unique_id=101337293]
+position = Vector2(-15.5, 1.3472214)
+scale = Vector2(0.6944444, 0.6944445)
+texture = ExtResource("10_gpngy")
 
 [node name="Bottom_WetFloor2" type="Polygon2D" parent="." unique_id=984584414]
 position = Vector2(868, 1287)
@@ -622,116 +436,72 @@ limit_right = 5600
 limit_bottom = 1900
 
 [node name="Third_ExposedWiring_RightWall" type="Node2D" parent="." unique_id=1526940203]
-position = Vector2(1100, 1132)
-
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_RightWall" unique_id=1021033141]
-position = Vector2(-72, 13)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_RightWall" unique_id=1274660810]
-offset_left = -137.0
-offset_top = -12.0
-offset_right = -1.0
-offset_bottom = 37.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+position = Vector2(1100, 1104)
 
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_RightWall" unique_id=205113975]
 position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_RightWall/MechanicArea" unique_id=1581354980]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
 
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_RightWall" unique_id=1888733176]
+position = Vector2(-75, 12.999958)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
+
 [node name="Third_ExposedWiring_RightWall2" type="Node2D" parent="." unique_id=342498927]
 position = Vector2(1974, 1077)
-
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_RightWall2" unique_id=905507903]
-position = Vector2(-72, 13)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_RightWall2" unique_id=1676217938]
-offset_left = -137.0
-offset_top = -12.0
-offset_right = -1.0
-offset_bottom = 37.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_RightWall2" unique_id=374125891]
 position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_RightWall2/MechanicArea" unique_id=1596064878]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
 
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_RightWall2" unique_id=87795111]
+position = Vector2(-75, 12.999958)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
+
 [node name="Ground_ExposedWiring_Left2" type="Node2D" parent="." unique_id=1263221407]
 position = Vector2(1807, 1245)
 
-[node name="Visual" type="Polygon2D" parent="Ground_ExposedWiring_Left2" unique_id=248654417]
-position = Vector2(2, -4)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
-
-[node name="Label" type="Label" parent="Ground_ExposedWiring_Left2" unique_id=364423619]
-offset_left = -106.0
-offset_top = -9.0
-offset_right = 86.0
-offset_bottom = 15.0
-text = "Exposed Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="Ground_ExposedWiring_Left2" unique_id=1656934229]
+position = Vector2(-7.1250534, 13)
+scale = Vector2(0.26814184, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="MechanicArea" type="Area2D" parent="Ground_ExposedWiring_Left2" unique_id=1643791572]
 position = Vector2(2, -4)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_ExposedWiring_Left2/MechanicArea" unique_id=197734725]
-polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, 11.5, 38, -81.5, 38, -130, 38)
 
 [node name="Ground_ExposedWiring_Left" type="Node2D" parent="." unique_id=1438195111]
 position = Vector2(2295, 1246)
-
-[node name="Visual" type="Polygon2D" parent="Ground_ExposedWiring_Left" unique_id=921769685]
-position = Vector2(2, -4)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
-
-[node name="Label" type="Label" parent="Ground_ExposedWiring_Left" unique_id=1211059087]
-offset_left = -106.0
-offset_top = -9.0
-offset_right = 86.0
-offset_bottom = 15.0
-text = "Exposed Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="MechanicArea" type="Area2D" parent="Ground_ExposedWiring_Left" unique_id=1381212696]
 position = Vector2(2, -4)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_ExposedWiring_Left/MechanicArea" unique_id=1729629547]
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground_ExposedWiring_Left" unique_id=726315365]
+position = Vector2(-5, -1.000042)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Third_WetFloor2" type="Polygon2D" parent="." unique_id=10351033]
 position = Vector2(2926.6282, 1290.6588)
@@ -759,52 +529,27 @@ scale = Vector2(0.8400004, 0.67999995)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_3" unique_id=1073688316]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="MiddleBox_3" unique_id=1222948778]
-position = Vector2(-37.023693, 0)
-scale = Vector2(1.8227487, 1)
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="MiddleBox_3" unique_id=1225021960]
-offset_left = -17.647053
-offset_top = -18.0
-offset_right = 74.35295
-offset_bottom = 31.0
-scale = Vector2(0.38823533, 1)
-text = "Obstacle
-(table)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="MiddleBox_3" unique_id=289678013]
+position = Vector2(2.670288e-05, 3.0000143)
+scale = Vector2(5.6250033, 7.000001)
+texture = ExtResource("11_4wtbl")
 
 [node name="Third_ExposedWiring_Left" type="Node2D" parent="." unique_id=1056122392]
 position = Vector2(2563, 1237)
-
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_Left" unique_id=1425435915]
-position = Vector2(154, -80)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_Left" unique_id=1190580582]
-offset_left = 62.0
-offset_top = -130.0
-offset_right = 226.0
-offset_bottom = -81.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_Left" unique_id=957716492]
 position = Vector2(154, -80)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_Left/MechanicArea" unique_id=2099395948]
 polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_Left" unique_id=1836730175]
+position = Vector2(157, -108.000046)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="MiddleCeilingFan_4" parent="." unique_id=957664066 instance=ExtResource("7_ceiling_fan")]
 position = Vector2(3025, 1144)
@@ -812,29 +557,12 @@ position = Vector2(3025, 1144)
 [node name="Ground_ExposedWiring_Mid3" type="Node2D" parent="." unique_id=1452584937]
 position = Vector2(4053, 1023)
 
-[node name="Visual" type="Polygon2D" parent="Ground_ExposedWiring_Mid3" unique_id=970650830]
-position = Vector2(-375, 194.19995)
-scale = Vector2(1, 1.4)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
-
-[node name="Label" type="Label" parent="Ground_ExposedWiring_Mid3" unique_id=307497158]
-offset_left = -466.0
-offset_top = 186.19995
-offset_right = -274.0
-offset_bottom = 210.19995
-scale = Vector2(1, 1.4)
-text = "Exposed Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="MechanicArea" type="Area2D" parent="Ground_ExposedWiring_Mid3" unique_id=1754993873]
 position = Vector2(-375, 194.19995)
 scale = Vector2(1, 1.4)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_ExposedWiring_Mid3/MechanicArea" unique_id=1723711324]
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
@@ -843,32 +571,25 @@ polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
 position = Vector2(-789, -887)
 scale = Vector2(0.98558563, 1.3185632)
 
-[node name="Visual" type="Polygon2D" parent="Ground_ExposedWiring_Mid3/Ground_ExposedWiring_Mid3" unique_id=700518227]
-position = Vector2(-375, 194.19995)
-scale = Vector2(1, 1.4)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
-
-[node name="Label" type="Label" parent="Ground_ExposedWiring_Mid3/Ground_ExposedWiring_Mid3" unique_id=708666901]
-offset_left = -466.0
-offset_top = 186.19995
-offset_right = -274.0
-offset_bottom = 210.19995
-scale = Vector2(1, 1.4)
-text = "Exposed Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="MechanicArea" type="Area2D" parent="Ground_ExposedWiring_Mid3/Ground_ExposedWiring_Mid3" unique_id=818337498]
 position = Vector2(-375, 194.19995)
 scale = Vector2(1, 1.4)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_ExposedWiring_Mid3/Ground_ExposedWiring_Mid3/MechanicArea" unique_id=16916191]
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground_ExposedWiring_Mid3/Ground_ExposedWiring_Mid3" unique_id=1917349272]
+position = Vector2(-379.46976, 194.90912)
+scale = Vector2(0.2133296, 0.09575896)
+texture = ExtResource("14_odeo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground_ExposedWiring_Mid3" unique_id=2045578789]
+position = Vector2(-353.125, 193.99995)
+scale = Vector2(0.21232058, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Ground_ExposedWiring_Mid2" type="Node2D" parent="." unique_id=346231849]
 position = Vector2(4519, 1021)
@@ -899,61 +620,37 @@ limit_bottom = 1900
 [node name="Ground_ExposedWiring_Mid4" type="Node2D" parent="." unique_id=347208018]
 position = Vector2(4485, 1025)
 
-[node name="Visual" type="Polygon2D" parent="Ground_ExposedWiring_Mid4" unique_id=540580465]
-position = Vector2(-375, 194.19995)
-scale = Vector2(1, 1.4)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
-
-[node name="Label" type="Label" parent="Ground_ExposedWiring_Mid4" unique_id=1604128228]
-offset_left = -466.0
-offset_top = 186.19995
-offset_right = -274.0
-offset_bottom = 210.19995
-scale = Vector2(1, 1.4)
-text = "Exposed Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="MechanicArea" type="Area2D" parent="Ground_ExposedWiring_Mid4" unique_id=2085181327]
 position = Vector2(-375, 194.19995)
 scale = Vector2(1, 1.4)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground_ExposedWiring_Mid4/MechanicArea" unique_id=1411423347]
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
 
+[node name="Sprite2D" type="Sprite2D" parent="Ground_ExposedWiring_Mid4" unique_id=2037299017]
+position = Vector2(-372.62503, 196.99995)
+scale = Vector2(0.18919453, 0.071770355)
+texture = ExtResource("14_odeo2")
+
 [node name="Third_ExposedWiring_Left2" type="Node2D" parent="." unique_id=2001006573]
 position = Vector2(4616, 1106)
-
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_Left2" unique_id=2126994539]
-position = Vector2(154, -80)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_Left2" unique_id=2146330595]
-offset_left = 62.0
-offset_top = -130.0
-offset_right = 226.0
-offset_bottom = -81.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_Left2" unique_id=2107473505]
 position = Vector2(154, -80)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_Left2/MechanicArea" unique_id=2140681648]
 polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_Left2" unique_id=1439712637]
+position = Vector2(156, -114.000046)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Wall4" type="Polygon2D" parent="." unique_id=1353890629]
 position = Vector2(5405, 1714.8082)
@@ -1022,60 +719,36 @@ polygon = PackedVector2Array(-174, -17, -134.90918, -17.387054, -73, -18, 325.43
 [node name="Third_ExposedWiring_Left3" type="Node2D" parent="." unique_id=634323941]
 position = Vector2(4149, 712)
 
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_Left3" unique_id=649855633]
-position = Vector2(154, -80)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_Left3" unique_id=522346998]
-offset_left = 62.0
-offset_top = -130.0
-offset_right = 226.0
-offset_bottom = -81.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_Left3" unique_id=1136292936]
 position = Vector2(154, -80)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_Left3/MechanicArea" unique_id=654414530]
 polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
 
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_Left3" unique_id=1209394134]
+position = Vector2(148, -108.999985)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
+
 [node name="Third_ExposedWiring_RightWall3" type="Node2D" parent="." unique_id=1233887926]
 position = Vector2(1289, 669)
-
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_RightWall3" unique_id=73795169]
-position = Vector2(-72, 13)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_RightWall3" unique_id=1629935350]
-offset_left = -137.0
-offset_top = -12.0
-offset_right = -1.0
-offset_bottom = 37.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_RightWall3" unique_id=1907878744]
 position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_RightWall3/MechanicArea" unique_id=257818810]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_RightWall3" unique_id=702303633]
+position = Vector2(-75, 12.999958)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Bottom_WetFloor5" type="Polygon2D" parent="." unique_id=1578272464]
 position = Vector2(1164, 870)
@@ -1134,31 +807,19 @@ polygon = PackedVector2Array(-987, -25, -826, -25, -827, 13, -987, 13)
 [node name="Third_ExposedWiring_RightWall4" type="Node2D" parent="." unique_id=1217239432]
 position = Vector2(231, 812)
 
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_RightWall4" unique_id=2003159625]
-position = Vector2(-72, 13)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_RightWall4" unique_id=1893435832]
-offset_left = -137.0
-offset_top = -12.0
-offset_right = -1.0
-offset_bottom = 37.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_RightWall4" unique_id=2085660005]
 position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_RightWall4/MechanicArea" unique_id=1511574648]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_RightWall4" unique_id=948965792]
+position = Vector2(-75, 12.999958)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Platform9" type="Polygon2D" parent="." unique_id=972159986]
 position = Vector2(1051, 605)
@@ -1207,31 +868,19 @@ position = Vector2(318, 181)
 [node name="Third_ExposedWiring_RightWall5" type="Node2D" parent="." unique_id=957314768]
 position = Vector2(221, 301)
 
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_RightWall5" unique_id=1122137135]
-position = Vector2(-72, 13)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_RightWall5" unique_id=1348949535]
-offset_left = -137.0
-offset_top = -12.0
-offset_right = -1.0
-offset_bottom = 37.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_RightWall5" unique_id=1650323337]
 position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_RightWall5/MechanicArea" unique_id=174657157]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_RightWall5" unique_id=2106521924]
+position = Vector2(-75, 12.999958)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Second_WetFloor5" type="Polygon2D" parent="." unique_id=723828606]
 position = Vector2(993.9547, 492)
@@ -1259,22 +908,10 @@ position = Vector2(714, 442)
 position = Vector2(0, 15)
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="TopBox_2" unique_id=1337276772]
-position = Vector2(0, 15)
-scale = Vector2(1, 0.75)
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="TopBox_2" unique_id=2091304213]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(boxes)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="TopBox_2" unique_id=775403893]
+position = Vector2(2.670288e-05, 13.999996)
+scale = Vector2(5.6250033, 5.6250033)
+texture = ExtResource("11_4wtbl")
 
 [node name="Second_WetFloor6" type="Polygon2D" parent="." unique_id=1854002725]
 position = Vector2(1888.3671, 490)
@@ -1295,31 +932,19 @@ polygon = PackedVector2Array(-174, -17, -134.90918, -17.387054, -73, -18, 325.43
 [node name="Third_ExposedWiring_RightWall6" type="Node2D" parent="." unique_id=712494277]
 position = Vector2(2120, 256)
 
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_RightWall6" unique_id=283174394]
-position = Vector2(-72, 13)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_RightWall6" unique_id=1697523495]
-offset_left = -137.0
-offset_top = -12.0
-offset_right = -1.0
-offset_bottom = 37.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_RightWall6" unique_id=1665941905]
 position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_RightWall6/MechanicArea" unique_id=125009623]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_RightWall6" unique_id=580609845]
+position = Vector2(-75, 12.999958)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="Coffee_BottomPlatform3" parent="." unique_id=1818561728 instance=ExtResource("4_coffee")]
 position = Vector2(2449, 320)
@@ -1344,20 +969,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FakeExit" unique_id=1364089341]
 shape = SubResource("fake_exit_collision")
 
-[node name="Visual" type="Polygon2D" parent="FakeExit" unique_id=1232580013]
-color = Color(0.75, 0.75, 0.75, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="FakeExit" unique_id=1152791870]
-offset_left = -57.0
-offset_top = -21.0
-offset_right = 60.0
-offset_bottom = 28.0
-text = "Reset
-(Door to Stairs)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="FakeExit" unique_id=913770220]
+position = Vector2(0.4998653, 1.3472214)
+scale = Vector2(0.82407403, 0.6944445)
+texture = ExtResource("10_gpngy")
 
 [node name="BottomBox_5" type="StaticBody2D" parent="." unique_id=1322092147]
 position = Vector2(4416, 440)
@@ -1365,20 +980,10 @@ position = Vector2(4416, 440)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox_5" unique_id=1599750000]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="BottomBox_5" unique_id=1217430110]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="BottomBox_5" unique_id=1175597982]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="BottomBox_5" unique_id=1910617820]
+position = Vector2(2.670288e-05, 4.0000067)
+scale = Vector2(5.6250033, 6.875002)
+texture = ExtResource("11_4wtbl")
 
 [node name="Bottom_WetFloor6" type="Polygon2D" parent="." unique_id=1834902089]
 position = Vector2(4810, 491)
@@ -1409,52 +1014,55 @@ position = Vector2(4863, 440)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox_6" unique_id=626197123]
 shape = SubResource("box_collision")
 
-[node name="Visual" type="Polygon2D" parent="BottomBox_6" unique_id=803195435]
-color = Color(0.6, 0.4, 0.2, 1)
-polygon = PackedVector2Array(-45, -60, 45, -60, 45, 60, -45, 60)
-
-[node name="Label" type="Label" parent="BottomBox_6" unique_id=1804251906]
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 46.0
-offset_bottom = 18.0
-text = "Obstacle
-(box)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="Sprite2D" type="Sprite2D" parent="BottomBox_6" unique_id=1103556256]
+position = Vector2(2.670288e-05, 3.5)
+scale = Vector2(5.6250033, 6.937503)
+texture = ExtResource("11_4wtbl")
 
 [node name="Third_ExposedWiring_Left4" type="Node2D" parent="." unique_id=1633786402]
 position = Vector2(4472, 316)
-
-[node name="Visual" type="Polygon2D" parent="Third_ExposedWiring_Left4" unique_id=2091021752]
-position = Vector2(154, -80)
-color = Color(0.9, 0.35, 0.25, 0.95)
-polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
-
-[node name="Label" type="Label" parent="Third_ExposedWiring_Left4" unique_id=993365660]
-offset_left = 62.0
-offset_top = -130.0
-offset_right = 226.0
-offset_bottom = -81.0
-text = "Exposed
-Wiring"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="MechanicArea" type="Area2D" parent="Third_ExposedWiring_Left4" unique_id=1546296914]
 position = Vector2(154, -80)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("11_n8ff8")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Third_ExposedWiring_Left4/MechanicArea" unique_id=768383955]
 polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="Third_ExposedWiring_Left4" unique_id=1743115928]
+position = Vector2(152, -105)
+scale = Vector2(0.15988834, 0.071770355)
+texture = ExtResource("14_odeo2")
 
 [node name="StudyNote10" parent="." unique_id=1268355994 instance=ExtResource("3_study_note")]
 position = Vector2(5154, 440)
 
 [node name="StudyNote11" parent="." unique_id=1062856971 instance=ExtResource("3_study_note")]
 position = Vector2(2015, 1239)
+
+[node name="MiddleCeilingFan_8" parent="." unique_id=2069710264 instance=ExtResource("7_ceiling_fan")]
+position = Vector2(1365, 351)
+
+[node name="MiddleBox_4" type="StaticBody2D" parent="." unique_id=1306253963]
+position = Vector2(922, 1235)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_4" unique_id=1200769914]
+shape = SubResource("box_collision")
+
+[node name="Sprite2D" type="Sprite2D" parent="MiddleBox_4" unique_id=1425619218]
+position = Vector2(2.670288e-05, 3.9999857)
+scale = Vector2(5.6250033, 6.875005)
+texture = ExtResource("11_4wtbl")
+
+[node name="MiddleBox_5" type="StaticBody2D" parent="." unique_id=1869789876]
+position = Vector2(1126, 1234)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBox_5" unique_id=850819830]
+shape = SubResource("box_collision")
+
+[node name="Sprite2D" type="Sprite2D" parent="MiddleBox_5" unique_id=1304028168]
+position = Vector2(2.670288e-05, 3.0000143)
+scale = Vector2(5.6250033, 7.000001)
+texture = ExtResource("11_4wtbl")

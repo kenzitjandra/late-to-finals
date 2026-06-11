@@ -1,34 +1,29 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://bl0ng2mum4ul2"]
 
-[ext_resource type="Script" path="res://scripts/objects/hazards/hazard.gd" id="1_hazard"]
+[ext_resource type="Script" uid="uid://b2sncsh8r5jxe" path="res://scripts/objects/hazards/hazard.gd" id="1_hazard"]
 
 [sub_resource type="RectangleShape2D" id="hazard_shape"]
 size = Vector2(72, 40)
 
-[node name="ExposedWiring" type="Area2D"]
+[node name="ExposedWiring" type="Area2D" unique_id=1597713301]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_hazard")
-focus_damage = 10
-damage_cooldown = 1.0
 flashing_enabled = true
-active_duration = 1.2
-inactive_duration = 1.2
-active_modulate = Color(1, 1, 1, 1)
-inactive_modulate = Color(0.35, 0.35, 0.35, 0.45)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1101762881]
 shape = SubResource("hazard_shape")
 
-[node name="Visual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-36, -20, 36, -20, 36, 20, -36, 20)
+[node name="Visual" type="Polygon2D" parent="." unique_id=916596208]
 color = Color(0.9, 0.25, 0.1, 1)
+polygon = PackedVector2Array(-36, -20, 36, -20, 36, 20, -36, 20)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=733861569]
 offset_left = -32.0
 offset_top = -18.0
 offset_right = 32.0
 offset_bottom = 18.0
-text = "Exposed\nWiring"
+text = "Exposed
+Wiring"
 horizontal_alignment = 1
 vertical_alignment = 1

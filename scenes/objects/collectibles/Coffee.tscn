@@ -1,28 +1,21 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://cit4jbfnsuy8x"]
 
-[ext_resource type="Script" path="res://scripts/objects/collectibles/collectible.gd" id="1_collectible"]
+[ext_resource type="Script" uid="uid://bo22howfrv3lq" path="res://scripts/objects/collectibles/collectible.gd" id="1_collectible"]
+[ext_resource type="Texture2D" uid="uid://dhbhm3inbqhbi" path="res://assets/level3_skin/coffee.png" id="2_a3vkh"]
 
 [sub_resource type="RectangleShape2D" id="pickup_shape"]
 size = Vector2(48, 48)
 
-[node name="Coffee" type="Area2D"]
+[node name="Coffee" type="Area2D" unique_id=1138258403]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_collectible")
 collectible_type = "coffee"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=951409130]
 shape = SubResource("pickup_shape")
 
-[node name="Visual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
-color = Color(0.45, 0.25, 0.12, 1)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -24.0
-offset_top = -12.0
-offset_right = 24.0
-offset_bottom = 12.0
-text = "Coffee"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=347393139]
+position = Vector2(-0.25000077, 0.1000002)
+scale = Vector2(4.0499997, 4.0500007)
+texture = ExtResource("2_a3vkh")

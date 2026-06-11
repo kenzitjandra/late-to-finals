@@ -4,7 +4,7 @@ extends StaticBody2D
 @export var respawn_delay: float = 2.5
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var visual: Polygon2D = $Visual
+@onready var visual: CanvasItem = $Sprite2D
 @onready var detector: Area2D = $PlayerDetector
 
 var is_ready := true
