@@ -7,6 +7,7 @@ const LEVEL_STATE_PLAYING := "playing"
 const LEVEL_STATE_COMPLETED := "completed"
 const LEVEL_STATE_FAILED := "failed"
 
+const MAIN_MENU_PATH := "res://scenes/main/MainMenu.tscn"
 const LEVEL_1_PATH := "res://scenes/levels/Level1_ApartmentPanic.tscn"
 const LEVEL_2_PATH := "res://scenes/levels/Level2_CampusRush.tscn"
 const LEVEL_3_PATH := "res://scenes/levels/Level3_FinalHallSprint.tscn"
@@ -108,6 +109,15 @@ func fail_current_level(level_name: String = "") -> void:
 func restart_current_level() -> void:
 	level_state = LEVEL_STATE_PLAYING
 	get_tree().reload_current_scene()
+
+
+func go_to_main_menu() -> void:
+	level_state = LEVEL_STATE_PLAYING
+	current_level_display_name = "Level 1"
+	current_objective = "Get your Student ID"
+	final_ending_title = ""
+	final_ending_description = ""
+	get_tree().change_scene_to_file.call_deferred(MAIN_MENU_PATH)
 
 
 func go_to_level_1() -> void:

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clgc7w73eaw0u"]
 
-[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://dtjnrcaktn0te" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="2_hud"]
 [ext_resource type="PackedScene" uid="uid://c20cgw6x52b4k" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_study_note"]
 [ext_resource type="PackedScene" uid="uid://cit4jbfnsuy8x" path="res://scenes/objects/collectibles/Coffee.tscn" id="4_coffee"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://d3dpw7lcd6n6m" path="res://scripts/levels/level3_manager.gd" id="9_level3_manager"]
 [ext_resource type="Texture2D" uid="uid://ct86ce72553uo" path="res://assets/level1_skin/sheet/generic_door.png" id="10_gpngy"]
 [ext_resource type="Script" uid="uid://uionc3qv6p4b" path="res://scripts/objects/hazards/wet_floor.gd" id="10_gvwop"]
+[ext_resource type="Texture2D" uid="uid://dvqmjowbjqu0u" path="res://assets/level1_skin/roommate.png" id="10_o4gkc"]
 [ext_resource type="Texture2D" uid="uid://dxxlqhjmula2g" path="res://assets/level3_skin/cardboard_box.png" id="11_4wtbl"]
 [ext_resource type="Script" uid="uid://b2sncsh8r5jxe" path="res://scripts/objects/hazards/hazard.gd" id="11_n8ff8"]
 [ext_resource type="Texture2D" uid="uid://du011ks25u0nh" path="res://assets/level3_skin/table.png" id="11_odeo2"]
@@ -301,6 +302,11 @@ offset_bottom = 62.0
 text = "Senior"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/Senior" unique_id=895888310]
+position = Vector2(-2.9999676, -2.9999712)
+scale = Vector2(4.828129, 4.828129)
+texture = ExtResource("10_o4gkc")
 
 [node name="Signs" type="Node2D" parent="." unique_id=49722913]
 

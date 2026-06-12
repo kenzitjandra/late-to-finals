@@ -26,6 +26,8 @@ var coffee_label: Label
 var student_id_label: Label
 var objective_label: Label
 
+var main_menu_button: Button
+
 var low_focus_panel: NinePatchRect
 var low_focus_label: Label
 
@@ -264,6 +266,15 @@ func _create_result_panel() -> void:
 	result_label.add_theme_font_size_override("font_size", 17)
 	result_panel.add_child(result_label)
 
+	main_menu_button = Button.new()
+	main_menu_button.name = "MainMenuButton"
+	main_menu_button.text = "Main Menu"
+	main_menu_button.position = Vector2(250, 375)
+	main_menu_button.size = Vector2(200, 42)
+	main_menu_button.visible = false
+	main_menu_button.pressed.connect(_on_main_menu_pressed)
+	result_panel.add_child(main_menu_button)
+
 
 func _center_result_panel() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
@@ -319,4 +330,12 @@ func show_result_panel(state: String) -> void:
 		]
 
 	_center_result_panel()
+	if main_menu_button != null:
+		main_menu_button.visible = GameManager.current_level_display_name == "Level 3"
 	result_panel.visible = true
+
+func _on_main_menu_pressed() -> void:
+	if GameManager.has_method("go_to_main_menu"):
+		GameManager.go_to_main_menu()
+	else:
+		get_tree().change_scene_to_file("res://scenes/main/MainMenu.tscn")

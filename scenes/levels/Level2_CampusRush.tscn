@@ -1,22 +1,23 @@
 [gd_scene format=3 uid="uid://bfd7wv1ekx8v"]
 
-[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_4ijb4"]
+[ext_resource type="PackedScene" uid="uid://dtjnrcaktn0te" path="res://scenes/player/Player.tscn" id="1_4ijb4"]
 [ext_resource type="PackedScene" uid="uid://cdr1qo4kfu53h" path="res://scenes/levels/Lvl2/platform.tscn" id="2_8e7yb"]
-[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_p1u73"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazards/WetFloor.tscn" id="4_bw0md"]
-[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/Coffee.tscn" id="5_hr6ds"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazards/MovingCarHazard.tscn" id="6_hr6ds"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazards/FallZone.tscn" id="7_rf53q"]
+[ext_resource type="PackedScene" uid="uid://c20cgw6x52b4k" path="res://scenes/objects/collectibles/StudyNote.tscn" id="3_p1u73"]
+[ext_resource type="PackedScene" uid="uid://cit4jbfnsuy8x" path="res://scenes/objects/collectibles/Coffee.tscn" id="5_hr6ds"]
+[ext_resource type="PackedScene" uid="uid://bhy5b8d5hf2ub" path="res://scenes/objects/hazards/MovingCarHazard.tscn" id="6_hr6ds"]
+[ext_resource type="PackedScene" uid="uid://cd6crw88glgmi" path="res://scenes/objects/hazards/FallZone.tscn" id="7_rf53q"]
 [ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudentID.tscn" id="7_ufkxa"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="8_jh7ar"]
+[ext_resource type="PackedScene" uid="uid://bl0ng2mum4ul2" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="8_jh7ar"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/SecurityGuard.tscn" id="8_ookv4"]
-[ext_resource type="PackedScene" path="res://scenes/objects/interactive/Roommate.tscn" id="9_pxecf"]
+[ext_resource type="PackedScene" uid="uid://dsq483cyqvpse" path="res://scenes/objects/interactive/Roommate.tscn" id="9_pxecf"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/IDBarrier.tscn" id="9_rf53q"]
-[ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ookv4"]
-[ext_resource type="PackedScene" path="res://scenes/objects/interactive/LockedDoor.tscn" id="14_kswdf"]
+[ext_resource type="PackedScene" uid="uid://co4osg2q1jnmp" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ookv4"]
+[ext_resource type="PackedScene" uid="uid://dbgtmklvvw7d4" path="res://scenes/objects/interactive/LockedDoor.tscn" id="14_kswdf"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="15_hud"]
 [ext_resource type="Script" uid="uid://c06cuuemjdvwr" path="res://scripts/levels/level2_manager.gd" id="16_level2_manager"]
+[ext_resource type="Script" uid="uid://uionc3qv6p4b" path="res://scripts/objects/hazards/wet_floor.gd" id="17_dtk2v"]
 [ext_resource type="Script" uid="uid://cwr2vhpuek2dr" path="res://scripts/objects/interactive/grandma_road_interaction.gd" id="17_gfgbw"]
+[ext_resource type="Texture2D" uid="uid://dvqmjowbjqu0u" path="res://assets/level1_skin/roommate.png" id="17_lix7e"]
 
 [sub_resource type="RectangleShape2D" id="level_end_exit_shape"]
 size = Vector2(120, 160)
@@ -25,85 +26,104 @@ size = Vector2(120, 160)
 script = ExtResource("16_level2_manager")
 
 [node name="Player" parent="." unique_id=551579220 instance=ExtResource("1_4ijb4")]
-position = Vector2(248, -49)
+position = Vector2(251, -56)
 
 [node name="HUD" parent="." unique_id=1838889001 instance=ExtResource("15_hud")]
 
 [node name="World" type="StaticBody2D" parent="." unique_id=1188501321]
 
 [node name="StaticBody2D2" parent="World" unique_id=1931035566 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(752, -32)
 scale = Vector2(0.27999997, 0.06494087)
 
 [node name="StaticBody2D3" parent="World" unique_id=236934579 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1072, -36)
 scale = Vector2(0.27999997, 0.06494087)
 
 [node name="StaticBody2D4" parent="World" unique_id=984579906 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1536, -28)
 scale = Vector2(0.27999997, 0.14494133)
 
 [node name="StaticBody2D5" parent="World" unique_id=1146183940 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1648, -28)
 scale = Vector2(0.27999997, 0.59715825)
 
 [node name="StaticBody2D18" parent="World" unique_id=1904847811 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4312, -28)
 scale = Vector2(0.27999997, 0.14494133)
 
 [node name="StaticBody2D19" parent="World" unique_id=2010817379 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4424, -42)
 scale = Vector2(0.26831004, 0.3571581)
 
 [node name="StaticBody2D20" parent="World" unique_id=1058044971 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6288, -21)
 scale = Vector2(-0.16451582, 0.14494133)
 
 [node name="StaticBody2D21" parent="World" unique_id=405831412 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6352.0005, -45)
 scale = Vector2(-0.15764731, 0.3571581)
 
 [node name="StaticBody2D12" parent="World" unique_id=2068825784 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1888, -232)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D22" parent="World" unique_id=1183118683 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6487.9995, -220)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D23" parent="World" unique_id=1515045925 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6295.9995, -328)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D24" parent="World" unique_id=126461814 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4552, -692)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D17" parent="World" unique_id=992155715 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1991.9999, -113)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D13" parent="World" unique_id=170908305 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1992, -336)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D14" parent="World" unique_id=1335536098 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1880, -464)
 scale = Vector2(0.22435148, -0.018153606)
 
 [node name="StaticBody2D9" parent="World" unique_id=1227677770 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(2520, -8)
 scale = Vector2(0.24950735, 0.37931383)
 
 [node name="StaticBody2D8" parent="World" unique_id=1768581791 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(2528, -372)
 scale = Vector2(2.4495075, -0.060687095)
 
 [node name="StaticBody2D15" parent="World" unique_id=471363090 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(5432, -339.9999)
 scale = Vector2(4.238378, -0.080751665)
 
 [node name="StaticBody2D16" parent="World" unique_id=1959916054 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(5552, -704.00006)
 scale = Vector2(4.838398, -0.080751665)
 
@@ -111,18 +131,22 @@ scale = Vector2(4.838398, -0.080751665)
 position = Vector2(360, -60)
 
 [node name="StaticBody2D" parent="World" unique_id=1679222532 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(3000.0002, 16)
 scale = Vector2(8.650634, -0.0770402)
 
 [node name="StaticBody2D7" parent="World" unique_id=1730745597 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6912.0005, 16)
 scale = Vector2(3.549623, -0.0770402)
 
 [node name="StaticBody2D11" parent="World" unique_id=601201802 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4912, 16.000002)
 scale = Vector2(4.469623, -0.0770402)
 
 [node name="StaticBody2D6" parent="World" unique_id=1399535083 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(304, 16)
 scale = Vector2(1.2401037, 0.08012628)
 
@@ -151,12 +175,8 @@ position = Vector2(5096, -904)
 position = Vector2(5432, -107.99994)
 
 [node name="FallZone" parent="World" unique_id=491835585 instance=ExtResource("7_rf53q")]
-position = Vector2(912, 144)
+position = Vector2(912, 196.00002)
 scale = Vector2(4.2542667, 0.78918)
-
-[node name="WetFloor" parent="World" unique_id=1118739426 instance=ExtResource("4_bw0md")]
-position = Vector2(5176, -15.999939)
-scale = Vector2(7.3432446, 1.6537117)
 
 [node name="ExposedWiring" parent="World" unique_id=1234610746 instance=ExtResource("8_jh7ar")]
 position = Vector2(5896.0005, -407.9999)
@@ -167,84 +187,74 @@ position = Vector2(5896, -631.99994)
 scale = Vector2(0.8780699, 2.9818268)
 
 [node name="FallZone2" parent="World" unique_id=1814806416 instance=ExtResource("7_rf53q")]
-position = Vector2(6000.0005, 68.00006)
+position = Vector2(6000.0005, 160)
 scale = Vector2(2.3476768, 1.4138836)
 
 [node name="StudyNote3" parent="World" unique_id=1267261569 instance=ExtResource("3_p1u73")]
 position = Vector2(3240, -57)
 
 [node name="StaticBody2D10" parent="World" unique_id=330495323 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6536, -488)
 scale = Vector2(0.07443959, 1.8401409)
-
-[node name="WetFloor2" parent="World" unique_id=1037829834 instance=ExtResource("4_bw0md")]
-position = Vector2(5264.0005, -368)
-scale = Vector2(5.1311135, 0.98422694)
 
 [node name="Coffee3" parent="World" unique_id=505600079 instance=ExtResource("5_hr6ds")]
 position = Vector2(4464, -624)
 
-[node name="WetFloor3" parent="World" unique_id=417406782 instance=ExtResource("4_bw0md")]
-position = Vector2(6064, -728)
-scale = Vector2(2.3200195, 1)
-
-[node name="Label" type="Label" parent="." unique_id=73302349]
-offset_left = 3451.0
-offset_top = -243.0
-offset_right = 3630.0
-offset_bottom = -116.0
-text = "Old Grandma:
-Yes: time- 100
-       Door open"
-
 [node name="StaticBody2D" parent="." unique_id=262018150 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1840, -256)
 scale = Vector2(0.041177537, 0.6240075)
 
 [node name="StaticBody2D2" parent="." unique_id=1149649127 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(2032, -239.99998)
 scale = Vector2(0.041177537, 0.6640063)
 
 [node name="StaticBody2D3" parent="." unique_id=1240075307 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(3008, -256)
 scale = Vector2(0.041177545, 0.6240075)
 
 [node name="StaticBody2D4" parent="." unique_id=1075794370 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(3128, -256)
 scale = Vector2(0.041177545, 0.6240075)
 
 [node name="StaticBody2D5" parent="." unique_id=381169304 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(1840.0001, -552.00006)
 scale = Vector2(0.041177537, 0.8640063)
 
 [node name="StaticBody2D6" parent="." unique_id=1438011838 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(3128, -552)
 scale = Vector2(0.041177545, 0.86400634)
 
 [node name="MovingCarHazard" parent="." unique_id=573060422 instance=ExtResource("6_hr6ds")]
-position = Vector2(2160.0002, -76)
-scale = Vector2(2.3879943, 1)
+position = Vector2(2202.0002, -73)
+scale = Vector2(1.7670946, 1.6018353)
 
 [node name="MovingCarHazard2" parent="." unique_id=1152871355 instance=ExtResource("6_hr6ds")]
-position = Vector2(2360, -76)
-scale = Vector2(2.3879943, 1)
+position = Vector2(2382, -72)
+scale = Vector2(1.7628301, 1.5666667)
 
 [node name="MovingCarHazard3" parent="." unique_id=982689160 instance=ExtResource("6_hr6ds")]
-position = Vector2(2674, -76)
-scale = Vector2(2.387994, 1)
+position = Vector2(2673, -63)
+scale = Vector2(1.8318858, 1.5625)
 
 [node name="MovingCarHazard4" parent="." unique_id=137509037 instance=ExtResource("6_hr6ds")]
-position = Vector2(2873.9998, -76)
-scale = Vector2(2.387994, 1)
+position = Vector2(2874.0002, -63.999996)
+scale = Vector2(1.930024, 1.5833334)
 
 [node name="MovingCarHazard5" parent="." unique_id=1219938888 instance=ExtResource("6_hr6ds")]
 position = Vector2(3816, -76)
-scale = Vector2(2.387994, 1)
+scale = Vector2(1.7404528, 1.7391304)
 grandma_event_car = 1
 
 [node name="MovingCarHazard6" parent="." unique_id=2095380978 instance=ExtResource("6_hr6ds")]
 position = Vector2(4048, -76)
-scale = Vector2(2.387994, 1)
+scale = Vector2(2.1865969, 1.8611112)
 grandma_event_car = 1
 
 [node name="Overpass key" parent="." unique_id=1178387539 instance=ExtResource("7_ufkxa")]
@@ -273,24 +283,24 @@ position = Vector2(6000, -170)
 scale = Vector2(1.0050337, 1)
 
 [node name="StaticBody2D7" parent="." unique_id=818178465 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(2240, -416)
 scale = Vector2(0.15999025, 0.19999999)
 
 [node name="StaticBody2D8" parent="." unique_id=775965464 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4704, -31.999931)
 scale = Vector2(0.15999025, 0.19999999)
 
 [node name="StaticBody2D9" parent="." unique_id=995016714 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(5648, -31.999931)
 scale = Vector2(0.15999025, 0.19999999)
 
 [node name="StaticBody2D10" parent="." unique_id=1016768503 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(2640, -416)
 scale = Vector2(0.15999025, 0.19999999)
-
-[node name="WetFloor" parent="." unique_id=1716872794 instance=ExtResource("4_bw0md")]
-position = Vector2(2440, -392)
-scale = Vector2(2.88, 1)
 
 [node name="Label2" type="Label" parent="." unique_id=1994631473]
 offset_left = 80.0
@@ -298,13 +308,6 @@ offset_top = -92.0
 offset_right = 177.0
 offset_bottom = -69.0
 text = "Ovepass key"
-
-[node name="Label3" type="Label" parent="." unique_id=141838326]
-offset_left = 2176.0
-offset_top = -216.0
-offset_right = 2353.0
-offset_bottom = -193.0
-text = "longer, and alternating between the other car"
 
 [node name="Coffee2" parent="." unique_id=1067795178 instance=ExtResource("5_hr6ds")]
 position = Vector2(5176, -179.99994)
@@ -326,56 +329,101 @@ helped_text = "Grandma: Thank you! I used to be a lecturer.
 Here are my secret notes and the overpass key!"
 ignored_text = "Grandma: It's okay. Be careful crossing!"
 
-[node name="Label4" type="Label" parent="." unique_id=2035278940]
-offset_left = 3720.0
-offset_top = -204.0
-offset_right = 3760.0
-offset_bottom = -181.0
-text = "When grandma cross, car stop while grandma cross
-if not cross, alternating between the other car"
+[node name="Sprite2D" type="Sprite2D" parent="Grandma" unique_id=430215664]
+position = Vector2(-2.9999962, -2.000001)
+scale = Vector2(4.40625, 4.40625)
+texture = ExtResource("17_lix7e")
 
 [node name="StaticBody2D11" parent="." unique_id=1810643993 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(6472.0005, -760)
 scale = Vector2(0.24146946, 0.19698752)
 
 [node name="StaticBody2D12" parent="." unique_id=1116252217 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4856.0005, -455.99997)
 scale = Vector2(1.3614597, 0.5569888)
 
 [node name="StaticBody2D13" parent="." unique_id=187596776 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4496, -536)
 scale = Vector2(0.44144994, 0.15698871)
 
 [node name="StaticBody2D15" parent="." unique_id=1538188205 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4808, -752)
 scale = Vector2(0.44380912, 0.27698871)
 
 [node name="StaticBody2D16" parent="." unique_id=1980154238 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(5480, -856)
 scale = Vector2(0.9063596, 0.8281236)
 
 [node name="StaticBody2D14" parent="." unique_id=614359359 instance=ExtResource("2_8e7yb")]
+modulate = Color(0.34509805, 0.1764706, 0.17254902, 1)
 position = Vector2(4392.0005, -752)
 scale = Vector2(0.09076866, 1.2493576)
 
 [node name="FacultyBuildingExit" type="Area2D" parent="." unique_id=792013693]
-position = Vector2(7440, -124)
+position = Vector2(7440, -95)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FacultyBuildingExit" unique_id=2015882789]
 shape = SubResource("level_end_exit_shape")
 
-[node name="Visual" type="Polygon2D" parent="FacultyBuildingExit" unique_id=1825926938]
-color = Color(0.2, 0.8, 0.2, 1)
-polygon = PackedVector2Array(-60, -80, 60, -80, 60, 80, -60, 80)
+[node name="Bottom_WetFloor5" type="Polygon2D" parent="." unique_id=980083876]
+position = Vector2(2609, -393)
+scale = Vector2(2.1384892, 1.0256411)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
 
-[node name="Label" type="Label" parent="FacultyBuildingExit" unique_id=466828890]
-offset_left = -70.0
-offset_top = -12.0
-offset_right = 70.0
-offset_bottom = 32.0
-text = "Faculty
-Building"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="MechanicArea" type="Area2D" parent="Bottom_WetFloor5" unique_id=25780630]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_dtk2v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bottom_WetFloor5/MechanicArea" unique_id=1040534922]
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10, -168.65775, -3.8701172)
+
+[node name="Bottom_WetFloor6" type="Polygon2D" parent="." unique_id=1777936470]
+position = Vector2(5598.0005, -13)
+scale = Vector2(5.0984893, 1.0256411)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Bottom_WetFloor6" unique_id=1934238515]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_dtk2v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bottom_WetFloor6/MechanicArea" unique_id=255446526]
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10, -168.65775, -3.8701172)
+
+[node name="Bottom_WetFloor7" type="Polygon2D" parent="." unique_id=1369254029]
+position = Vector2(5497, -369.00003)
+scale = Vector2(2.1384892, 1.0256411)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, -40.699257, -22.275024, 3, -24, 5, 9, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Bottom_WetFloor7" unique_id=1833629528]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_dtk2v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bottom_WetFloor7/MechanicArea" unique_id=544587810]
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10, -168.65775, -3.8701172)
+
+[node name="Bottom_WetFloor8" type="Polygon2D" parent="." unique_id=1644436021]
+position = Vector2(6209, -726.00006)
+scale = Vector2(1.3384893, 1.0256411)
+color = Color(0.08, 0.48, 1, 0.95)
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10)
+
+[node name="MechanicArea" type="Area2D" parent="Bottom_WetFloor8" unique_id=929519441]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_dtk2v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bottom_WetFloor8/MechanicArea" unique_id=333575886]
+polygon = PackedVector2Array(-167, -21, -121.87732, -21, -73, -21, 3, -24, 5, 9, -170, 10, -168.65775, -3.8701172)

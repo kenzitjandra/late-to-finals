@@ -1,27 +1,20 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://bhy5b8d5hf2ub"]
 
-[ext_resource type="Script" path="res://scripts/objects/hazards/moving_car_hazard.gd" id="1_car"]
+[ext_resource type="Script" uid="uid://dshgscvunp01s" path="res://scripts/objects/hazards/moving_car_hazard.gd" id="1_car"]
+[ext_resource type="Texture2D" uid="uid://cqh8rwtdyp4s8" path="res://assets/level1_skin/car.png" id="2_v256q"]
 
 [sub_resource type="RectangleShape2D" id="car_shape"]
 size = Vector2(80, 120)
 
-[node name="MovingCarHazard" type="Area2D"]
+[node name="MovingCarHazard" type="Area2D" unique_id=532012051]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_car")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=247229718]
 shape = SubResource("car_shape")
 
-[node name="Visual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-40, -60, 40, -60, 40, 60, -40, 60)
-color = Color(0.9, 0.15, 0.15, 1)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -32.0
-offset_top = -12.0
-offset_right = 32.0
-offset_bottom = 12.0
-text = "Car"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=723511121]
+position = Vector2(-0.6874893, -1.6874874)
+scale = Vector2(0.10795454, 0.10795454)
+texture = ExtResource("2_v256q")

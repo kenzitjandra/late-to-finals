@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_hud"]
-[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudyNote.tscn" id="4_study_note"]
-[ext_resource type="PackedScene" path="res://scenes/objects/collectibles/Coffee.tscn" id="5_coffee"]
+[ext_resource type="PackedScene" uid="uid://c20cgw6x52b4k" path="res://scenes/objects/collectibles/StudyNote.tscn" id="4_study_note"]
+[ext_resource type="PackedScene" uid="uid://cit4jbfnsuy8x" path="res://scenes/objects/collectibles/Coffee.tscn" id="5_coffee"]
 [ext_resource type="PackedScene" path="res://scenes/objects/collectibles/StudentID.tscn" id="6_student_id"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="7_exposed_wiring"]
+[ext_resource type="PackedScene" uid="uid://bl0ng2mum4ul2" path="res://scenes/objects/hazards/ExposedWiring.tscn" id="7_exposed_wiring"]
 [ext_resource type="PackedScene" path="res://scenes/objects/hazards/WetFloor.tscn" id="8_wet_floor"]
 [ext_resource type="PackedScene" path="res://scenes/objects/hazards/FallZone.tscn" id="9_fall_zone"]
-[ext_resource type="PackedScene" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ceiling_fan"]
+[ext_resource type="PackedScene" uid="uid://co4osg2q1jnmp" path="res://scenes/objects/platforms/CeilingFanPlatform.tscn" id="10_ceiling_fan"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/Roommate.tscn" id="11_roommate"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/SecurityGuard.tscn" id="12_security_guard"]
 [ext_resource type="PackedScene" path="res://scenes/objects/interactive/IDBarrier.tscn" id="13_id_barrier"]
@@ -513,13 +513,6 @@ text = "Opening"
 
 [node name="Level1_MapDraft" type="Node2D" parent="." unique_id=461976513]
 z_index = 90
-
-[node name="FlowNote" type="Label" parent="Level1_MapDraft" unique_id=407329369]
-offset_left = 90.0
-offset_top = 60.0
-offset_right = 820.0
-offset_bottom = 155.0
-text = "Level 1 route: spawn upper-right -> move left -> descend -> move right -> descend -> move left -> descend -> ground exit -> locked door -> traffic -> bus stop"
 
 [node name="Draft_FloorLines" type="Node2D" parent="Level1_MapDraft" unique_id=1298791430]
 
@@ -1426,7 +1419,6 @@ position = Vector2(162, -80)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_hazard_script")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Left/MechanicArea" unique_id=828787267]
 polygon = PackedVector2Array(-90, -80, 90, -80, 92, 29, -88, 23)
@@ -1510,7 +1502,6 @@ position = Vector2(101, -106)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_hazard_script")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_Mid/MechanicArea" unique_id=1737337567]
 polygon = PackedVector2Array(-105, -70, 105, -70, 105, 43, -103, 43)
@@ -1559,7 +1550,6 @@ position = Vector2(-72, 13)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_hazard_script")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ThirdFloor/Third_ExposedWiring_RightWall/MechanicArea" unique_id=1220336202]
 polygon = PackedVector2Array(-70, -34, 70, -34, 70, 34, -70, 34)
@@ -1886,7 +1876,6 @@ position = Vector2(-242, 141)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_hazard_script")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/ServiceFloor/Service_ExposedWiring_Right/MechanicArea" unique_id=1175959294]
 polygon = PackedVector2Array(-300, -28, 300, -28, 300, 4, 300, 28, -300, 28)
@@ -2124,7 +2113,6 @@ position = Vector2(-126, 236)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_hazard_script")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Left/MechanicArea" unique_id=728348957]
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
@@ -2169,7 +2157,6 @@ position = Vector2(-100, 235)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("19_hazard_script")
-flashing_enabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level1_MapDraft/GroundFloor/Ground_ExposedWiring_Mid/MechanicArea" unique_id=1099375137]
 polygon = PackedVector2Array(-130, -38, 130, -38, 130, 38, -130, 38)
@@ -2323,14 +2310,9 @@ vertical_alignment = 1
 
 [node name="Road1_CarHazard" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=1480774762 instance=ExtResource("16_moving_car")]
 position = Vector2(-235, 225)
-speed = 250.0
-move_distance = 120.0
 
 [node name="Road2_CarHazard" parent="Level1_MapDraft/Outdoor/Outdoor_TrafficArea" unique_id=551670852 instance=ExtResource("16_moving_car")]
 position = Vector2(155, 225)
-speed = 250.0
-move_distance = 120.0
-start_direction = -1.0
 
 [node name="Outdoor_BusStop" type="Node2D" parent="Level1_MapDraft/Outdoor" unique_id=995248738]
 position = Vector2(5280, 1585)
@@ -2504,7 +2486,6 @@ polygon = PackedVector2Array(-260, -12, 260, -12, 260, 12, -260, 12)
 
 [node name="Test_MovingCarHazard" parent="RoundMechanics_TestArea" unique_id=969965457 instance=ExtResource("16_moving_car")]
 position = Vector2(2600, 776)
-move_distance = 90.0
 
 [node name="Test_FallGap_LeftPlatform" type="StaticBody2D" parent="RoundMechanics_TestArea" unique_id=362306178]
 position = Vector2(820, 1040)
